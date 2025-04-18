@@ -415,7 +415,7 @@ export default function CheckoutPage() {
           <div>
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Email: info@royalbarber.com</li>
+              <li>Email: info@rmistrbarber.com</li>
               <li>Phone: +971 4 123 4567</li>
               <li>Address: Sheikh Zayed Road, Dubai</li>
             </ul>

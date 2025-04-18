@@ -204,7 +204,7 @@ export default function DubaiPage() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
                     <p className="text-gray-300">Phone: +971 4 123 4567</p>
-                    <p className="text-gray-300">Email: dubai@royalbarber.com</p>
+                    <p className="text-gray-300">Email: dubai@mistrbarber.com</p>
                   </div>
                 </div>
               </div>
@@ -324,7 +324,7 @@ export default function DubaiPage() {
           <div>
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Email: info@royalbarber.com</li>
+              <li>Email: info@mistrbarber.com</li>
               <li>Phone: +971 4 123 4567</li>
               <li>Address: Sheikh Zayed Road, Dubai</li>
             </ul>

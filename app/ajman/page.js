@@ -262,7 +262,7 @@ export default function AjmanPage() {
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
                     <p className="text-gray-300">Phone: +971 6 987 6543</p>
                     <p className="text-gray-300">
-                      Email: ajman@royalbarber.com
+                      Email: ajman@mistrbarber.com
                     </p>
                   </div>
                 </div>
@@ -396,7 +396,7 @@ export default function AjmanPage() {
           <div>
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Email: info@royalbarber.com</li>
+              <li>Email: info@mistrbarber.com</li>
               <li>Phone: +971 4 123 4567</li>
               <li>Address: Sheikh Zayed Road, Dubai</li>
             </ul>

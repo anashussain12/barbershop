@@ -265,7 +265,7 @@ export default function SharjahPage() {
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
                     <p className="text-gray-300">Phone: +971 6 123 4567</p>
                     <p className="text-gray-300">
-                      Email: sharjah@royalbarber.com
+                      Email: sharjah@mistrbarber.com
                     </p>
                   </div>
                 </div>
