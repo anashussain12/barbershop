@@ -34,7 +34,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-[#4a3c31]/50 z-10" />
         <ImageWithFallback
-          src="/hero-barber.jpg"
+          src="/banner.jpeg"
           alt="Barber Shop Hero"
           fill
           className="object-cover z-5"
@@ -45,7 +45,7 @@ export default function Home() {
           <div className="mb-6 transform -rotate-2">
             <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text text-lg md:text-xl font-semibold tracking-wider uppercase">Exclusive Grooming</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">ROYAL BARBER</h1>
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">MISTR BARBER</h1>
           <p className="text-xl md:text-2xl max-w-2xl text-gray-200 mb-8">Where gentlemen receive the royal treatment</p>
           <button className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]">
             BOOK YOUR THRONE
@@ -168,7 +168,7 @@ export default function Home() {
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
           </div>
-          <p className="text-2xl md:text-3xl font-light italic text-gray-200 mb-8">The attention to detail and personalized service at Royal Barber is unmatched. It&aposs more than a haircut—it&aposs an experience every gentleman deserves.</p>
+          <p className="text-2xl md:text-3xl font-light italic text-gray-200 mb-8">The attention to detail and personalized service at MISTR BARBER is unmatched. It&aposs more than a haircut—it&aposs an experience every gentleman deserves.</p>
           <div className="flex items-center justify-center">
             <div className="w-16 h-16 rounded-full mr-4 overflow-hidden relative">
               <ImageWithFallback
@@ -192,7 +192,7 @@ export default function Home() {
       <footer className="py-12 px-6 bg-[#111111]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
-            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">ROYAL BARBER</h3>
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">MISTR BARBER</h3>
             <p className="text-gray-400 mb-4">Where gentlemen receive the royal treatment.</p>
             <div className="flex space-x-4">
               <a href="#" className="text-amber-500 hover:text-yellow-400">
@@ -227,7 +227,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
-          <p className="text-gray-500">© 2024 Royal Barber. All rights reserved.</p>
+          <p className="text-gray-500">© 2024 MISTR BARBER. All rights reserved.</p>
         </div>
       </footer>
     </main>

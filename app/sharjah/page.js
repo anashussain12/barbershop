@@ -370,7 +370,7 @@ export default function SharjahPage() {
       <footer className="py-8 px-6 bg-[#111111] border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400">
-            © 2024 Royal Barber. All rights reserved.
+            © 2024 MISTR BARBER. All rights reserved.
           </p>
           <div className="flex justify-center space-x-6 mt-4">
             <a href="#" className="text-gray-400 hover:text-amber-500">

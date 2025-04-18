@@ -15,7 +15,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-          ROYAL BARBER
+          MISTR BARBER
         </Link>
 
         {/* Desktop Navigation */}
