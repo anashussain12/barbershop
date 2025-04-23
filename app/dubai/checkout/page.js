@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
-import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase"; // adjust path as needed
+
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export default function CheckoutPage() {
   const [selectedService, setSelectedService] = useState("Royal Haircut");
@@ -57,6 +58,52 @@ export default function CheckoutPage() {
 
   const locations = ["Dubai", "Sharjah", "Ajman"];
 
+
+
+  const handleBooking = async (formData) => {
+      // Fetch existing bookings with the same details
+      const bookingsRef = collection(db, "bookings");  // Using 'collection' here
+      const q = query(
+        bookingsRef,
+      
+        where("firstName", "==", formData.firstName),
+        where("lastName", "==", formData.lastName),
+        where("email", "==", formData.email),
+        where("service", "==", formData.service),
+        where("barber", "==", formData.barber),
+        where("location", "==", formData.location),
+        where("date", "==", formData.date),
+        where("phone", "==", formData.phone),
+        where("status", "==", "pending") // Check for pending bookings
+  
+      );
+  
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        // If a booking exists with the same details and is still "pending", block new booking
+        alert("You already have a pending booking with these details. Please wait for the admin to mark it as completed.");
+        return;
+      }
+  
+      // Proceed with the booking creation (adding a new document to Firestore)
+      try {
+        const docRef = await addDoc(collection(db, "bookings"), {
+          ...formData,
+          status: "pending",  // Initial status is pending
+        });
+  
+        alert("Booking successful!");
+      } catch (error) {
+        console.error("Error booking appointment: ", error);
+        alert("Something went wrong. Please try again.");
+      }
+    };
+  
+
+
+
+
+
   const handleServiceChange = (e) => {
     setSelectedService(e.target.value);
   };
@@ -78,27 +125,51 @@ export default function CheckoutPage() {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
- // Handle submit for database
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    try {
-      const docRef = await addDoc(collection(db, "bookings"), {
-        ...form,
-        service: selectedService,
-        barber: selectedBarber,
-        location: selectedLocation,
-        createdAt: new Date().toISOString(),
-      });
 
-      alert("Booking confirmed!");
-      console.log("Document written with ID: ", docRef.id);
-      console.log("Confirmeddddddd");
-    } catch (error) {
-      console.error("Error adding document: ", error);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      // Use `form` instead of `formData`
+      const bookingsRef = collection(db, "bookings");
+      const q = query(
+        bookingsRef,
+        where("firstName", "==", form.firstName),
+        where("lastName", "==", form.lastName),
+        where("email", "==", form.email),
+        where("service", "==", selectedService),
+        where("barber", "==", selectedBarber),
+        where("location", "==", selectedLocation),
+        where("date", "==", form.date),
+        where("phone", "==", form.phone),
+        where("status", "==", "pending")
+      );
+    
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        alert("You have already booked this service with the same details. Please wait until the previous booking is completed.");
+        return;
+      }
+    
+      try {
+        const docRef = await addDoc(collection(db, "bookings"), {
+          ...form,
+          service: selectedService,
+          barber: selectedBarber,
+          location: selectedLocation,
+          createdAt: new Date().toISOString(),
+          status: "pending"
+        });
+    
+        alert("Booking confirmed!");
+        console.log("Document written with ID: ", docRef.id);
+      } catch (error) {
+        console.error("Error adding document: ", error);
+        alert("Something went wrong. Please try again.");
+      }
+    };
+    
 
   // Find the selected service details
   const selectedServiceDetails =

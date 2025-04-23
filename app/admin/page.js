@@ -1,11 +1,21 @@
 "use client"; // Add this line
 
 import { useEffect, useState } from "react";
-import { collection, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../lib/firebase";
 // Analytics
-import { analytics } from '../lib/firebase'; // Adjust the path accordingly
-import { logEvent } from 'firebase/analytics';
+import { analytics } from "../lib/firebase"; // Adjust the path accordingly
+import { logEvent } from "firebase/analytics";
+// import { query, where, getDocs, collection } from "firebase/firestore";
+import { query, where } from "firebase/firestore";
+
+
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -38,11 +48,10 @@ const Dashboard = () => {
       );
 
       // Log event for booking completion
-      logEvent(analytics, 'booking_completed', {
+      logEvent(analytics, "booking_completed", {
         bookingId: id,
-        status: 'completed',
+        status: "completed",
       });
-
     } catch (error) {
       console.error("Error updating document: ", error);
     }
@@ -67,11 +76,10 @@ const Dashboard = () => {
       setIsEditing(false);
 
       // Log event for booking update
-      logEvent(analytics, 'booking_updated', {
+      logEvent(analytics, "booking_updated", {
         bookingId: selectedBooking.id,
         updatedFields: selectedBooking,
       });
-
     } catch (error) {
       console.error("Error updating document: ", error);
     }
@@ -94,19 +102,56 @@ const Dashboard = () => {
       alert("Booking deleted successfully");
 
       // Log event for booking deletion
-      logEvent(analytics, 'booking_deleted', {
+      logEvent(analytics, "booking_deleted", {
         bookingId: id,
       });
-
     } catch (error) {
       console.error("Error deleting document: ", error);
       alert("Something went wrong while deleting the booking.");
     }
   };
+  const handleBooking = async (formData) => {
+    // Fetch existing bookings with the same details
+    const bookingsRef = collection(db, "bookings");
+    const q = query(
+      bookingsRef,
+      where("firstName", "==", formData.firstName),
+      where("lastName", "==", formData.lastName),
+      where("email", "==", formData.email),
+      where("service", "==", formData.service),
+      where("barber", "==", formData.barber),
+      where("location", "==", formData.location),
+      where("date", "==", formData.date),
+      where("phone", "==", formData.phone),
+      where("status", "==", "pending") // Check for pending bookings
+    );
+  
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      // If a booking exists with the same details and is still "pending", block new booking
+      alert("You already have a pending booking with these details. Please wait for the admin to mark it as completed.");
+      return;
+    }
+  
+    // Proceed with the booking creation (adding a new document to Firestore)
+    try {
+      const docRef = await addDoc(collection(db, "bookings"), {
+        ...formData,
+        status: "pending",  // Initial status is pending
+      });
+  
+      alert("Booking successful!");
+    } catch (error) {
+      console.error("Error booking appointment: ", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Booking Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">
+        Booking Dashboard
+      </h1>
 
       {/* Bookings List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -125,6 +170,9 @@ const Dashboard = () => {
               <strong>Service:</strong> {booking.service}
             </p>
             <p className="text-gray-600">
+              <strong>Phone:</strong> {booking.phone}
+            </p>
+            <p className="text-gray-600">
               <strong>Barber:</strong> {booking.barber}
             </p>
             <p className="text-gray-600">
@@ -134,9 +182,16 @@ const Dashboard = () => {
               <strong>Note:</strong> {booking.notes}
             </p>
             <p className="text-gray-500 text-sm">
-              <strong>Date:</strong> {new Date(booking.createdAt).toLocaleString()}
+              <strong>Date:</strong>{" "}
+              {new Date(booking.createdAt).toLocaleString()}
             </p>
-            <p className={`text-sm font-semibold ${booking.status === "completed" ? "text-green-500" : "text-yellow-500"} `}>
+            <p
+              className={`text-sm font-semibold ${
+                booking.status === "completed"
+                  ? "text-green-500"
+                  : "text-yellow-500"
+              } `}
+            >
               <strong>Status:</strong> {booking.status || "Pending"}
             </p>
 
@@ -150,10 +205,14 @@ const Dashboard = () => {
               </button>
               <button
                 onClick={() => handleComplete(booking.id)}
-                className={`bg-${booking.status === "completed" ? "gray" : "green"}-500 bg-black text-white px-4 py-2 rounded-md hover:bg-green-600`}
+                className={`bg-${
+                  booking.status === "completed" ? "gray" : "green"
+                }-500 bg-black text-white px-4 py-2 rounded-md hover:bg-green-600`}
                 disabled={booking.status === "completed"}
               >
-                {booking.status === "completed" ? "Completed" : "Mark as Completed"}
+                {booking.status === "completed"
+                  ? "Completed"
+                  : "Mark as Completed"}
               </button>
               <button
                 onClick={() => handleDelete(booking.id)}
@@ -175,7 +234,10 @@ const Dashboard = () => {
               type="text"
               value={selectedBooking.firstName}
               onChange={(e) =>
-                setSelectedBooking({ ...selectedBooking, firstName: e.target.value })
+                setSelectedBooking({
+                  ...selectedBooking,
+                  firstName: e.target.value,
+                })
               }
               className="border border-gray-300 p-2 w-full mb-4 rounded-md"
               placeholder="First Name"
@@ -184,7 +246,10 @@ const Dashboard = () => {
               type="text"
               value={selectedBooking.lastName}
               onChange={(e) =>
-                setSelectedBooking({ ...selectedBooking, lastName: e.target.value })
+                setSelectedBooking({
+                  ...selectedBooking,
+                  lastName: e.target.value,
+                })
               }
               className="border border-gray-300 p-2 w-full mb-4 rounded-md"
               placeholder="Last Name"
@@ -192,7 +257,10 @@ const Dashboard = () => {
             <textarea
               value={selectedBooking.notes}
               onChange={(e) =>
-                setSelectedBooking({ ...selectedBooking, notes: e.target.value })
+                setSelectedBooking({
+                  ...selectedBooking,
+                  notes: e.target.value,
+                })
               }
               className="border border-gray-300 p-2 w-full mb-4 rounded-md"
               placeholder="Notes"
