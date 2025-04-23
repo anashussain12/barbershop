@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Link from "next/link";
 import Header from "../../../components/Header";
-
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../lib/firebase"; // adjust path as needed
 export default function CheckoutPage() {
   const [selectedService, setSelectedService] = useState('Classic Cut');
   const [selectedBarber, setSelectedBarber] = useState('');
@@ -77,10 +78,35 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Booking confirmed for ${form.firstName} ${form.lastName}!`);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   alert(`Booking confirmed for ${form.firstName} ${form.lastName}!`);
+  // };
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const docRef = await addDoc(collection(db, "bookings"), {
+          ...form,
+          service: selectedService,
+          barber: selectedBarber,
+          location: selectedLocation,
+          createdAt: new Date().toISOString(),
+        });
+  
+        alert("Booking confirmed!");
+        console.log("Document written with ID: ", docRef.id);
+        console.log("Sharjah confirmed");
+      } catch (error) {
+        console.error("Error adding document: ", error);
+        alert("Something went wrong. Please try again.");
+      }
+    };
+
+
+
 
   // Find the selected service details
   const selectedServiceDetails = services.find(service => service.name === selectedService) || services[0];
