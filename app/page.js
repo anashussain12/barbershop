@@ -57,7 +57,6 @@ export default function Home() {
       {/* Divider */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
-      {/* Locations Section */}
       <section className="py-20 px-6 max-w-7xl mx-auto relative">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('/texture-bg.jpg')] opacity-5 mix-blend-overlay pointer-events-none"></div>
         <div className="text-center mb-16">
