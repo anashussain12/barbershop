@@ -30,6 +30,7 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
+      {/* Hero Section */}
       <div className="relative h-[60vh] w-full">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-[#4a3c31]/50 z-10" />
@@ -70,6 +71,7 @@ export default function Home() {
           {locations.map((location) => (
             <Link key={location.name} href={`/${location.name.toLowerCase()}`}>
               <div className="group relative h-96 rounded-lg overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] transition-all duration-500 hover:scale-[1.02]">
+                {/* Subtle glow effect on hover */}
                 {/* Subtle glow effect on hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-white/5 z-10 pointer-events-none"></div>
                 
