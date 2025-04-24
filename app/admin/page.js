@@ -37,7 +37,6 @@ const Dashboard = () => {
   }, []);
 
   // Handle mark as completed
-  // Handle mark as completed
   const handleComplete = async (id) => {
     try {
       const bookingRef = doc(db, "bookings", id);
