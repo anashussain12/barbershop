@@ -125,7 +125,6 @@ export default function CheckoutPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Use `form` instead of `formData`
     const bookingsRef = collection(db, "bookings");
     const q = query(
       bookingsRef,
@@ -158,6 +157,21 @@ export default function CheckoutPage() {
   
       alert("Booking confirmed!");
       console.log("Document written with ID: ", docRef.id);
+  
+      // 🔄 Reset form
+      setForm({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        date: '',
+        time: '',
+        notes: '',
+      });
+      setSelectedService('Classic Cut');
+      setSelectedBarber('');
+      setSelectedLocation('Sharjah');
+  
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Something went wrong. Please try again.");
