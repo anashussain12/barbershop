@@ -11,7 +11,7 @@ export default function CheckoutPage() {
   const [selectedServices, setSelectedServices] = useState([]); // Use for multiple service selection
 
   const [selectedBarber, setSelectedBarber] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("Dubai");
+  const [selectedLocation, setSelectedLocation] = useState("ETOBICOKE");
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -57,7 +57,7 @@ export default function CheckoutPage() {
 
   const barbers = ["Ahmed", "Malik", "Rashed", "Any Available Barber"];
 
-  const locations = ["Dubai", "Sharjah", "Ajman"];
+  const locations = ["ETOBICOKE", "NOTRYORK", "DUNDASLOCATION"];
 
   const handleBooking = async (formData) => {
     const bookingsRef = collection(db, "bookings");
@@ -193,7 +193,7 @@ export default function CheckoutPage() {
       });
       setSelectedServices([]);
       setSelectedBarber("");
-      setSelectedLocation("Sharjah");
+      setSelectedLocation("Etibicoke");
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Something went wrong. Please try again.");

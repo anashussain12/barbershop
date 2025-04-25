@@ -6,19 +6,19 @@ import Header from "../components/Header";
 export default function Home() {
   const locations = [
     { 
-      name: "Dubai", 
+      name: "ETOBICOKE", 
       image: "/dubai-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       description: "Premium cuts in the heart of Downtown"
     },
     { 
-      name: "Sharjah", 
+      name: "NOTRYORK", 
       image: "/sharjah-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       description: "Classic styles with modern techniques"
     },
     { 
-      name: "Ajman", 
+      name: "DundasLocation", 
       image: "/ajman-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       description: "Relaxed atmosphere with expert service"
@@ -29,7 +29,6 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
       <Header />
       
-      {/* Hero Section */}
       {/* Hero Section */}
       <div className="relative h-[60vh] w-full">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
