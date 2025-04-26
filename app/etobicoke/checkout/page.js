@@ -108,7 +108,7 @@ export default function CheckoutPage() {
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
     setSelectedLocation(newLocation);
-    if (newLocation !== "Sharjah") {
+    if (newLocation !== "ETOBICOKE") {
       window.location.href = `/${newLocation.toLowerCase()}/checkout`;
     }
   };
