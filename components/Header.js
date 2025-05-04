@@ -1,57 +1,98 @@
-'use client';
-
-import Link from 'next/link';
-import { useState } from 'react';
+"use client";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDubaiDropdownOpen, setIsDubaiDropdownOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header className="relative py-6 px-6 bg-[#1a1a1a] border-b border-white/10 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
+        <Link
+          href="/"
+          className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text"
+        >
           MISTR BARBER
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-white hover:text-amber-400 transition-colors duration-300">
+        <nav className="hidden md:flex items-center space-x-8 relative">
+          <Link
+            href="/"
+            className="text-white hover:text-amber-400 transition-colors duration-300"
+          >
             Home
           </Link>
-          <Link href="/dubai" className="text-white hover:text-amber-400 transition-colors duration-300">
-            Dubai
-          </Link>
-          <Link href="/services" className="text-white hover:text-amber-400 transition-colors duration-300">
-            Services
-          </Link>
-          <Link href="/about" className="text-white hover:text-amber-400 transition-colors duration-300">
-            About
-          </Link>
-          <Link 
-            href="/dubai/checkout" 
-            className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105"
+
+          {/* Dubai Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setIsDubaiDropdownOpen(true)}
+            onMouseLeave={() => setIsDubaiDropdownOpen(false)}
           >
-            Book Now
+            <button className="text-white hover:text-amber-400 transition-colors duration-300">
+              Locations
+            </button>
+            {isDubaiDropdownOpen && (
+              <div className="absolute left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
+                <Link
+                  href="/etobicoke"
+                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                >
+                  Etobicokde
+                </Link>
+
+                <Link
+                  href="/notryork"
+                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                >
+                  Notryork
+                </Link>
+                <Link
+                  href="/dundaslocation"
+                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                >
+                  DundasLocation
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <Link
+            href="/about"
+            className="text-white hover:text-amber-400 transition-colors duration-300"
+          >
+            About
           </Link>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden text-white focus:outline-none"
           onClick={toggleMenu}
         >
           {isMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg className="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg className="h-6 w-6" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </button>
@@ -61,38 +102,55 @@ export default function Header() {
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-[#1a1a1a] border-b border-white/10 py-4 px-6 shadow-lg">
           <nav className="flex flex-col space-y-4">
-            <Link 
-              href="/" 
-              className="text-white hover:text-amber-400 transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
+            <Link
+              href="/"
+              className="text-white hover:text-amber-400 transition"
+              onClick={closeMenu}
             >
               Home
             </Link>
-            <Link 
-              href="/dubai" 
-              className="text-white hover:text-amber-400 transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Dubai
-            </Link>
-            <Link 
-              href="/services" 
-              className="text-white hover:text-amber-400 transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Services
-            </Link>
-            <Link 
-              href="/about" 
-              className="text-white hover:text-amber-400 transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
+
+            {/* Dubai Dropdown (Mobile) */}
+            <details className="group">
+              <summary className="text-white cursor-pointer hover:text-amber-400 transition">
+                Dubai
+              </summary>
+              <div className="pl-4 mt-2 space-y-2">
+                <Link
+                  href="/dubai"
+                  className="block text-white hover:text-amber-400"
+                  onClick={closeMenu}
+                >
+                  Overview
+                </Link>
+                <Link
+                  href="/dubai/services"
+                  className="block text-white hover:text-amber-400"
+                  onClick={closeMenu}
+                >
+                  Services
+                </Link>
+                <Link
+                  href="/dubai/gallery"
+                  className="block text-white hover:text-amber-400"
+                  onClick={closeMenu}
+                >
+                  Gallery
+                </Link>
+              </div>
+            </details>
+
+            <Link
+              href="/about"
+              className="text-white hover:text-amber-400 transition"
+              onClick={closeMenu}
             >
               About
             </Link>
-            <Link 
-              href="/dubai/checkout" 
-              className="inline-block px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300"
-              onClick={() => setIsMenuOpen(false)}
+            <Link
+              href="/dubai/checkout"
+              className="inline-block px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition"
+              onClick={closeMenu}
             >
               Book Now
             </Link>
