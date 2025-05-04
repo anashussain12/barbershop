@@ -162,6 +162,7 @@ export default function AjmanPage() {
           <div className="mt-12 text-center">
             <Link href="/services" className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]">
               VIEW FULL MENU
+              {/* VIEW FULL MENU */}
             </Link>
           </div>
         </div>
