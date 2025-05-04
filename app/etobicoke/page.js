@@ -6,47 +6,63 @@ import Header from "../../components/Header";
 export default function DubaiPage() {
   const services = [
     {
-      name: "Royal Haircut",
-      price: "AED 120",
-      duration: "45 min",
+      name: "Hair Cut & Styling",
+      // price: "AED 120",
+      // duration: "45 min",
       description:
         "Precision cut with styling, hot towel refreshment, and scalp massage",
       image: "/royal-haircut.jpeg",
     },
     {
-      name: "Beard Sculpting",
-      price: "AED 80",
-      duration: "30 min",
+      name: "Threading",
+      // price: "AED 80",
+      // duration: "30 min",
       description:
         "Expert beard shaping with hot towel treatment and essential oils",
       image: "/beard-sculpting.jpg",
     },
     {
-      name: "Complete Grooming",
-      price: "AED 180",
-      duration: "75 min",
+      name: "Waxing",
+      // price: "AED 180",
+      // duration: "75 min",
       description: "Haircut, beard trim, facial cleanse, and styling",
       image: "/complete-grooming.jpg",
     },
     {
-      name: "Hot Towel Shave",
-      price: "AED 90",
-      duration: "40 min",
+      name: "Pearcing",
+      // price: "AED 90",
+      // duration: "40 min",
       description:
         "Traditional straight razor shave with hot towel preparation",
       image: "/hot-towel-shave.jpg",
     },
     {
-      name: "Hair & Scalp Treatment",
-      price: "AED 150",
-      duration: "60 min",
+      name: "Skin care",
+      // price: "AED 150",
+      // duration: "60 min",
       description: "Deep conditioning treatment with scalp therapy and styling",
       image: "/hair-scalp-treatment.jpg",
     },
     {
-      name: "Grey Coverage",
-      price: "AED 140",
-      duration: "60 min",
+      name: "Hair Colour & Highlights",
+      // price: "AED 140",
+      // duration: "60 min",
+      description:
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
+    },
+    {
+      name: "Makeup Artistry",
+      // price: "AED 140",
+      // duration: "60 min",
+      description:
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
+    },
+    {
+      name: "Perm",
+      // price: "AED 140",
+      // duration: "60 min",
       description:
         "Natural-looking color application specifically for grey coverage",
       image: "/grey-coverage.jpg",
@@ -136,7 +152,6 @@ export default function DubaiPage() {
                     height={300}
                     className="rounded-lg mb-4"
                   />
-                  {/* Subtle glow effect on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none"></div>
 
                   <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text relative z-10">
@@ -157,7 +172,6 @@ export default function DubaiPage() {
                     </span>
                   </div>
 
-                  {/* Subtle border highlight effect */}
                   <div className="absolute inset-0 border border-transparent group-hover:border-white/10 rounded-lg transition-all duration-500"></div>
                 </div>
               </Link>

@@ -6,49 +6,69 @@ import Image from "next/image";
 export default function AjmanPage() {
   const services = [
     {
-      name: "Relaxed Cut",
-      price: "AED 80",
-      duration: "35 min",
-      description: "Laid-back haircut with styling and complimentary beverage",
-      image: "/relaxed.jpg",
-    },
-    {
-      name: "Express Trim",
-      price: "AED 50",
-      duration: "20 min",
-      description: "Quick touch-up for those on the go, includes styling",
-      image: "/beard-trim.jpg",
-    },
-    {
-      name: "Full Experience",
-      price: "AED 140",
-      duration: "70 min",
-      description: "Haircut, beard trim, face mask, and shoulder massage",
-      image: "/complete-grooming.jpg",
-    },
-    {
-      name: "Beard Design",
-      price: "AED 65",
-      duration: "30 min",
+      name: "Hair Cut & Styling",
+      // price: "AED 120",
+      // duration: "45 min",
       description:
-        "Creative beard styling with precision detailing and conditioning",
+        "Precision cut with styling, hot towel refreshment, and scalp massage",
+      image: "/royal-haircut.jpeg",
+    },
+    {
+      name: "Threading",
+      // price: "AED 80",
+      // duration: "30 min",
+      description:
+        "Expert beard shaping with hot towel treatment and essential oils",
       image: "/beard-sculpting.jpg",
     },
     {
-      name: "Senior Special",
-      price: "AED 70",
-      duration: "40 min",
-      description: "Specialized service for our distinguished senior clients",
-      image: "/gentle-cut.jpg",
+      name: "Waxing",
+      // price: "AED 180",
+      // duration: "75 min",
+      description: "Haircut, beard trim, facial cleanse, and styling",
+      image: "/complete-grooming.jpg",
     },
     {
-      name: "Kids Cut",
-      price: "AED 60",
-      duration: "25 min",
-      description: "Fun and friendly haircuts for the little gentlemen",
-      image: "/kids.jpg",
+      name: "Pearcing",
+      // price: "AED 90",
+      // duration: "40 min",
+      description:
+        "Traditional straight razor shave with hot towel preparation",
+      image: "/hot-towel-shave.jpg",
+    },
+    {
+      name: "Skin care",
+      // price: "AED 150",
+      // duration: "60 min",
+      description: "Deep conditioning treatment with scalp therapy and styling",
+      image: "/hair-scalp-treatment.jpg",
+    },
+    {
+      name: "Hair Colour & Highlights",
+      // price: "AED 140",
+      // duration: "60 min",
+      description:
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
+    },
+    {
+      name: "Makeup Artistry",
+      // price: "AED 140",
+      // duration: "60 min",
+      description:
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
+    },
+    {
+      name: "Perm",
+      // price: "AED 140",
+      // duration: "60 min",
+      description:
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
     },
   ];
+
 
   const barbers = [
     {

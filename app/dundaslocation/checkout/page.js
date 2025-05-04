@@ -4,12 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
-// import { query, where, getDocs, collection } from "firebase/firestore";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export default function CheckoutPage() {
-  const [selectedServices, setSelectedServices] = useState([]); // Use for multiple service selection
-
   const [selectedBarber, setSelectedBarber] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("DUNDASLOCATION");
   const [form, setForm] = useState({
@@ -22,82 +19,140 @@ export default function CheckoutPage() {
     notes: "",
   });
 
-  const services = [
+  const [openSections, setOpenSections] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  const data = [
     {
-      name: "Relaxed Cut",
-      price: "AED 80",
-      duration: "35 min",
+      title: "Hair Cut & Styling",
+      options: [
+        { name: "Men Hair Cut", price: "$20" },
+        { name: "Women Hair Cut & Wash", price: "$30" },
+        { name: "Women Hair Cut Wa & Style", price: "$45" },
+        { name: "Women Hair Shampoo & Blow Dry", price: "$25" },
+        { name: "Women Oil Head Massage", price: "$25" },
+        { name: "Kids Hair Cut", price: "$20" },
+        { name: "Girls Hair Cut Under age", price: "$20" },
+        { name: "Women Layers Cut", price: "$40" },
+        { name: "Hair Straightening", price: "$35 & up" },
+        { name: "Ladies Shampoo", price: "$10" },
+        { name: "Mens Beard Cut", price: "$20" },
+      ],
     },
     {
-      name: "Express Trim",
-      price: "AED 50",
-      duration: "20 min",
+      title: "Threading",
+      options: [
+        { name: "Eyebrow", price: "$5" },
+        { name: "Upper Lips", price: "$5" },
+        { name: "Chin", price: "$5" },
+        { name: "Forehead", price: "$5" },
+        { name: "Full Face", price: "$25" },
+        { name: "Full Face & Neck", price: "$30" },
+        { name: "Mens Threading", price: "$10" },
+      ],
+    },
+
+    {
+      title: "Waxing",
+      options: [
+        { name: "Eyebrow", price: "$5" },
+        { name: "Upper Lips", price: "$5" },
+        { name: "Chin", price: "$5" },
+        { name: "Forehead", price: "$5" },
+        { name: "Full Face", price: "$25" },
+        { name: "Under Arm", price: "$10" },
+        { name: "Full Arm", price: "$20" },
+        { name: "Full Legs", price: "$35" },
+        { name: "Half Legs", price: "$20" },
+        { name: "Stomach", price: "$25" },
+        { name: "Full Back", price: "$25" },
+        { name: "Full Body", price: "$100" },
+        { name: "Brazilian", price: "$35" },
+        { name: "Bikini/Line", price: "$15" },
+      ],
     },
     {
-      name: "Full Experience",
-      price: "AED 140",
-      duration: "70 min",
+      title: "Pearcing",
+      options: [
+        { name: "Ear", price: "$25" },
+        { name: "Nose", price: "$25" },
+      ],
     },
     {
-      name: "Beard Design",
-      price: "AED 65",
-      duration: "30 min",
+      title: "Skin Care",
+      options: [
+        { name: "Men Facial Staring", price: "$60" },
+        { name: "Full Face Bleach", price: "$15" },
+        { name: "Herbal Facial", price: "$60" },
+        { name: "Gold Facial", price: "$70" },
+        { name: "Diamond Facial", price: "$80" },
+        { name: "Acne Facial", price: "$80" },
+      ],
     },
+
     {
-      name: "Senior Special",
-      price: "AED 70",
-      duration: "40 min",
+      title: "Hair Colour & Highlights",
+      options: [
+        { name: "Individual Highlights", price: "$10" },
+        { name: "Cap Highlights", price: "$60" },
+        { name: "Hair Colour for Men with Wash", price: "$20" },
+        { name: "Hair Smoothing", price: "$200 Up" },
+        { name: "Hair Keratin", price: "$200 Up" },
+        { name: "Women Root Touchup", price: "$35" },
+      ],
     },
+
     {
-      name: "Kids Cut",
-      price: "AED 60",
-      duration: "25 min",
+      title: "Makeup Artistry",
+      options: [
+        { name: "Party Makeup", price: "$80" },
+        { name: "Party Hairstyles", price: "$40" },
+        { name: "Full Bridal Makeup in Salon", price: "$150" },
+        { name: "Bridal Mehndi", price: "$90" },
+        { name: "Mehndi per Hand", price: "$15" },
+      ],
+    },
+
+    {
+      title: "Perm",
+      options: [
+        { name: "Men & Women Perm", price: "$100 & Up" },
+        { name: "Beard Perm", price: "$80" },
+      ],
     },
   ];
-
-  const barbers = ["Saeed", "Yusuf", "Ibrahim", "Any Available Barber"];
-
+  const barbers = ["Ahmed", "Malik", "Rashed", "Any Available Barber"];
   const locations = ["ETOBICOKE", "NOTRYORK", "DUNDASLOCATION"];
-  const handleBooking = async (formData) => {
-    const bookingsRef = collection(db, "bookings");
-    const q = query(
-      bookingsRef,
-      where("firstName", "==", formData.firstName),
-      where("lastName", "==", formData.lastName),
-      where("email", "==", formData.email),
-      where("services", "array-contains-any", formData.services), // Check for any selected service
-      where("barber", "==", formData.barber),
-      where("location", "==", formData.location),
-      where("date", "==", formData.date),
-      where("phone", "==", formData.phone),
-      where("status", "==", "pending")
-    );
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      alert(
-        "You already have a pending booking with these details. Please wait for the admin to mark it as completed."
-      );
-      return;
-    }
 
-    try {
-      const docRef = await addDoc(collection(db, "bookings"), {
-        ...formData,
-        status: "pending",
-      });
-      alert("Booking successful!");
-    } catch (error) {
-      console.error("Error booking appointment: ", error);
-      alert("Something went wrong. Please try again.");
-    }
+  const toggleSection = (title) => {
+    setOpenSections((prev) =>
+      prev.includes(title)
+        ? prev.filter((item) => item !== title)
+        : [...prev, title]
+    );
   };
 
-  const handleServiceChange = (serviceName) => {
-    setSelectedServices((prevSelected) =>
-      prevSelected.includes(serviceName)
-        ? prevSelected.filter((name) => name !== serviceName)
-        : [...prevSelected, serviceName]
-    );
+  const handleCheckboxChange = (sectionTitle, option) => {
+    setSelectedOptions((prev) => {
+      const section = prev[sectionTitle] || {};
+      if (section[option.name]) {
+        const newSection = { ...section };
+        delete newSection[option.name];
+        return { ...prev, [sectionTitle]: newSection };
+      }
+      return { ...prev, [sectionTitle]: { ...section, [option.name]: option } };
+    });
+  };
+
+  const getSelectedServices = () => {
+    return Object.values(selectedOptions).reduce((acc, section) => {
+      return [
+        ...acc,
+        ...Object.values(section).filter(
+          (service) => typeof service === "object"
+        ),
+      ];
+    }, []);
   };
 
   const handleBarberChange = (e) => {
@@ -107,7 +162,7 @@ export default function CheckoutPage() {
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
     setSelectedLocation(newLocation);
-    if (newLocation !== "DundasLocation") {
+    if (newLocation !== "DUNDASLOCATION") {
       window.location.href = `/${newLocation.toLowerCase()}/checkout`;
     }
   };
@@ -116,34 +171,14 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = {
-  //     ...form,
-  //     services: selectedServices,
-  //     barber: selectedBarber,
-  //     location: selectedLocation,
-  //   };
-  //   await handleBooking(formData);
-
-  //   // Reset form
-  //   setForm({
-  //     firstName: "",
-  //     lastName: "",
-  //     email: "",
-  //     phone: "",
-  //     date: "",
-
-  //     time: "",
-  //     notes: "",
-  //   });
-  //   setSelectedServices([]);
-  //   setSelectedBarber("");
-  //   setSelectedLocation("Sharjah");
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const selectedServices = getSelectedServices();
+    if (selectedServices.length === 0) {
+      alert("Please select at least one service");
+      return;
+    }
 
     const bookingsRef = collection(db, "bookings");
     const q = query(
@@ -151,7 +186,6 @@ export default function CheckoutPage() {
       where("firstName", "==", form.firstName),
       where("lastName", "==", form.lastName),
       where("email", "==", form.email),
-      where("service", "==", selectedServices),
       where("barber", "==", selectedBarber),
       where("location", "==", selectedLocation),
       where("date", "==", form.date),
@@ -170,7 +204,8 @@ export default function CheckoutPage() {
     try {
       const docRef = await addDoc(collection(db, "bookings"), {
         ...form,
-        service: selectedServices,
+        services: selectedServices.map((s) => s.name),
+        servicesWithPrices: selectedServices,
         barber: selectedBarber,
         location: selectedLocation,
         createdAt: new Date().toISOString(),
@@ -178,9 +213,6 @@ export default function CheckoutPage() {
       });
 
       alert("Booking confirmed!");
-      console.log("Document written with ID: ", docRef.id);
-
-      // 🔄 Reset form
       setForm({
         firstName: "",
         lastName: "",
@@ -190,14 +222,15 @@ export default function CheckoutPage() {
         time: "",
         notes: "",
       });
-      setSelectedServices([]);
+      setSelectedOptions({});
       setSelectedBarber("");
-      setSelectedLocation("Sharjah");
+      setSelectedLocation("DUNDASLOCATION");
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Something went wrong. Please try again.");
     }
   };
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
       <Header />
@@ -205,7 +238,7 @@ export default function CheckoutPage() {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <Link
-              href="/dundaslocation"
+              href="/services"
               className="text-amber-500 hover:text-yellow-400 transition-colors duration-300 flex items-center w-fit"
             >
               <svg
@@ -279,52 +312,55 @@ export default function CheckoutPage() {
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT SERVICE
                   </h3>
-                  <div className="space-y-3">
-                    {services.map((service) => (
+                  <div className="w-full max-w-md mx-auto space-y-4 text-white">
+                    {data.map((section) => (
                       <div
-                        key={service.name}
-                        className={`flex items-center p-4 rounded-md cursor-pointer transition-all duration-300 ${
-                          selectedServices.includes(service.name)
-                            ? "bg-white/10 border border-white/10"
-                            : "hover:bg-white/5 border border-transparent"
-                        }`}
+                        key={section.title}
+                        className="bg-[#2d2d2d] p-4 rounded-md border border-gray-600"
                       >
-                        <input
-                          type="checkbox"
-                          name="service"
-                          id={service.name.replace(/\s+/g, "-").toLowerCase()}
-                          value={service.name}
-                          checked={selectedServices.includes(service.name)}
-                          onChange={() => handleServiceChange(service.name)}
-                          className="h-4 w-4 text-amber-500 focus:ring-amber-400 border-gray-600 bg-gray-700"
-                        />
-                        <label
-                          htmlFor={service.name
-                            .replace(/\s+/g, "-")
-                            .toLowerCase()}
-                          className="ml-3 block text-white cursor-pointer w-full"
+                        <button
+                          type="button"
+                          onClick={() => toggleSection(section.title)}
+                          className="flex justify-between items-center w-full"
                         >
-                          <div className="flex justify-between">
-                            <span
-                              className={
-                                selectedServices.includes(service.name)
-                                  ? "text-amber-400"
-                                  : ""
-                              }
-                            >
-                              {service.name}
-                            </span>
-                            <span
-                              className={`font-bold ${
-                                selectedServices.includes(service.name)
-                                  ? "text-white"
-                                  : "text-amber-500"
-                              }`}
-                            >
-                              {service.price}
-                            </span>
+                          <span className="font-semibold">{section.title}</span>
+                          <span className="text-xl font-bold">
+                            {openSections.includes(section.title) ? "−" : "+"}
+                          </span>
+                        </button>
+
+                        {openSections.includes(section.title) && (
+                          <div className="mt-3 pl-2 space-y-2 text-sm text-gray-300">
+                            {section.options.map((option) => (
+                              <label
+                                key={option.name}
+                                className="flex justify-between items-center cursor-pointer"
+                              >
+                                <div className="flex items-center gap-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={
+                                      !!selectedOptions[section.title]?.[
+                                        option.name
+                                      ]
+                                    }
+                                    onChange={() =>
+                                      handleCheckboxChange(
+                                        section.title,
+                                        option
+                                      )
+                                    }
+                                    className="accent-pink-500"
+                                  />
+                                  <span>{option.name}</span>
+                                </div>
+                                <span className="text-gray-400">
+                                  {option.price}
+                                </span>
+                              </label>
+                            ))}
                           </div>
-                        </label>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -519,6 +555,8 @@ export default function CheckoutPage() {
                     ></textarea>
                   </div>
                 </div>
+
+                {/* ... (rest of the form elements remain the same) ... */}
               </div>
               <div className="md:col-span-1">
                 <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)] sticky top-6">
@@ -533,32 +571,20 @@ export default function CheckoutPage() {
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-300 ">Services:</span>
-                      <span className="text-white font-medium">
-                        {selectedServices.length > 0
-                          ? selectedServices.join(", ")
-                          : "No service selected"}
-                      </span>
-                    </div>
-                    {selectedServices.length > 0 &&
-                      selectedServices.map((serviceName) => {
-                        const service = services.find(
-                          (s) => s.name === serviceName
-                        );
-                        return (
+                      <span className="text-gray-300">Services:</span>
+                      <div className="text-right">
+                        {getSelectedServices().map((service) => (
                           <div
                             key={service.name}
-                            className="flex justify-between"
+                            className="text-white font-medium"
                           >
-                            <span className="text-gray-300">
-                              {service.name} Price:
-                            </span>
-                            <span className="text-amber-500 font-bold">
-                              {service.price}
-                            </span>
+                            {service.name} - {service.price}
                           </div>
-                        );
-                      })}
+                        ))}
+                        {getSelectedServices().length === 0 &&
+                          "No service selected"}
+                      </div>
+                    </div>
                     <div className="flex justify-between">
                       <span className="text-gray-300">Barber:</span>
                       <span className="text-white">
@@ -581,17 +607,13 @@ export default function CheckoutPage() {
                       <div className="flex justify-between text-lg">
                         <span className="text-white font-medium">Total:</span>
                         <span className="text-amber-500 font-bold">
-                          {selectedServices.length > 0
-                            ? selectedServices.reduce((total, serviceName) => {
-                                const service = services.find(
-                                  (s) => s.name === serviceName
-                                );
-                                const price = parseInt(
-                                  service.price.replace("AED ", "")
-                                );
-                                return total + price;
-                              }, 0)
-                            : "AED 0"}
+                          $
+                          {getSelectedServices().reduce((total, service) => {
+                            const price = parseInt(
+                              service.price.replace(/\D/g, "")
+                            );
+                            return total + price;
+                          }, 0)}
                         </span>
                       </div>
                     </div>

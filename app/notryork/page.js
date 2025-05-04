@@ -6,56 +6,69 @@ import Header from "../../components/Header";
 export default function SharjahPage() {
   const services = [
     {
-      name: "Gentleman's Package",
-      price: "AED 150",
-      duration: "65 min",
+      name: "Hair Cut & Styling",
+      // price: "AED 120",
+      // duration: "45 min",
       description:
-        "Haircut, beard trim, facial scrub, and relaxing scalp massage",
-      image: "/package.jpg",
+        "Precision cut with styling, hot towel refreshment, and scalp massage",
+      image: "/royal-haircut.jpeg",
     },
-
     {
-      name: "Beard Trim",
-      price: "AED 60",
-      duration: "25 min",
+      name: "Threading",
+      // price: "AED 80",
+      // duration: "30 min",
       description:
-        "Expert beard shaping with essential oils and moisturizing treatment",
-      image: "/beard-trim.jpg",
+        "Expert beard shaping with hot towel treatment and essential oils",
+      image: "/beard-sculpting.jpg",
     },
-
     {
-      name: "Father & Son",
-      price: "AED 130",
-      duration: "60 min",
-      description: "Haircuts for both father and son in a shared experience",
-      image: "/father-son.jpg",
+      name: "Waxing",
+      // price: "AED 180",
+      // duration: "75 min",
+      description: "Haircut, beard trim, facial cleanse, and styling",
+      image: "/complete-grooming.jpg",
     },
-
     {
-      name: "Traditional Shave",
-      price: "AED 70",
-      duration: "35 min",
+      name: "Pearcing",
+      // price: "AED 90",
+      // duration: "40 min",
       description:
-        "Classic straight razor shave with pre and post-shave treatments",
+        "Traditional straight razor shave with hot towel preparation",
       image: "/hot-towel-shave.jpg",
     },
     {
-      name: "Classic Cut",
-      price: "AED 90",
-      duration: "40 min",
-      description:
-        "Traditional haircut with precision styling and hot towel finish",
-      image: "/classic-cut.jpg",
+      name: "Skin care",
+      // price: "AED 150",
+      // duration: "60 min",
+      description: "Deep conditioning treatment with scalp therapy and styling",
+      image: "/hair-scalp-treatment.jpg",
     },
     {
-      name: "Hair Coloring",
-      price: "AED 120",
-      duration: "60 min",
+      name: "Hair Colour & Highlights",
+      // price: "AED 140",
+      // duration: "60 min",
       description:
-        "Professional color application with natural-looking results",
-      image: "/hair-color.jpg",
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
+    },
+    {
+      name: "Makeup Artistry",
+      // price: "AED 140",
+      // duration: "60 min",
+      description:
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
+    },
+    {
+      name: "Perm",
+      // price: "AED 140",
+      // duration: "60 min",
+      description:
+        "Natural-looking color application specifically for grey coverage",
+      image: "/grey-coverage.jpg",
     },
   ];
+
 
   const barbers = [
     {

@@ -47,9 +47,7 @@ export default function Home() {
           </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">MISTR BARBER</h1>
           <p className="text-xl md:text-2xl max-w-2xl text-gray-200 mb-8">Where gentlemen receive the royal treatment</p>
-          <button className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]">
-            BOOK YOUR THRONE
-          </button>
+          
         </div>
       </div>
 
