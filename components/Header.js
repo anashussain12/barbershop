@@ -64,10 +64,10 @@ export default function Header() {
           </div>
 
           <Link
-            href="/about"
+            href="/services"
             className="text-white hover:text-amber-400 transition-colors duration-300"
           >
-            About
+            Services
           </Link>
         </nav>
 
