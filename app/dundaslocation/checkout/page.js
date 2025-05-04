@@ -205,7 +205,7 @@ export default function CheckoutPage() {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <Link
-              href="/sharjah"
+              href="/dundaslocation"
               className="text-amber-500 hover:text-yellow-400 transition-colors duration-300 flex items-center w-fit"
             >
               <svg
