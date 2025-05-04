@@ -14,6 +14,8 @@ export default function CheckoutPage() {
     lastName: "",
     email: "",
     phone: "",
+    service : "",
+    
     date: "",
     time: "",
     notes: "",
@@ -72,7 +74,7 @@ export default function CheckoutPage() {
       ],
     },
     {
-      title: "Pearcing",
+      title: "Piercing",
       options: [
         { name: "Ear", price: "$25" },
         { name: "Nose", price: "$25" },
@@ -191,6 +193,7 @@ export default function CheckoutPage() {
       where("location", "==", selectedLocation),
       where("date", "==", form.date),
       where("phone", "==", form.phone),
+      where("service", "==", form.service),
       where("status", "==", "pending")
     );
 
@@ -220,6 +223,7 @@ export default function CheckoutPage() {
         email: "",
         phone: "",
         date: "",
+        service: "",
         time: "",
         notes: "",
       });
