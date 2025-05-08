@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
+import Logo from "../public/misterbarber.jpg"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +19,10 @@ export default function Header() {
           href="/"
           className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text"
         >
-          MISTR BARBER
+          {/* MISTR BARBER */}
+          <Image
+          src={Logo}
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -111,7 +116,7 @@ export default function Header() {
             </Link>
 
             {/* Dubai Dropdown (Mobile) */}
-            <details className="group">
+            {/* <details className="group">
               <summary className="text-white cursor-pointer hover:text-amber-400 transition">
                 Dubai
               </summary>
@@ -138,22 +143,48 @@ export default function Header() {
                   Gallery
                 </Link>
               </div>
-            </details>
+            </details> */}
 
-            <Link
+            {/* <Link
               href="/about"
               className="text-white hover:text-amber-400 transition"
               onClick={closeMenu}
             >
-              About
-            </Link>
-            <Link
-              href="/dubai/checkout"
-              className="inline-block px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition"
-              onClick={closeMenu}
-            >
-              Book Now
-            </Link>
+              Locations
+            </Link> */}
+
+<div
+            className="relative"
+            onMouseEnter={() => setIsDubaiDropdownOpen(true)}
+            onMouseLeave={() => setIsDubaiDropdownOpen(false)}
+          >
+            <button className="text-white hover:text-amber-400 transition-colors duration-300">
+              Locations
+            </button>
+            {isDubaiDropdownOpen && (
+              <div className="absolute left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
+                <Link
+                  href="/etobicoke"
+                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                >
+                  Etobicokde
+                </Link>
+
+                <Link
+                  href="/notryork"
+                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                >
+                  Notryork
+                </Link>
+                <Link
+                  href="/dundaslocation"
+                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                >
+                  DundasLocation
+                </Link>
+              </div>
+            )}
+          </div>
           </nav>
         </div>
       )}
