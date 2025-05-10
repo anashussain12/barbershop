@@ -17,7 +17,7 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="text-2xl font-bold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text"
+          className=" font-bold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text"
         >
           {/* MISTR BARBER */}
           <Image
@@ -26,7 +26,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 relative">
+        <nav className="hidden text-[18px] md:flex items-center space-x-8 relative">
           <Link
             href="/"
             className="text-white hover:text-amber-400 transition-colors duration-300"

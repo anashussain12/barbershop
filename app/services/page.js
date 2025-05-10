@@ -4,58 +4,60 @@ import ImageWithFallback from "../components/ImageWithFallback";
 import Header from "../../components/Header";
 
 export default function DubaiPage() {
+  // Hair Color and Highlights
   const services = [
     // ETOBICOKE SERVICES
     {
-      name: "Royal Haircut",
-      price: "AED 120",
+      name: "Individual Highlights",
+      price: "$10",
       location: "Etobicoke",
-      duration: "45 min",
-      description:
-        "Precision cut with styling, hot towel refreshment, and scalp massage",
+      // duration: "45 min",
+      // description:
+      //   "Precision cut with styling, hot towel refreshment, and scalp massage",
       image: "/royal-haircut.jpeg",
     },
     {
-      name: "Beard Sculpting",
-      price: "AED 80",
+      name: "Cap Highlights",
+      price: "$60",
       location: "Etobicoke",
-      duration: "30 min",
-      description:
-        "Expert beard shaping with hot towel treatment and essential oils",
+      // duration: "30 min",
+      // description:
+      //   "Expert beard shaping with hot towel treatment and essential oils",
       image: "/beard-sculpting.jpg",
     },
     {
-      name: "Complete Grooming",
-      price: "AED 180",
+      name: "Hair Colour for Men with Wash",
+      price: "$20",
       location: "Etobicoke",
-      duration: "75 min",
-      description: "Haircut, beard trim, facial cleanse, and styling",
+      // duration: "75 min",
+      // description: "Haircut, beard trim, facial cleanse, and styling",
       image: "/complete-grooming.jpg",
     },
     {
-      name: "Hot Towel Shave",
-      price: "AED 90",
+      name: "Hair Smoothing",
+      price: "$200 & up",
       location: "Etobicoke",
-      duration: "40 min",
-      description:
-        "Traditional straight razor shave with hot towel preparation",
+      // duration: "40 min",
+      // description:
+      //   "Traditional straight razor shave with hot towel preparation",
       image: "/hot-towel-shave.jpg",
     },
     {
-      name: "Hair & Scalp Treatment",
-      price: "AED 150",
+      name: "Hair Keratin",
+      price: "$200 & up",
+
       location: "Etobicoke",
-      duration: "60 min",
-      description: "Deep conditioning treatment with scalp therapy and styling",
+      // duration: "60 min",
+      // description: "Deep conditioning treatment with scalp therapy and styling",
       image: "/hair-scalp-treatment.jpg",
     },
     {
-      name: "Grey Coverage",
-      price: "AED 140",
+      name: "Women Root Touchup",
+      price: "$35",
       location: "Etobicoke",
-      duration: "60 min",
-      description:
-        "Natural-looking color application specifically for grey coverage",
+      // duration: "60 min",
+      // description:
+      //   "Natural-looking color application specifically for grey coverage",
       image: "/grey-coverage.jpg",
     },
   ];
@@ -125,15 +127,16 @@ export default function DubaiPage() {
     {
       dundasname: "Relaxed Cut",
       dundasprice: "AED 80",
-      dundaslocation : "DundasLocation",
+      dundaslocation: "DundasLocation",
       dundasduration: "35 min",
-      dundasdescription: "Laid-back haircut with styling and complimentary beverage",
+      dundasdescription:
+        "Laid-back haircut with styling and complimentary beverage",
       dundasimage: "/relaxed.jpg",
     },
     {
       dundasname: "Express Trim",
       dundasprice: "AED 50",
-      dundaslocation : "DundasLocation",
+      dundaslocation: "DundasLocation",
       dundasduration: "20 min",
       dundasdescription: "Quick touch-up for those on the go, includes styling",
       dundasimage: "/beard-trim.jpg",
@@ -141,7 +144,7 @@ export default function DubaiPage() {
     {
       dundasname: "Full Experience",
       dundasprice: "AED 140",
-      dundaslocation : "DundasLocation",
+      dundaslocation: "DundasLocation",
       dundasduration: "70 min",
       dundasdescription: "Haircut, beard trim, face mask, and shoulder massage",
       dundasimage: "/complete-grooming.jpg",
@@ -149,29 +152,29 @@ export default function DubaiPage() {
     {
       dundasname: "Beard Design",
       dundasprice: "AED 65",
-      dundaslocation : "DundasLocation",
+      dundaslocation: "DundasLocation",
       dundasduration: "30 min",
       dundasdescription:
         "Creative beard styling with precision detailing and conditioning",
-        dundasimage: "/beard-sculpting.jpg",
+      dundasimage: "/beard-sculpting.jpg",
     },
     {
       dundasname: "Senior Special",
       dundasprice: "AED 70",
-      dundaslocation : "DundasLocation",
+      dundaslocation: "DundasLocation",
       dundasduration: "40 min",
-      dundasdescription: "Specialized service for our distinguished senior clients",
+      dundasdescription:
+        "Specialized service for our distinguished senior clients",
       dundasimage: "/gentle-cut.jpg",
     },
     {
       dundasname: "Kids Cut",
       dundasprice: "AED 60",
-      dundaslocation : "DundasLocation",
+      dundaslocation: "DundasLocation",
       dundasduration: "25 min",
       dundasdescription: "Fun and friendly haircuts for the little gentlemen",
       dundasimage: "/kids.jpg",
     },
-
   ];
 
   return (
@@ -290,7 +293,11 @@ export default function DubaiPage() {
           {/* DUNDASLOCATION MAP  */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {dundasservices.map((dundaslocationservice) => (
-              <Link key={dundaslocationservice.name} href="/dundaslocation/checkout" className="group">
+              <Link
+                key={dundaslocationservice.name}
+                href="/dundaslocation/checkout"
+                className="group"
+              >
                 <div className="p-8 rounded-lg bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 group-hover:border-white/10 transition-all duration-500 relative overflow-hidden">
                   {/* Subtle glow effect on hover */}
 
@@ -311,7 +318,9 @@ export default function DubaiPage() {
                     <span className="text-amber-500 font-bold">
                       {dundaslocationservice.dundasprice}
                     </span>
-                    <span className="text-gray-400">{dundaslocationservice.dundasduration}</span>
+                    <span className="text-gray-400">
+                      {dundaslocationservice.dundasduration}
+                    </span>
                   </div>
                   <p className="text-white font-semibold mb-2 relative z-10">
                     <span className="text-amber-500 pr-1">Location:</span>{" "}
