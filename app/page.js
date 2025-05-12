@@ -219,7 +219,7 @@ export default function Home() {
             <ul className="text-gray-400 space-y-2">
               <li>Email: info@mistrbarber.com</li>
               <li>Phone: +1 416-604-4066</li>
-              <li>Address: Sheikh Zayed Road, Dubai</li>
+              <li>Address: 2912 Dundas St W, Toronto</li>
             </ul>
           </div>
         </div>
