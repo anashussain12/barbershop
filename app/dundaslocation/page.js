@@ -280,7 +280,7 @@ export default function AjmanPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
-                    <p className="text-gray-300">Phone: +971 6 987 6543</p>
+                    <p className="text-gray-300">Phone: +1 416-604-4066</p>
                     <p className="text-gray-300">
                       Email: ajman@mistrbarber.com
                     </p>

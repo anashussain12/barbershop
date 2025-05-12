@@ -281,7 +281,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
-                    <p className="text-gray-300">Phone: +971 4 123 4567</p>
+                    <p className="text-gray-300">Phone: +1 416-604-4066</p>
                     <p className="text-gray-300">
                       Email: dubai@mistrbarber.com
                     </p>
@@ -438,7 +438,7 @@ export default function DubaiPage() {
                 Mr Barber unisex{" "}
               </h1>
               <li>Email: info@mistrbarber.com</li>
-              <li>Phone: +971 4 123 4567</li>
+              <li>Phone: +1 416-604-4066</li>
               <li>Address: 1625 albion Road 416 749 7900 </li>
             </ul>
           </div>

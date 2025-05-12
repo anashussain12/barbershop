@@ -277,7 +277,7 @@ export default function SharjahPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
-                    <p className="text-gray-300">Phone: +971 6 123 4567</p>
+                    <p className="text-gray-300">Phone: +1 416-604-4066</p>
                     {/* <p className="text-gray-300">
                       Email: sharjah@mistrbarber.com
                     </p> */}
@@ -433,7 +433,7 @@ export default function SharjahPage() {
                 Mr Barber unisex{" "}
               </h1>
               <li>Email: info@mistrbarber.com</li>
-              <li>Phone: +971 4 123 4567</li>
+              <li>Phone: +1 416-604-4066</li>
               <li>Address: 2528 Finch Avenue w 416 749 4757 </li>
             </ul>
           </div>

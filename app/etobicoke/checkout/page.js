@@ -690,7 +690,7 @@ export default function CheckoutPage() {
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
               <li>Email: info@mistrbarber.com</li>
-              <li>Phone: +971 4 123 4567</li>
+              <li>Phone: +1 416-604-4066</li>
               <li>Address: Sheikh Zayed Road, Dubai</li>
             </ul>
           </div>

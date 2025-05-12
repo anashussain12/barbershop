@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 
 export default function DubaiPage() {
   // Hair Color and Highlights
+  // Hair Color and Highlightss
   const services = [
     // ETOBICOKE SERVICES
     {
@@ -399,7 +400,7 @@ export default function DubaiPage() {
                 Mr Barber unisex{" "}
               </h1>
               <li>Email: info@mistrbarber.com</li>
-              <li>Phone: +971 4 123 4567</li>
+              <li>Phone: +1 416-604-4066</li>
               <li>Address: 1625 albion Road 416 749 7900 </li>
             </ul>
           </div>
