@@ -693,5 +693,3 @@ export default function CheckoutPage() {
     </main>
   );
 }
-// n
-// n
