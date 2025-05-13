@@ -687,6 +687,8 @@ export default function CheckoutPage() {
           <div className="mt-12 pt-8 border-t border-white/10 text-center">
             <p className="text-gray-500">
               © 2024 MISTR BARBER. All rights reserved.
+              © 2024 MISTR BARBER. All rights reserved.
+              © 2024 MISTR BARBER. All rights reserved.
             </p>
           </div>
         </footer>
