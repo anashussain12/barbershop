@@ -689,6 +689,7 @@ export default function CheckoutPage() {
               © 2024 MISTR BARBER. All rights reserved.
               {/* © 2024 MISTR BARBER. All rights reserved. */}
               {/* © 2024 MISTR BARBER. All rights reserved. */}
+              {/* © 2024 MISTR BARBER. All rights reserved. */}
             </p>
           </div>
         </footer>
