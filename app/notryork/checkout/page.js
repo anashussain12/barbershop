@@ -688,6 +688,7 @@ export default function CheckoutPage() {
             <p className="text-gray-500">
               © 2024 MISTR BARBER. All rights reserved.
               {/* © 2024 MISTR BARBER. All rights reserved. */}
+              {/* © 2024 MISTR BARBER. All rights reserved. */}
             </p>
           </div>
         </footer>
