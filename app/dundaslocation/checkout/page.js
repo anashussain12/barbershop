@@ -14,6 +14,8 @@ export default function CheckoutPage() {
     lastName: "",
     email: "",
     phone: "",
+    service : "",
+    
     date: "",
     time: "",
     notes: "",
@@ -72,7 +74,7 @@ export default function CheckoutPage() {
       ],
     },
     {
-      title: "Pearcing",
+      title: "Piercing",
       options: [
         { name: "Ear", price: "$25" },
         { name: "Nose", price: "$25" },
@@ -121,6 +123,9 @@ export default function CheckoutPage() {
       ],
     },
   ];
+  const [loading, setLoading] = useState(false);     // NEW
+
+
   const barbers = ["Ahmed", "Malik", "Rashed", "Any Available Barber"];
   const locations = ["ETOBICOKE", "NOTRYORK", "DUNDASLOCATION"];
 
@@ -162,7 +167,7 @@ export default function CheckoutPage() {
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
     setSelectedLocation(newLocation);
-    if (newLocation !== "DUNDASLOCATION") {
+    if (newLocation !== "ETOBICOKE") {
       window.location.href = `/${newLocation.toLowerCase()}/checkout`;
     }
   };
@@ -171,65 +176,136 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const selectedServices = getSelectedServices();
-    if (selectedServices.length === 0) {
-      alert("Please select at least one service");
-      return;
-    }
+  //   const selectedServices = getSelectedServices();
+  //   if (selectedServices.length === 0) {
+  //     alert("Please select at least one service");
+  //     return;
+  //   }
 
+  //   const bookingsRef = collection(db, "bookings");
+  //   const q = query(
+  //     bookingsRef,
+  //     where("firstName", "==", form.firstName),
+  //     where("lastName", "==", form.lastName),
+  //     where("email", "==", form.email),
+  //     where("barber", "==", selectedBarber),
+  //     where("location", "==", selectedLocation),
+  //     where("date", "==", form.date),
+  //     where("phone", "==", form.phone),
+  //     where("service", "==", form.service),
+  //     where("status", "==", "pending")
+  //   );
+
+  //   const querySnapshot = await getDocs(q);
+  //   if (!querySnapshot.empty) {
+  //     alert(
+  //       "You have already booked this service with the same details. Please wait until the previous booking is completed."
+  //     );
+  //     return;
+  //   }
+
+  //   try {
+  //     const docRef = await addDoc(collection(db, "bookings"), {
+  //       ...form,
+  //       services: selectedServices.map((s) => s.name),
+  //       servicesWithPrices: selectedServices,
+  //       barber: selectedBarber,
+  //       location: selectedLocation,
+  //       createdAt: new Date().toISOString(),
+  //       status: "pending",
+  //     });
+
+  //     alert("Your appointment has been confirmed, our team will contact you soon✅");
+  //     setForm({
+  //       firstName: "",
+  //       lastName: "",
+  //       email: "",
+  //       phone: "",
+  //       date: "",
+  //       service: "",
+  //       time: "",
+  //       notes: "",
+  //     });
+  //     setSelectedOptions({});
+  //     setSelectedBarber("");
+  //     setSelectedLocation("ETOBICOKE");
+  //   } catch (error) {
+  //     console.error("Error adding document: ", error);
+  //     alert("Something went wrong. Please try again.");
+  //   }
+  // };
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (loading) return;          // ignore double-clicks
+  setLoading(true);
+
+  const selectedServices = getSelectedServices();
+  if (selectedServices.length === 0) {
+    alert("Please select at least one service");
+    setLoading(false);
+    return;
+  }
+
+  try {
+    /* check duplicate */
     const bookingsRef = collection(db, "bookings");
     const q = query(
       bookingsRef,
       where("firstName", "==", form.firstName),
-      where("lastName", "==", form.lastName),
-      where("email", "==", form.email),
-      where("barber", "==", selectedBarber),
-      where("location", "==", selectedLocation),
-      where("date", "==", form.date),
-      where("phone", "==", form.phone),
-      where("status", "==", "pending")
+      where("lastName",  "==", form.lastName),
+      where("email",     "==", form.email),
+      where("barber",    "==", selectedBarber),
+      where("location",  "==", selectedLocation),
+      where("date",      "==", form.date),
+      where("phone",     "==", form.phone),
+      where("service",   "==", form.service),
+      where("status",    "==", "pending")
     );
-
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
+    const snap = await getDocs(q);
+    if (!snap.empty) {
       alert(
         "You have already booked this service with the same details. Please wait until the previous booking is completed."
       );
       return;
     }
 
-    try {
-      const docRef = await addDoc(collection(db, "bookings"), {
-        ...form,
-        services: selectedServices.map((s) => s.name),
-        servicesWithPrices: selectedServices,
-        barber: selectedBarber,
-        location: selectedLocation,
-        createdAt: new Date().toISOString(),
-        status: "pending",
-      });
+    /* add new booking */
+    await addDoc(bookingsRef, {
+      ...form,
+      services:           selectedServices.map((s) => s.name),
+      servicesWithPrices: selectedServices,
+      barber:             selectedBarber,
+      location:           selectedLocation,
+      createdAt:          new Date().toISOString(),
+      status:             "pending",
+    });
 
-      alert("Booking confirmed!");
-      setForm({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        date: "",
-        time: "",
-        notes: "",
-      });
-      setSelectedOptions({});
-      setSelectedBarber("");
-      setSelectedLocation("DUNDASLOCATION");
-    } catch (error) {
-      console.error("Error adding document: ", error);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+    alert("Your appointment has been confirmed, our team will contact you soon ✅");
+    /* reset */
+    setForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      date: "",
+      service: "",
+      time: "",
+      notes: "",
+    });
+    setSelectedOptions({});
+    setSelectedBarber("");
+    setSelectedLocation("ETOBICOKE");
+  } catch (err) {
+    console.error("Error adding document:", err);
+    alert("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);          // hide spinner
+  }
+};
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
@@ -618,12 +694,54 @@ export default function CheckoutPage() {
                       </div>
                     </div>
                   </div>
-                  <button
+                  {/* <button
                     type="submit"
                     className="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-[1.02] shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]"
                   >
                     CONFIRM BOOKING
-                  </button>
+                  </button> */}
+
+  <button
+  type="submit"
+  disabled={loading}
+  className={`w-full py-3 flex items-center justify-center
+    bg-gradient-to-r from-amber-500 to-yellow-400
+    hover:from-amber-400 hover:to-yellow-300
+    text-black font-bold rounded-md transition-all duration-300
+    transform hover:scale-[1.02]
+    shadow-[0_5px_15px_rgba(0,0,0,0.2)]
+    hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
+    ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}
+  `}
+>
+  {loading ? (
+    /* simple SVG spinner */
+    <svg
+      className="animate-spin h-5 w-5 text-black"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+      />
+    </svg>
+  ) : (
+    "CONFIRM BOOKING"
+  )}
+</button>
+
+
                   <p className="text-gray-400 text-sm mt-4 text-center">
                     By confirming, you agree to our booking terms and
                     cancellation policy.

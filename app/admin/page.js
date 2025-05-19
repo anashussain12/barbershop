@@ -139,7 +139,7 @@ const Dashboard = () => {
       });
     } catch (error) {
       console.error("Error deleting document: ", error);
-      alert("Something went wrong while deleting the booking.");
+      // alert("Something went wrong while deleting the booking.");
     }
   };
 
