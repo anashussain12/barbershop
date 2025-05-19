@@ -5,49 +5,103 @@ import Header from "../../components/Header";
 export default function DubaiPage() {
   const notryorkservices = [
     {
-      notname: "Gentleman's Package",
+      notname: "Hair Cut & Styling ",
       notdescription: [
-        "Haircut",
-        "Beard trim",
-        "Facial scrub",
-        "Relaxing scalp massage",
+        "Men Haircut",
+        "Women Haircut & wash",
+        "Women Haircut & style",
+        "Women Hair Shampoo & Blow dry",
+        "Women oil head massage",
+        "Kids Hair cut",
+        "Girls Hair cut under age",
+        "Women layers cut",
+        "Hair straightening",
+        "Ladies shampoo",
+        "Mens beard cut",
       ],
       notimage: "/package.jpg",
     },
     {
-      notname: "Gentleman's Package",
+      notname: "Threading",
       notdescription: [
-        "Haircut",
-        "Beard trim",
-        "Facial scrub",
-        "Relaxing scalp massage",
+        "Eyebrow",
+        "Upper lips",
+        "Chin",
+        "Forehead",
+        "Full face",
+        "Full face & Neck",
+        "Mens threading",
       ],
-      notimage: "/package.jpg",
+      notimage: "/threadingmen.png",
     },
     {
-      notname: "Gentleman's Package",
+      notname: "Skin care",
       notdescription: [
-        "Haircut",
-        "Beard trim",
-        "Facial scrub",
-        "Relaxing scalp massage",
+        "Men facial staring",
+        "Full face bleach",
+        "Herbal facial",
+        "Gold facial",
+        "Diamond facial",
+        "Acne facial",
       ],
-      notimage: "/package.jpg",
+      notimage: "/skincare.jpg",
     },
-    // add more services as needed …
+    {
+      notname: "Hair colour & Highlights",
+      notdescription: [
+        "Individual highlights",
+        "Cap highlights",
+        "Hair colour for men with mesh",
+        "Hair smoothing",
+        "Hair keratin",
+        "Women root touchup",
+      ],
+      notimage: "/highlighthair.png",
+    },
+    {
+      notname: "Makeup Artistry",
+      notdescription: [
+        "Party makeup",
+        "Party hairstyles",
+        "Full bridal makeup in salon",
+        "Bridal mehndi",
+        "Mehndi per hand",
+      ],
+      notimage: "/artistry.jpg",
+    },
+    {
+      notname: "Piercing",
+      notdescription: ["Ear", "Nose"],
+      notimage: "/piercing.jpg",
+    },
+    {
+      notname: "Waxing",
+      notdescription: [
+        "Eyebrow",
+        "Upper lips",
+        "Chin",
+        "Forehead",
+        "Full face",
+        "Under arm",
+        "Full arm",
+        "Full legs",
+        "Half legs",
+        "Stomach",
+        "Full back",
+        "Full body",
+        "Brazilian",
+        "Bikini/Line",
+      ],
+      notimage: "/waxing.jpg",
+    },
   ];
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333] text-white">
       <Header />
-
-      {/* thin divider */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-      {/* Services */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto space-y-14">
-          {/* heading */}
           <h2 className="w-fit mx-auto text-5xl font-extrabold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
             SERVICES
             <span className="block h-px w-24 mx-auto mt-3 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
@@ -59,11 +113,10 @@ export default function DubaiPage() {
               <Link
                 key={svc.notname}
                 href="/notryork/checkout"
-                className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition"
+                className="group relative rounded-2xl overflow-hidden "
               >
                 {/* container */}
                 <article className="flex flex-col lg:flex-row bg-gradient-to-b from-[#2d2d2d]/80 to-[#1a1a1a]/80 backdrop-blur-sm">
-
                   {/* image */}
                   <Image
                     src={svc.notimage}
@@ -92,8 +145,10 @@ export default function DubaiPage() {
 
                     {/* CTA */}
                     <div className="pt-6 text-right">
-                      <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded font-bold text-black
-                                         group-hover:from-amber-400 group-hover:to-yellow-300 transition">
+                      <span
+                        className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded font-bold text-black
+                                         group-hover:from-amber-400 group-hover:to-yellow-300 transition"
+                      >
                         BOOK NOW
                       </span>
                     </div>
@@ -107,7 +162,7 @@ export default function DubaiPage() {
           </div>
         </div>
       </section>
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
       <footer className="py-12 px-6 bg-[#111111]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>

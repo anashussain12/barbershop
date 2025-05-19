@@ -1,112 +1,116 @@
 import Link from "next/link";
 import Image from "next/image";
-import ImageWithFallback from "../components/ImageWithFallback";
 import Header from "../../components/Header";
 
-export default function SharjahPage() {
-  const services = [
+export default function DubaiPage() {
+  const notryorkservices = [
     {
-      name: "Hair Cut & Styling",
-      // price: "AED 120",
-      // duration: "45 min",
-      description:
-        "Precision cut with styling, hot towel refreshment, and scalp massage",
-      image: "/royal-haircut.jpeg",
+      notname: "Hair Cut & Styling ",
+      notdescription: [
+        "Men Haircut",
+        "Women Haircut & wash",
+        "Women Haircut & style",
+        "Women Hair Shampoo & Blow dry",
+        "Women oil head massage",
+        "Kids Hair cut",
+        "Girls Hair cut under age",
+        "Women layers cut",
+        "Hair straightening",
+        "Ladies shampoo",
+        "Mens beard cut",
+      ],
+      notimage: "/package.jpg",
     },
     {
-      name: "Threading",
-      // price: "AED 80",
-      // duration: "30 min",
-      description:
-        "Expert beard shaping with hot towel treatment and essential oils",
-      image: "/beard-sculpting.jpg",
+      notname: "Threading",
+      notdescription: [
+        "Eyebrow",
+        "Upper lips",
+        "Chin",
+        "Forehead",
+        "Full face",
+        "Full face & Neck",
+        "Mens threading",
+      ],
+      notimage: "/threadingmen.png",
     },
     {
-      name: "Waxing",
-      // price: "AED 180",
-      // duration: "75 min",
-      description: "Haircut, beard trim, facial cleanse, and styling",
-      image: "/complete-grooming.jpg",
+      notname: "Skin care",
+      notdescription: [
+        "Men facial staring",
+        "Full face bleach",
+        "Herbal facial",
+        "Gold facial",
+        "Diamond facial",
+        "Acne facial",
+      ],
+      notimage: "/skincare.jpg",
     },
     {
-      name: "Pearcing",
-      // price: "AED 90",
-      // duration: "40 min",
-      description:
-        "Traditional straight razor shave with hot towel preparation",
-      image: "/hot-towel-shave.jpg",
+      notname: "Hair colour & Highlights",
+      notdescription: [
+        "Individual highlights",
+        "Cap highlights",
+        "Hair colour for men with mesh",
+        "Hair smoothing",
+        "Hair keratin",
+        "Women root touchup",
+      ],
+      notimage: "/highlighthair.png",
     },
     {
-      name: "Skin care",
-      // price: "AED 150",
-      // duration: "60 min",
-      description: "Deep conditioning treatment with scalp therapy and styling",
-      image: "/hair-scalp-treatment.jpg",
+      notname: "Makeup Artistry",
+      notdescription: [
+        "Party makeup",
+        "Party hairstyles",
+        "Full bridal makeup in salon",
+        "Bridal mehndi",
+        "Mehndi per hand",
+      ],
+      notimage: "/artistry.jpg",
     },
     {
-      name: "Hair Colour & Highlights",
-      // price: "AED 140",
-      // duration: "60 min",
-      description:
-        "Natural-looking color application specifically for grey coverage",
-      image: "/grey-coverage.jpg",
+      notname: "Piercing",
+      notdescription: ["Ear", "Nose"],
+      notimage: "/piercing.jpg",
     },
     {
-      name: "Makeup Artistry",
-      // price: "AED 140",
-      // duration: "60 min",
-      description:
-        "Natural-looking color application specifically for grey coverage",
-      image: "/grey-coverage.jpg",
-    },
-    {
-      name: "Perm",
-      // price: "AED 140",
-      // duration: "60 min",
-      description:
-        "Natural-looking color application specifically for grey coverage",
-      image: "/grey-coverage.jpg",
-    },
-  ];
-
-
-  const barbers = [
-    {
-      name: "Fahad",
-      specialty: "Classic Cuts",
-      image: "/barber-fahad.jpg",
-      fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
-    },
-    {
-      name: "Omar",
-      specialty: "Beard Styling",
-      image: "/barber-omar.jpg",
-      fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
-    },
-    {
-      name: "Khalid",
-      specialty: "Traditional Techniques",
-      image: "/barber-khalid.jpg",
-      fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
+      notname: "Waxing",
+      notdescription: [
+        "Eyebrow",
+        "Upper lips",
+        "Chin",
+        "Forehead",
+        "Full face",
+        "Under arm",
+        "Full arm",
+        "Full legs",
+        "Half legs",
+        "Stomach",
+        "Full back",
+        "Full body",
+        "Brazilian",
+        "Bikini/Line",
+      ],
+      notimage: "/waxing.jpg",
     },
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
+    <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333] text-white">
       <Header />
 
-      {/* Hero Section */}
-      <div className="relative h-[50vh] w-full">
+ <div className="relative h-[50vh] w-full">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-[#4a3c31]/50 z-10" />
-        <ImageWithFallback
+        {/* <ImageWithFallback
           src="/sharjah-location-hero.jpg"
           alt="Sharjah Barber Shop"
           fill
           className="object-cover z-5"
           priority
           fallbackClassName="bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d]"
-        />
+        /> */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
             NOTRYORK
@@ -123,77 +127,70 @@ export default function SharjahPage() {
         </div>
       </div>
 
-      {/* Divider */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto space-y-14">
+          <h2 className="w-fit mx-auto text-5xl font-extrabold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
+           OUR SERVICES
+            <span className="block h-px w-24 mx-auto mt-3 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+          </h2>
 
-      {/* Services Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-[#333333] to-[#1a1a1a]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="inline-block text-4xl font-bold relative">
-              <span className="bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-                OUR SERVICES
-              </span>
-              <div className="h-px w-24 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mx-auto mt-3"></div>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
+          {/* grid */}
+          <div className="grid gap-10 lg:gap-14 sm:grid-cols-2">
+            {notryorkservices.map((svc) => (
               <Link
-                key={service.name}
+                key={svc.notname}
                 href="/notryork/checkout"
-                className="group"
+                className="group relative rounded-2xl overflow-hidden "
               >
-                <div className="p-8 rounded-lg bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 group-hover:border-white/10 transition-all duration-500 relative overflow-hidden">
+                {/* container */}
+                <article className="flex flex-col lg:flex-row bg-gradient-to-b from-[#2d2d2d]/80 to-[#1a1a1a]/80 backdrop-blur-sm">
+                  {/* image */}
                   <Image
-                    src={service.image}
-                    alt={service.name}
+                    src={svc.notimage}
+                    alt={svc.notname}
                     width={400}
                     height={300}
-                    className="rounded-lg mb-4"
+                    className="object-cover w-full lg:w-64 h-56 lg:h-auto"
                   />
-                  {/* Subtle glow effect on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none"></div>
 
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text relative z-10">
-                    {service.name}
-                  </h3>
-                  <div className="flex justify-between mb-4 relative z-10">
-                    <span className="text-amber-500 font-bold">
-                      {service.price}
-                    </span>
-                    <span className="text-gray-400">{service.duration}</span>
-                  </div>
-                  <p className="text-gray-300 mb-6 relative z-10">
-                    {service.description}
-                  </p>
-                  <div className="flex justify-end relative z-10">
-                    <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded text-black font-bold transition-all duration-300 group-hover:from-amber-400 group-hover:to-yellow-300">
-                      BOOK NOW
-                    </span>
-                  </div>
+                  {/* text panel */}
+                  <div className="flex flex-col flex-1 p-6 lg:p-8">
+                    {/* title */}
+                    <header className="mb-2">
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
+                        {svc.notname}
+                      </h3>
+                      <div className="h-0.5 w-20 bg-gradient-to-r from-amber-500 to-yellow-400 mt-1" />
+                    </header>
 
-                  {/* Subtle border highlight effect */}
-                  <div className="absolute inset-0 border border-transparent group-hover:border-white/10 rounded-lg transition-all duration-500"></div>
-                </div>
+                    {/* description list */}
+                    <ul className="flex-1 space-y-1 list-disc list-inside text-gray-300/90">
+                      {svc.notdescription.map((line) => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+
+                    {/* CTA */}
+                    <div className="pt-6 text-right">
+                      <span
+                        className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded font-bold text-black
+                                         group-hover:from-amber-400 group-hover:to-yellow-300 transition"
+                      >
+                        BOOK NOW
+                      </span>
+                    </div>
+                  </div>
+                </article>
+
+                {/* soft glow on hover */}
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-amber-500/10 to-transparent pointer-events-none" />
               </Link>
             ))}
           </div>
-
-          <div className="mt-12 text-center">
-            <Link href="services" className="px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]">
-              VIEW FULL MENU
-            </Link>
-          </div>
         </div>
       </section>
-
-      {/* Divider */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-      {/* Location Details Section */}
-      <section className="py-20 px-6 bg-[#1a1a1a]">
+              <section className="py-16 px-6 bg-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
@@ -227,8 +224,12 @@ export default function SharjahPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
+                    <p className="text-gray-300">LOCATION: ETOBICOKE</p>
                     <p className="text-gray-300">
-                      2528 Finch Avenue w 416 749 4757
+                      1625 albion Road 416 749 7900
+                    </p>
+                    <p className="text-gray-300">
+                      1625 albion Road 416 749 7900
                     </p>
                   </div>
                 </div>
@@ -252,7 +253,7 @@ export default function SharjahPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Hours</h3>
-                    <p className="text-gray-300">Monday - Friday: 9AM - 8PM</p>
+                    <p className="text-gray-300">Monday - Friday: 10AM - 9PM</p>
                     <p className="text-gray-300">Saturday: 9AM - 7PM</p>
                     <p className="text-gray-300">Sunday: 10AM - 6PM</p>
                   </div>
@@ -278,108 +279,20 @@ export default function SharjahPage() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
                     <p className="text-gray-300">Phone: +1 416-604-4066</p>
-                    {/* <p className="text-gray-300">
-                      Email: sharjah@mistrbarber.com
-                    </p> */}
+                    <p className="text-gray-300">
+                      Email: dubai@mistrbarber.com
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-              <ImageWithFallback
-                src="/sharjah-map.jpg"
-                alt="Sharjah Location Map"
-                fill
-                className="object-cover"
-                fallbackClassName="bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d]"
-              />
-              <div className="absolute inset-0 flex items-end p-6">
-                <div className="bg-black/70 p-4 rounded-lg backdrop-blur-sm w-full">
-                  <h3 className="text-xl font-bold mb-2">Find Us</h3>
-                  <p className="text-gray-300 mb-4">
-                    Located in the heart of Al Nahda, easily accessible from all
-                    parts of NOTRYORK.
-                  </p>
-                  <a
-                    href="https://maps.app.goo.gl/123"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded text-black font-bold transform transition-all duration-300 hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]"
-                  >
-                    GET DIRECTIONS
-                  </a>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>
 
-      {/* Divider */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-      {/* Barbers Section */}
-      <section className="py-20 px-6 bg-[#1a1a1a] relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/texture-bg.jpg')] opacity-5 mix-blend-overlay pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="inline-block text-4xl font-bold relative">
-              <span className="bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-                MEET OUR BARBERS
-              </span>
-              <div className="h-px w-24 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mx-auto mt-3"></div>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {barbers.map((barber) => (
-              <div key={barber.name} className="group">
-                <div className="relative h-96 rounded-lg overflow-hidden shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)] transition-all duration-500 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] mb-6">
-                  <ImageWithFallback
-                    src={barber.image}
-                    alt={`Barber ${barber.name}`}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    fallbackClassName="bg-gradient-to-br from-gray-800 to-amber-900"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] to-transparent opacity-90" />
-                </div>
-                <h3 className="text-2xl font-bold mb-1 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-                  {barber.name}
-                </h3>
-                <p className="text-amber-500">{barber.specialty}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-      {/* Booking Section */}
-      <section className="py-20 px-6 bg-[#1a1a1a] relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/texture-bg.jpg')] opacity-5 mix-blend-overlay pointer-events-none"></div>
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-            READY FOR THE ROYAL TREATMENT?
-          </h2>
-          <p className="text-xl text-gray-300 mb-10">
-            Book your appointment today and experience premium grooming services
-            at our NOTRYORK location.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="px-8 py-4 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]">
-              BOOK ONLINE
-            </button>
-            <button className="px-8 py-4 bg-transparent border-2 border-amber-500/30 text-white font-bold rounded-md transition-all duration-300 hover:border-amber-500/50 transform hover:scale-105">
-              CALL US
-            </button>
-          </div>
-        </div>
-      </section>
-
       <footer className="py-12 px-6 bg-[#111111]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
@@ -434,7 +347,7 @@ export default function SharjahPage() {
               </h1>
               <li>Email: info@mistrbarber.com</li>
               <li>Phone: +1 416-604-4066</li>
-              <li>Address: 2528 Finch Avenue w 416 749 4757 </li>
+              <li>Address: 1625 albion Road 416 749 7900 </li>
             </ul>
           </div>
         </div>
