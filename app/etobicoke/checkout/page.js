@@ -6,6 +6,8 @@ import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
+
+
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
   const [minDate, setMinDate] = useState("");
@@ -179,67 +181,6 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const selectedServices = getSelectedServices();
-  //   if (selectedServices.length === 0) {
-  //     alert("Please select at least one service");
-  //     return;
-  //   }
-
-  //   const bookingsRef = collection(db, "bookings");
-  //   const q = query(
-  //     bookingsRef,
-  //     where("firstName", "==", form.firstName),
-  //     where("lastName", "==", form.lastName),
-  //     where("email", "==", form.email),
-  //     where("barber", "==", selectedBarber),
-  //     where("location", "==", selectedLocation),
-  //     where("date", "==", form.date),
-  //     where("phone", "==", form.phone),
-  //     where("service", "==", form.service),
-  //     where("status", "==", "pending")
-  //   );
-
-  //   const querySnapshot = await getDocs(q);
-  //   if (!querySnapshot.empty) {
-  //     alert(
-  //       "You have already booked this service with the same details. Please wait until the previous booking is completed."
-  //     );
-  //     return;
-  //   }
-
-  //   try {
-  //     const docRef = await addDoc(collection(db, "bookings"), {
-  //       ...form,
-  //       services: selectedServices.map((s) => s.name),
-  //       servicesWithPrices: selectedServices,
-  //       barber: selectedBarber,
-  //       location: selectedLocation,
-  //       createdAt: new Date().toISOString(),
-  //       status: "pending",
-  //     });
-
-  //     alert("Your appointment has been confirmed, our team will contact you soon✅");
-  //     setForm({
-  //       firstName: "",
-  //       lastName: "",
-  //       email: "",
-  //       phone: "",
-  //       date: "",
-  //       service: "",
-  //       time: "",
-  //       notes: "",
-  //     });
-  //     setSelectedOptions({});
-  //     setSelectedBarber("");
-  //     setSelectedLocation("ETOBICOKE");
-  //   } catch (error) {
-  //     console.error("Error adding document: ", error);
-  //     alert("Something went wrong. Please try again.");
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -288,7 +229,7 @@ export default function CheckoutPage() {
       });
 
       alert(
-        "Your appointment has been confirmed, our team will contact you soon ✅"
+        "Your appointment has been confirmed,our team will contact you soon✅"
       );
       /* reset */
       setForm({
@@ -794,23 +735,24 @@ export default function CheckoutPage() {
                         </select>
 
                         {/* local number */}
-                       <input
-  type="tel"
-  id="phone"
-  name="phone"
-  value={form.phone}
-  onChange={handleChange}
-  /* ―― blocks any non-digit key press ―― */
-  onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-  pattern="\d{6,10}"     /* 6-10 digits allowed */
-  maxLength={10}
-  required
-  className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={form.phone}
+                          onChange={handleChange}
+                          /* ―― blocks any non-digit key press ―― */
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
+                          pattern="\d{6,10}" /* 6-10 digits allowed */
+                          maxLength={10}
+                          required
+                          className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
              text-white focus:border-amber-500 focus:ring-1
              focus:ring-amber-500 transition-all duration-300"
-  placeholder="Your phone number"
-/>
-
+                          placeholder="Your phone number"
+                        />
                       </div>
                     </div>
                   </div>
@@ -903,45 +845,45 @@ export default function CheckoutPage() {
                     CONFIRM BOOKING
                   </button> */}
 
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full py-3 flex items-center justify-center
-    bg-gradient-to-r from-amber-500 to-yellow-400
-    hover:from-amber-400 hover:to-yellow-300
-    text-black font-bold rounded-md transition-all duration-300
-    transform hover:scale-[1.02]
-    shadow-[0_5px_15px_rgba(0,0,0,0.2)]
-    hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
-    ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}
-  `}
-                  >
-                    {loading ? (
-                      /* simple SVG spinner */
-                      <svg
-                        className="animate-spin h-5 w-5 text-black"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                        />
-                      </svg>
-                    ) : (
-                      "CONFIRM BOOKING"
-                    )}
-                  </button>
+    <button
+      type="button"                /* keep type button so form doesn't auto-submit */
+      disabled={loading}
+      onClick={handleSubmit}
+      className={`w-full py-3 flex items-center justify-center
+        bg-gradient-to-r from-amber-500 to-yellow-400
+        hover:from-amber-400 hover:to-yellow-300
+        text-black font-bold rounded-md transition-all duration-300
+        transform hover:scale-[1.02]
+        shadow-[0_5px_15px_rgba(0,0,0,0.2)]
+        hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
+        ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}`}
+    >
+      {loading ? (
+        <svg
+          className="h-5 w-5 animate-spin text-black"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          />
+        </svg>
+      ) : (
+        "CONFIRM BOOKING"
+      )}
+    </button>
+
 
                   <p className="text-gray-400 text-sm mt-4 text-center">
                     By confirming, you agree to our booking terms and

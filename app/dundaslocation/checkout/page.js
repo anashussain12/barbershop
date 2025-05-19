@@ -273,6 +273,7 @@ const handleSubmit = async (e) => {
     if (!snap.empty) {
       alert(
         "You have already booked this service with the same details. Please wait until the previous booking is completed."
+        
       );
       return;
     }
@@ -288,7 +289,7 @@ const handleSubmit = async (e) => {
       status:             "pending",
     });
 
-    alert("Your appointment has been confirmed, our team will contact you soon ✅");
+    alert("Your appointment has been confirmed,our team will contact you soon✅");
     /* reset */
     setForm({
       firstName: "",

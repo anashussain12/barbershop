@@ -288,7 +288,7 @@ const handleSubmit = async (e) => {
       status:             "pending",
     });
 
-    alert("Your appointment has been confirmed, our team will contact you soon ✅");
+    alert("Your appointment has been confirmed,our team will contact you soon✅");
     /* reset */
     setForm({
       firstName: "",
