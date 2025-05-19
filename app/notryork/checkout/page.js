@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
@@ -9,6 +9,10 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("NOTRYORK");
+  const [minDate, setMinDate] = useState("");
+    useEffect(() => {
+      setMinDate(new Date().toISOString().split("T")[0]);
+    }, []);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -481,7 +485,7 @@ const handleSubmit = async (e) => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
+                {/* <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT DATE & TIME
                   </h3>
@@ -534,12 +538,74 @@ const handleSubmit = async (e) => {
                       </select>
                     </div>
                   </div>
+                </div> */}
+
+
+                  <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
+                  <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
+                    SELECT DATE &amp; TIME
+                  </h3>
+
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    {/* ---- DATE ---- */}
+                    <div>
+                      <label
+                        htmlFor="date"
+                        className="block text-gray-300 mb-2"
+                      >
+                        Date
+                      </label>
+                      <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        value={form.date}
+                        onChange={handleChange}
+                        min={minDate} // ⬅️ new
+                        required
+                        className="w-full h-10 p-2 bg-[#1a1a1a] …"
+                      />
+                    </div>
+
+                    {/* ---- TIME ---- */}
+                    <div>
+                      <label
+                        htmlFor="time"
+                        className="block text-gray-300 mb-2"
+                      >
+                        Time
+                      </label>
+                      <select
+                        id="time"
+                        name="time"
+                        value={form.time}
+                        onChange={handleChange}
+                        required
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
+                      >
+                        <option value="">Select a time</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     YOUR DETAILS
                   </h3>
+
+                  {/* names */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                       <label
@@ -555,10 +621,13 @@ const handleSubmit = async (e) => {
                         value={form.firstName}
                         onChange={handleChange}
                         required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                   text-white focus:border-amber-500 focus:ring-1
+                   focus:ring-amber-500 transition-all duration-300"
                         placeholder="Your first name"
                       />
                     </div>
+
                     <div>
                       <label
                         htmlFor="lastName"
@@ -573,11 +642,15 @@ const handleSubmit = async (e) => {
                         value={form.lastName}
                         onChange={handleChange}
                         required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                   text-white focus:border-amber-500 focus:ring-1
+                   focus:ring-amber-500 transition-all duration-300"
                         placeholder="Your last name"
                       />
                     </div>
                   </div>
+
+                  {/* email + phone */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                       <label
@@ -593,10 +666,14 @@ const handleSubmit = async (e) => {
                         value={form.email}
                         onChange={handleChange}
                         required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
+                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                   text-white focus:border-amber-500 focus:ring-1
+                   focus:ring-amber-500 transition-all duration-300"
                         placeholder="Your email address"
                       />
                     </div>
+
+                    {/* phone with country code */}
                     <div>
                       <label
                         htmlFor="phone"
@@ -604,18 +681,45 @@ const handleSubmit = async (e) => {
                       >
                         Phone
                       </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={form.phone}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                        placeholder="Your phone number"
-                      />
+
+                      <div className="flex">
+                        {/* country code selector */}
+                        <select
+                          id="countryCode"
+                          name="countryCode"
+                          value={form.countryCode || "+1"}
+                          onChange={handleChange}
+                          className="bg-[#1a1a1a] border border-white/10 rounded-l-md p-2
+                     text-white focus:border-amber-500 focus:ring-1
+                     focus:ring-amber-500 transition-all duration-300"
+                        >
+                          <option value="+1">+1</option>
+                          {/* add more as needed */}
+                        </select>
+
+                        {/* local number */}
+                       <input
+  type="tel"
+  id="phone"
+  name="phone"
+  value={form.phone}
+  onChange={handleChange}
+  /* ―― blocks any non-digit key press ―― */
+  onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+  pattern="\d{6,10}"     /* 6-10 digits allowed */
+  maxLength={10}
+  required
+  className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+             text-white focus:border-amber-500 focus:ring-1
+             focus:ring-amber-500 transition-all duration-300"
+  placeholder="Your phone number"
+/>
+
+                      </div>
                     </div>
                   </div>
+
+                  {/* notes */}
                   <div>
                     <label htmlFor="notes" className="block text-gray-300 mb-2">
                       Special Requests (Optional)
@@ -626,7 +730,9 @@ const handleSubmit = async (e) => {
                       value={form.notes}
                       onChange={handleChange}
                       rows="3"
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                 text-white focus:border-amber-500 focus:ring-1
+                 focus:ring-amber-500 transition-all duration-300"
                       placeholder="Any special requests or notes for your barber"
                     ></textarea>
                   </div>
