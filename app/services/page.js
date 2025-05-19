@@ -1,352 +1,113 @@
 import Link from "next/link";
 import Image from "next/image";
-import ImageWithFallback from "../components/ImageWithFallback";
 import Header from "../../components/Header";
 
 export default function DubaiPage() {
-  // Hair Color and Highlights
-  // Hair Color and Highlightss
-  const services = [
-    // ETOBICOKE SERVICES
-    {
-      name: "Individual Highlights",
-      price: "$10",
-      location: "Etobicoke",
-      // duration: "45 min",
-      // description:
-      //   "Precision cut with styling, hot towel refreshment, and scalp massage",
-      image: "/royal-haircut.jpeg",
-    },
-    {
-      name: "Cap Highlights",
-      price: "$60",
-      location: "Etobicoke",
-      // duration: "30 min",
-      // description:
-      //   "Expert beard shaping with hot towel treatment and essential oils",
-      image: "/beard-sculpting.jpg",
-    },
-    {
-      name: "Hair Colour for Men with Wash",
-      price: "$20",
-      location: "Etobicoke",
-      // duration: "75 min",
-      // description: "Haircut, beard trim, facial cleanse, and styling",
-      image: "/complete-grooming.jpg",
-    },
-    {
-      name: "Hair Smoothing",
-      price: "$200 & up",
-      location: "Etobicoke",
-      // duration: "40 min",
-      // description:
-      //   "Traditional straight razor shave with hot towel preparation",
-      image: "/hot-towel-shave.jpg",
-    },
-    {
-      name: "Hair Keratin",
-      price: "$200 & up",
-
-      location: "Etobicoke",
-      // duration: "60 min",
-      // description: "Deep conditioning treatment with scalp therapy and styling",
-      image: "/hair-scalp-treatment.jpg",
-    },
-    {
-      name: "Women Root Touchup",
-      price: "$35",
-      location: "Etobicoke",
-      // duration: "60 min",
-      // description:
-      //   "Natural-looking color application specifically for grey coverage",
-      image: "/grey-coverage.jpg",
-    },
-  ];
-
   const notryorkservices = [
-    // NOTRYORK SERVICES
-
     {
       notname: "Gentleman's Package",
-      notprice: "AED 150",
-      notlocation: "Notryork",
-      notduration: "65 min",
-      notdescription:
-        "Haircut, beard trim, facial scrub, and relaxing scalp massage",
+      notdescription: [
+        "Haircut",
+        "Beard trim",
+        "Facial scrub",
+        "Relaxing scalp massage",
+      ],
       notimage: "/package.jpg",
     },
-
     {
-      notname: "Beard Trim",
-      notprice: "AED 60",
-      notlocation: "Notryork",
-      notduration: "25 min",
-      notdescription:
-        "Expert beard shaping with essential oils and moisturizing treatment",
-      notimage: "/beard-trim.jpg",
-    },
-
-    {
-      notname: "Father & Son",
-      notprice: "AED 130",
-      notlocation: "Notryork",
-      notduration: "60 min",
-      notdescription: "Haircuts for both father and son in a shared experience",
-      notimage: "/father-son.jpg",
-    },
-
-    {
-      notname: "Traditional Shave",
-      notprice: "AED 70",
-      notlocation: "Notryork",
-      notduration: "35 min",
-      notdescription:
-        "Classic straight razor shave with pre and post-shave treatments",
-      notimage: "/hot-towel-shave.jpg",
+      notname: "Gentleman's Package",
+      notdescription: [
+        "Haircut",
+        "Beard trim",
+        "Facial scrub",
+        "Relaxing scalp massage",
+      ],
+      notimage: "/package.jpg",
     },
     {
-      notname: "Classic Cut",
-      notprice: "AED 90",
-      notlocation: "Notryork",
-      notduration: "40 min",
-      notdescription:
-        "Traditional haircut with precision styling and hot towel finish",
-      notimage: "/classic-cut.jpg",
+      notname: "Gentleman's Package",
+      notdescription: [
+        "Haircut",
+        "Beard trim",
+        "Facial scrub",
+        "Relaxing scalp massage",
+      ],
+      notimage: "/package.jpg",
     },
-    {
-      notname: "Hair Coloring",
-      notprice: "AED 120",
-      notlocation: "Notryork",
-      notduration: "60 min",
-      notdescription:
-        "Professional color application with natural-looking results",
-      notimage: "/hair-color.jpg",
-    },
-  ];
-
-  const dundasservices = [
-    {
-      dundasname: "Relaxed Cut",
-      dundasprice: "AED 80",
-      dundaslocation: "DundasLocation",
-      dundasduration: "35 min",
-      dundasdescription:
-        "Laid-back haircut with styling and complimentary beverage",
-      dundasimage: "/relaxed.jpg",
-    },
-    {
-      dundasname: "Express Trim",
-      dundasprice: "AED 50",
-      dundaslocation: "DundasLocation",
-      dundasduration: "20 min",
-      dundasdescription: "Quick touch-up for those on the go, includes styling",
-      dundasimage: "/beard-trim.jpg",
-    },
-    {
-      dundasname: "Full Experience",
-      dundasprice: "AED 140",
-      dundaslocation: "DundasLocation",
-      dundasduration: "70 min",
-      dundasdescription: "Haircut, beard trim, face mask, and shoulder massage",
-      dundasimage: "/complete-grooming.jpg",
-    },
-    {
-      dundasname: "Beard Design",
-      dundasprice: "AED 65",
-      dundaslocation: "DundasLocation",
-      dundasduration: "30 min",
-      dundasdescription:
-        "Creative beard styling with precision detailing and conditioning",
-      dundasimage: "/beard-sculpting.jpg",
-    },
-    {
-      dundasname: "Senior Special",
-      dundasprice: "AED 70",
-      dundaslocation: "DundasLocation",
-      dundasduration: "40 min",
-      dundasdescription:
-        "Specialized service for our distinguished senior clients",
-      dundasimage: "/gentle-cut.jpg",
-    },
-    {
-      dundasname: "Kids Cut",
-      dundasprice: "AED 60",
-      dundaslocation: "DundasLocation",
-      dundasduration: "25 min",
-      dundasdescription: "Fun and friendly haircuts for the little gentlemen",
-      dundasimage: "/kids.jpg",
-    },
+    // add more services as needed …
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
+    <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333] text-white">
       <Header />
-      {/* Divider */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
-      {/* Services Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-[#333333] to-[#1a1a1a]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="inline-block text-5xl font-bold relative">
-              <span className="bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-                SERVICES
-              </span>
-              <div className="h-px w-24 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mx-auto mt-3"></div>
-            </h2>
-          </div>
-          {/* ETOBICOKE MAP  */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
+      {/* thin divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+      {/* Services */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto space-y-14">
+          {/* heading */}
+          <h2 className="w-fit mx-auto text-5xl font-extrabold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
+            SERVICES
+            <span className="block h-px w-24 mx-auto mt-3 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+          </h2>
+
+          {/* grid */}
+          <div className="grid gap-10 lg:gap-14 sm:grid-cols-2">
+            {notryorkservices.map((svc) => (
               <Link
-                key={service.name}
-                href="/etobicoke/checkout"
-                className="group"
-              >
-                <div className="p-8 rounded-lg bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 group-hover:border-white/10 transition-all duration-500 relative overflow-hidden">
-                  <Image
-                    src={service.image}
-                    alt={service.name}
-                    width={400}
-                    height={300}
-                    className="rounded-lg mb-4"
-                  />
-                  {/* Subtle glow effect on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none"></div>
-
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text relative z-10">
-                    {service.name}
-                  </h3>
-                  <div className="flex justify-between mb-4 relative z-10">
-                    <span className="text-amber-500 font-bold">
-                      {service.price}
-                    </span>
-                    <span className="text-gray-400">{service.duration}</span>
-                  </div>
-                  <p className="text-white font-semibold mb-2 relative z-10">
-                    <span className="text-amber-500 pr-1">Location:</span>{" "}
-                    {service.location}
-                  </p>
-                  <p className="text-gray-300 mb-6 relative z-10">
-                    {service.description}
-                  </p>
-                  <div className="flex justify-end relative z-10">
-                    <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded text-black font-bold transition-all duration-300 group-hover:from-amber-400 group-hover:to-yellow-300">
-                      BOOK NOW
-                    </span>
-                  </div>
-
-                  {/* Subtle border highlight effect */}
-                  <div className="absolute inset-0 border border-transparent group-hover:border-white/10 rounded-lg transition-all duration-500"></div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          {/* NOTRYORK MAP */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {notryorkservices.map((notryorkservice) => (
-              <Link
-                key={notryorkservice.notname}
+                key={svc.notname}
                 href="/notryork/checkout"
-                className="group"
+                className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition"
               >
-                <div className="p-8 rounded-lg bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 group-hover:border-white/10 transition-all duration-500 relative overflow-hidden">
+                {/* container */}
+                <article className="flex flex-col lg:flex-row bg-gradient-to-b from-[#2d2d2d]/80 to-[#1a1a1a]/80 backdrop-blur-sm">
+
+                  {/* image */}
                   <Image
-                    src={notryorkservice.notimage}
-                    alt={notryorkservice.notname}
+                    src={svc.notimage}
+                    alt={svc.notname}
                     width={400}
                     height={300}
-                    className="rounded-lg mb-4"
-                  />
-                  {/* Subtle glow effect on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none"></div>
-
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text relative z-10">
-                    {notryorkservice.notname}
-                  </h3>
-                  <div className="flex justify-between mb-4 relative z-10">
-                    <span className="text-amber-500 font-bold">
-                      {notryorkservice.notprice}
-                    </span>
-                    <span className="text-gray-400">
-                      {notryorkservice.notduration}
-                    </span>
-                  </div>
-                  <p className="text-white font-semibold mb-2 relative z-10">
-                    <span className="text-amber-500 pr-1">Location:</span>{" "}
-                    {notryorkservice.notlocation}
-                  </p>
-                  <p className="text-gray-300 mb-6 relative z-10">
-                    {notryorkservice.notdescription}
-                  </p>
-                  <div className="flex justify-end relative z-10">
-                    <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded text-black font-bold transition-all duration-300 group-hover:from-amber-400 group-hover:to-yellow-300">
-                      BOOK NOW
-                    </span>
-                  </div>
-
-                  {/* Subtle border highlight effect */}
-                  <div className="absolute inset-0 border border-transparent group-hover:border-white/10 rounded-lg transition-all duration-500"></div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          {/* DUNDASLOCATION MAP  */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {dundasservices.map((dundaslocationservice) => (
-              <Link
-                key={dundaslocationservice.name}
-                href="/dundaslocation/checkout"
-                className="group"
-              >
-                <div className="p-8 rounded-lg bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 group-hover:border-white/10 transition-all duration-500 relative overflow-hidden">
-                  {/* Subtle glow effect on hover */}
-
-                  <Image
-                    src={dundaslocationservice.dundasimage}
-                    alt={dundaslocationservice.dundasname}
-                    width={400}
-                    height={300}
-                    className="rounded-lg mb-4"
+                    className="object-cover w-full lg:w-64 h-56 lg:h-auto"
                   />
 
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none"></div>
+                  {/* text panel */}
+                  <div className="flex flex-col flex-1 p-6 lg:p-8">
+                    {/* title */}
+                    <header className="mb-2">
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
+                        {svc.notname}
+                      </h3>
+                      <div className="h-0.5 w-20 bg-gradient-to-r from-amber-500 to-yellow-400 mt-1" />
+                    </header>
 
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text relative z-10">
-                    {dundaslocationservice.dundasname}
-                  </h3>
-                  <div className="flex justify-between mb-4 relative z-10">
-                    <span className="text-amber-500 font-bold">
-                      {dundaslocationservice.dundasprice}
-                    </span>
-                    <span className="text-gray-400">
-                      {dundaslocationservice.dundasduration}
-                    </span>
-                  </div>
-                  <p className="text-white font-semibold mb-2 relative z-10">
-                    <span className="text-amber-500 pr-1">Location:</span>{" "}
-                    {dundaslocationservice.dundaslocation}
-                  </p>
-                  <p className="text-gray-300 mb-6 relative z-10">
-                    {dundaslocationservice.dundasdescription}
-                  </p>
-                  <div className="flex justify-end relative z-10">
-                    <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded text-black font-bold transition-all duration-300 group-hover:from-amber-400 group-hover:to-yellow-300">
-                      BOOK NOW
-                    </span>
-                  </div>
+                    {/* description list */}
+                    <ul className="flex-1 space-y-1 list-disc list-inside text-gray-300/90">
+                      {svc.notdescription.map((line) => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
 
-                  {/* Subtle border highlight effect */}
-                  <div className="absolute inset-0 border border-transparent group-hover:border-white/10 rounded-lg transition-all duration-500"></div>
-                </div>
+                    {/* CTA */}
+                    <div className="pt-6 text-right">
+                      <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 px-4 py-2 rounded font-bold text-black
+                                         group-hover:from-amber-400 group-hover:to-yellow-300 transition">
+                        BOOK NOW
+                      </span>
+                    </div>
+                  </div>
+                </article>
+
+                {/* soft glow on hover */}
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-amber-500/10 to-transparent pointer-events-none" />
               </Link>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
       <footer className="py-12 px-6 bg-[#111111]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
@@ -414,6 +175,3 @@ export default function DubaiPage() {
     </main>
   );
 }
-//
-//
-//
