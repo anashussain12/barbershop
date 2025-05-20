@@ -20,6 +20,7 @@ export default function CheckoutPage() {
     phone: "",
     service: "",
     date: "",
+    // date: "",
     time: "",
     notes: "",
   });
