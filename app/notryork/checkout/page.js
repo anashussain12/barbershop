@@ -19,8 +19,8 @@ export default function CheckoutPage() {
     email: "",
     phone: "",
     service: "",
+
     date: "",
-    // date: "",
     time: "",
     notes: "",
   });
