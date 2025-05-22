@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Mr.Barber Unisex",
   description: "Best Unisex hairsalon for both men and women",
+  icon: "/favicon.png"
 };
 
 export default function RootLayout({ children }) {
