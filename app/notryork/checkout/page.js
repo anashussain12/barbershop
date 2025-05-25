@@ -908,7 +908,7 @@ const handleSubmit = async (e) => {
           <div>
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Email: info@mistrbarber.com</li>
+              <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
               <li>Phone: +1 416-604-4066</li>
               <li>Address: 2912 Dundas St W, Toronto</li>
             </ul>

@@ -165,7 +165,7 @@ export default function Home() {
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
           </div>
-          <p className="text-2xl md:text-3xl font-light italic text-gray-200 mb-8">The attention to detail and personalized service at Mr.BARBER UNISEX is unmatched. It&aposs more than a haircut—it&aposs an experience every gentleman deserves.</p>
+          <p className="text-2xl md:text-3xl font-light italic text-gray-200 mb-8">The attention to detail and personalized service at Mr.BARBER UNISEX is unmatched. It's more than a haircut—it&aposs an experience every gentleman deserves.</p>
           <div className="flex items-center justify-center">
             <div className="w-16 h-16 rounded-full mr-4 overflow-hidden relative">
               <ImageWithFallback
@@ -217,7 +217,7 @@ export default function Home() {
           <div>
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Email: info@mistrbarber.com</li>
+              <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
               <li>Phone: +1 416-604-4066</li>
               <li>Address: 2912 Dundas St W, Toronto</li>
             </ul>
