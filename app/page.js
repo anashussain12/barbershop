@@ -9,19 +9,19 @@ export default function Home() {
       name: "ETOBICOKE", 
       image: "/dubai-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
-      description: "Premium cuts in the heart of Downtown"
+      // description: "Premium cuts in the heart of Downtown"
     },
     { 
       name: "NOTRYORK", 
       image: "/sharjah-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
-      description: "Classic styles with modern techniques"
+      // description: "Classic styles with modern techniques"
     },
     { 
       name: "DundasLocation", 
       image: "/ajman-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
-      description: "Relaxed atmosphere with expert service"
+      // description: "Relaxed atmosphere with expert service"
     }
   ];
 
