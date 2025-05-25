@@ -30,100 +30,37 @@ export default function CheckoutPage() {
 
   const data = [
     {
-      title: "Hair Cut & Styling",
+      title: "Beard Trim/Shave",
       options: [
-        { name: "Men Hair Cut", price: "$20" },
-        { name: "Women Hair Cut & Wash", price: "$30" },
-        { name: "Women Hair Cut Wa & Style", price: "$45" },
-        { name: "Women Hair Shampoo & Blow Dry", price: "$25" },
-        { name: "Women Oil Head Massage", price: "$25" },
-        { name: "Kids Hair Cut", price: "$20" },
-        { name: "Girls Hair Cut Under age", price: "$20" },
-        { name: "Women Layers Cut", price: "$40" },
-        { name: "Hair Straightening", price: "$35 & up" },
-        { name: "Ladies Shampoo", price: "$10" },
-        { name: "Mens Beard Cut", price: "$20" },
+        { name: "Beard Trim/Shave", price: "$25 " },
+        
       ],
     },
     {
-      title: "Threading",
+      title: "Junior Haircut",
       options: [
-        { name: "Eyebrow", price: "$5" },
-        { name: "Upper Lips", price: "$5" },
-        { name: "Chin", price: "$5" },
-        { name: "Forehead", price: "$5" },
-        { name: "Full Face", price: "$25" },
-        { name: "Full Face & Neck", price: "$30" },
-        { name: "Mens Threading", price: "$10" },
+        { name: "Junior Haircut", price: "$25 " },
       ],
     },
 
     {
-      title: "Waxing",
+      title: "Haircut & Wash/Style",
       options: [
-        { name: "Eyebrow", price: "$5" },
-        { name: "Upper Lips", price: "$5" },
-        { name: "Chin", price: "$5" },
-        { name: "Forehead", price: "$5" },
-        { name: "Full Face", price: "$25" },
-        { name: "Under Arm", price: "$10" },
-        { name: "Full Arm", price: "$20" },
-        { name: "Full Legs", price: "$35" },
-        { name: "Half Legs", price: "$20" },
-        { name: "Stomach", price: "$25" },
-        { name: "Full Back", price: "$25" },
-        { name: "Full Body", price: "$100" },
-        { name: "Brazilian", price: "$35" },
-        { name: "Bikini/Line", price: "$15" },
+        { name: "Haircut & Wash/Style", price: "$40" },
+        
       ],
     },
     {
-      title: "Piercing",
+      title: "Haircut & Beard Trim",
       options: [
-        { name: "Ear", price: "$25" },
-        { name: "Nose", price: "$25" },
+        { name: "Haircut & Beard Trim", price: "$60" },
       ],
     },
     {
-      title: "Skin Care",
+      title: "Seniors haircut",
       options: [
-        { name: "Men Facial Staring", price: "$60" },
-        { name: "Full Face Bleach", price: "$15" },
-        { name: "Herbal Facial", price: "$60" },
-        { name: "Gold Facial", price: "$70" },
-        { name: "Diamond Facial", price: "$80" },
-        { name: "Acne Facial", price: "$80" },
-      ],
-    },
-
-    {
-      title: "Hair Colour & Highlights",
-      options: [
-        { name: "Individual Highlights", price: "$10" },
-        { name: "Cap Highlights", price: "$60" },
-        { name: "Hair Colour for Men with Wash", price: "$20" },
-        { name: "Hair Smoothing", price: "$200 Up" },
-        { name: "Hair Keratin", price: "$200 Up" },
-        { name: "Women Root Touchup", price: "$35" },
-      ],
-    },
-
-    {
-      title: "Makeup Artistry",
-      options: [
-        { name: "Party Makeup", price: "$80" },
-        { name: "Party Hairstyles", price: "$40" },
-        { name: "Full Bridal Makeup in Salon", price: "$150" },
-        { name: "Bridal Mehndi", price: "$90" },
-        { name: "Mehndi per Hand", price: "$15" },
-      ],
-    },
-
-    {
-      title: "Perm",
-      options: [
-        { name: "Men & Women Perm", price: "$100 & Up" },
-        { name: "Beard Perm", price: "$80" },
+        { name: "Seniors haircut", price: "$30" },
+        
       ],
     },
   ];

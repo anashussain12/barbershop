@@ -5,94 +5,43 @@ import Header from "../../components/Header";
 export default function DubaiPage() {
   const notryorkservices = [
     {
-      notname: "Hair Cut & Styling ",
+      notname: "Beard Trim/Shave",
       notdescription: [
-        "Men Haircut",
-        "Women Haircut & wash",
-        "Women Haircut & style",
-        "Women Hair Shampoo & Blow dry",
-        "Women oil head massage",
-        "Kids Hair cut",
-        "Girls Hair cut under age",
-        "Women layers cut",
-        "Hair straightening",
-        "Ladies shampoo",
-        "Mens beard cut",
+        "Precision beard trims and clean shaves tailored to your style, leaving you sharp and confident.",
+        
       ],
       notimage: "/package.jpg",
     },
     {
-      notname: "Threading",
+      notname: "Junior Haircut",
       notdescription: [
-        "Eyebrow",
-        "Upper lips",
-        "Chin",
-        "Forehead",
-        "Full face",
-        "Full face & Neck",
-        "Mens threading",
+        "Stylish and age-appropriate haircuts for kids, delivered with care and a friendly touch",
       ],
       notimage: "/threadingmen.png",
     },
     {
-      notname: "Skin care",
+      notname: "Haircut & Wash/Style",
       notdescription: [
-        "Men facial staring",
-        "Full face bleach",
-        "Herbal facial",
-        "Gold facial",
-        "Diamond facial",
-        "Acne facial",
+        "A fresh cut paired with a relaxing wash and professional styling — the complete grooming experience.",
+       
       ],
       notimage: "/skincare.jpg",
     },
     {
-      notname: "Hair colour & Highlights",
+      notname: "Haircut & Beard Trim",
       notdescription: [
-        "Individual highlights",
-        "Cap highlights",
-        "Hair colour for men with mesh",
-        "Hair smoothing",
-        "Hair keratin",
-        "Women root touchup",
+        "Sharp haircut and precision beard trim combined for a clean, well-groomed look tailored to you.",
+        
       ],
       notimage: "/highlighthair.png",
     },
     {
-      notname: "Makeup Artistry",
+      notname: "Seniors haircut",
       notdescription: [
-        "Party makeup",
-        "Party hairstyles",
-        "Full bridal makeup in salon",
-        "Bridal mehndi",
-        "Mehndi per hand",
+        "Classic, comfortable haircuts for seniors, delivered with care, precision, and attention to detail.",
+        
       ],
       notimage: "/artistry.jpg",
-    },
-    {
-      notname: "Piercing",
-      notdescription: ["Ear", "Nose"],
-      notimage: "/piercing.jpg",
-    },
-    {
-      notname: "Waxing",
-      notdescription: [
-        "Eyebrow",
-        "Upper lips",
-        "Chin",
-        "Forehead",
-        "Full face",
-        "Under arm",
-        "Full arm",
-        "Full legs",
-        "Half legs",
-        "Stomach",
-        "Full back",
-        "Full body",
-        "Brazilian",
-        "Bikini/Line",
-      ],
-      notimage: "/waxing.jpg",
     },
   ];
 
@@ -166,11 +115,11 @@ export default function DubaiPage() {
                     </header>
 
                     {/* description list */}
-                    <ul className="flex-1 space-y-1 list-disc list-inside text-gray-300/90">
+                    <p className="flex-1 text-xs space-y-1 list-disc list-inside text-gray-300/90">
                       {svc.notdescription.map((line) => (
-                        <li key={line}>{line}</li>
+                        <p key={line}>{line}</p>
                       ))}
-                    </ul>
+                    </p>
 
                     {/* CTA */}
                     <div className="pt-6 text-right">
@@ -225,12 +174,15 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
-                    <p className="text-gray-300">LOCATION: ETOBICOKE</p>
+                    <p className="text-gray-300">2912 Dundas St W.</p>
                     <p className="text-gray-300">
-                      1625 albion Road 416 749 7900
+                      Toronto, ON M6P 1Y8
                     </p>
                     <p className="text-gray-300">
-                      1625 albion Road 416 749 7900
+                      1625 Albidon rd. Etobicoke
+                    </p>
+                    <p className="text-gray-300">
+                      2528 finch ave west
                     </p>
                   </div>
                 </div>
@@ -254,9 +206,8 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Hours</h3>
-                    <p className="text-gray-300">Monday - Friday: 10AM - 9PM</p>
-                    <p className="text-gray-300">Saturday: 9AM - 7PM</p>
-                    <p className="text-gray-300">Sunday: 10AM - 6PM</p>
+                    <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
+                    <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
                   </div>
                 </div>
 
@@ -281,7 +232,7 @@ export default function DubaiPage() {
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
                     <p className="text-gray-300">Phone: +1 416-604-4066</p>
                     <p className="text-gray-300">
-                      Email: dubai@mistrbarber.com
+                      Email: Mr.BarberUnisexBeautySalon@gmail.com
                     </p>
                   </div>
                 </div>
