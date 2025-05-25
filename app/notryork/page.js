@@ -226,11 +226,12 @@ export default function DubaiPage() {
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
                     <p className="text-gray-300">Location: Notryork</p>
                     <p className="text-gray-300">
-                      1625 albion Road 416 749 7900
+                      Address: 2528 Finch Avenue w 
                     </p>
                     <p className="text-gray-300">
-                      1625 albion Road 416 749 7900
+                      Phone number: +1 416-749-4757 
                     </p>
+                    
                   </div>
                 </div>
 
@@ -278,7 +279,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
-                    <p className="text-gray-300">Phone: +1 416-604-4066</p>
+                    <p className="text-gray-300">Phone: +1 416-749-4757</p>
                     <p className="text-gray-300">
                       Email: Mr.BarberUnisexBeautySalon@gmail.com
                     </p>
@@ -346,8 +347,8 @@ export default function DubaiPage() {
                 Mr Barber unisex{" "}
               </h1>
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
-              <li>Phone: +1 416-604-4066</li>
-              <li>Address: 1625 albion Road 416 749 7900 </li>
+              <li>Phone: +1 416-749-4757</li>
+              <li>Address: 2528 Finch Avenue w</li>
             </ul>
           </div>
         </div>

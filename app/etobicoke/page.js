@@ -345,8 +345,8 @@ export default function DubaiPage() {
                 Mr Barber unisex{" "}
               </h1>
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
+              <li>Address: 1625 albion Road</li>
               <li>Phone: +1 416-604-4066</li>
-              <li>Address: 1625 albion Road 416 749 7900 </li>
             </ul>
           </div>
         </div>

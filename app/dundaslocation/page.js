@@ -174,16 +174,8 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
-                    <p className="text-gray-300">2912 Dundas St W.</p>
-                    <p className="text-gray-300">
-                      Toronto, ON M6P 1Y8
-                    </p>
-                    <p className="text-gray-300">
-                      1625 Albidon rd. Etobicoke
-                    </p>
-                    <p className="text-gray-300">
-                      2528 finch ave west
-                    </p>
+                    <p className="text-gray-300">2912 Dundas St W, Toronto.</p>
+                    
                   </div>
                 </div>
 

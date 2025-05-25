@@ -946,8 +946,8 @@ export default function CheckoutPage() {
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
-              <li>Phone: +1 416-604-4066</li>
-              <li>Address: 2912 Dundas St W, Toronto</li>
+              <li>Phone: +1 416-749-7900</li>
+              <li>Address: 1625 albion Road </li>
             </ul>
           </div>
         </div>
