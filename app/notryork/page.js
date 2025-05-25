@@ -224,7 +224,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
-                    <p className="text-gray-300">LOCATION: ETOBICOKE</p>
+                    <p className="text-gray-300">Location: Notryork</p>
                     <p className="text-gray-300">
                       1625 albion Road 416 749 7900
                     </p>
@@ -280,7 +280,7 @@ export default function DubaiPage() {
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
                     <p className="text-gray-300">Phone: +1 416-604-4066</p>
                     <p className="text-gray-300">
-                      Email: dubai@mistrbarber.com
+                      Email: Mr.BarberUnisexBeautySalon@gmail.com
                     </p>
                   </div>
                 </div>
