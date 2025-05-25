@@ -100,7 +100,7 @@ export default function DubaiPage() {
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333] text-white">
       <Header />
 
-       <div className="relative h-[50vh] w-full">
+      <div className="relative h-[50vh] w-full">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-[#4a3c31]/50 z-10" />
         {/* <ImageWithFallback
@@ -130,7 +130,7 @@ export default function DubaiPage() {
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto space-y-14">
           <h2 className="w-fit mx-auto text-5xl font-extrabold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-           OUR SERVICES
+            OUR SERVICES
             <span className="block h-px w-24 mx-auto mt-3 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
           </h2>
 
@@ -189,7 +189,7 @@ export default function DubaiPage() {
           </div>
         </div>
       </section>
-              <section className="py-16 px-6 bg-[#1a1a1a]">
+      <section className="py-16 px-6 bg-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
@@ -252,9 +252,10 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Hours</h3>
-                    <p className="text-gray-300">Monday - Friday: 10AM - 9PM</p>
-                    <p className="text-gray-300">Saturday: 9AM - 7PM</p>
-                    <p className="text-gray-300">Sunday: 10AM - 6PM</p>
+                    <p className="text-gray-300">
+                      Tuesday - Saturday: 10AM - 8PM
+                    </p>
+                    <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
                   </div>
                 </div>
 
@@ -285,8 +286,6 @@ export default function DubaiPage() {
                 </div>
               </div>
             </div>
-
-           
           </div>
         </div>
       </section>
@@ -333,9 +332,8 @@ export default function DubaiPage() {
           <div>
             <h4 className="text-white font-bold mb-4">HOURS</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Monday - Friday: 10AM - 9PM</li>
-              <li>Saturday: 9AM - 7PM</li>
-              <li>Sunday: 10AM - 6PM</li>
+              <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
+              <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
             </ul>
           </div>
           <div>

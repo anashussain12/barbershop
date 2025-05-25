@@ -6,8 +6,6 @@ import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
-
-
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
   const [minDate, setMinDate] = useState("");
@@ -180,7 +178,6 @@ export default function CheckoutPage() {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -845,11 +842,11 @@ export default function CheckoutPage() {
                     CONFIRM BOOKING
                   </button> */}
 
-    <button
-      type="button"                /* keep type button so form doesn't auto-submit */
-      disabled={loading}
-      onClick={handleSubmit}
-      className={`w-full py-3 flex items-center justify-center
+                  <button
+                    type="button" /* keep type button so form doesn't auto-submit */
+                    disabled={loading}
+                    onClick={handleSubmit}
+                    className={`w-full py-3 flex items-center justify-center
         bg-gradient-to-r from-amber-500 to-yellow-400
         hover:from-amber-400 hover:to-yellow-300
         text-black font-bold rounded-md transition-all duration-300
@@ -857,33 +854,32 @@ export default function CheckoutPage() {
         shadow-[0_5px_15px_rgba(0,0,0,0.2)]
         hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
         ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}`}
-    >
-      {loading ? (
-        <svg
-          className="h-5 w-5 animate-spin text-black"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            className="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            strokeWidth="4"
-          />
-          <path
-            className="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-          />
-        </svg>
-      ) : (
-        "CONFIRM BOOKING"
-      )}
-    </button>
-
+                  >
+                    {loading ? (
+                      <svg
+                        className="h-5 w-5 animate-spin text-black"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                    ) : (
+                      "CONFIRM BOOKING"
+                    )}
+                  </button>
 
                   <p className="text-gray-400 text-sm mt-4 text-center">
                     By confirming, you agree to our booking terms and
@@ -937,9 +933,8 @@ export default function CheckoutPage() {
           <div>
             <h4 className="text-white font-bold mb-4">HOURS</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Monday - Friday: 10AM - 9PM</li>
-              <li>Saturday: 9AM - 7PM</li>
-              <li>Sunday: 10AM - 6PM</li>
+              <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
+              <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
             </ul>
           </div>
           <div>

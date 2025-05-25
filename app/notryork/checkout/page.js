@@ -1,6 +1,6 @@
 "use client";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
@@ -10,16 +10,16 @@ export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("NOTRYORK");
   const [minDate, setMinDate] = useState("");
-    useEffect(() => {
-      setMinDate(new Date().toISOString().split("T")[0]);
-    }, []);
+  useEffect(() => {
+    setMinDate(new Date().toISOString().split("T")[0]);
+  }, []);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    service : "",
-    
+    service: "",
+
     date: "",
     time: "",
     notes: "",
@@ -127,8 +127,7 @@ export default function CheckoutPage() {
       ],
     },
   ];
-  const [loading, setLoading] = useState(false);     // NEW
-
+  const [loading, setLoading] = useState(false); // NEW
 
   const barbers = ["Ahmed", "Malik", "Rashed", "Any Available Barber"];
   const locations = ["ETOBICOKE", "NOTRYORK", "DUNDASLOCATION"];
@@ -242,74 +241,76 @@ export default function CheckoutPage() {
   //   }
   // };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (loading) return;          // ignore double-clicks
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading) return; // ignore double-clicks
+    setLoading(true);
 
-  const selectedServices = getSelectedServices();
-  if (selectedServices.length === 0) {
-    alert("Please select at least one service");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    /* check duplicate */
-    const bookingsRef = collection(db, "bookings");
-    const q = query(
-      bookingsRef,
-      where("firstName", "==", form.firstName),
-      where("lastName",  "==", form.lastName),
-      where("email",     "==", form.email),
-      where("barber",    "==", selectedBarber),
-      where("location",  "==", selectedLocation),
-      where("date",      "==", form.date),
-      where("phone",     "==", form.phone),
-      where("service",   "==", form.service),
-      where("status",    "==", "pending")
-    );
-    const snap = await getDocs(q);
-    if (!snap.empty) {
-      alert(
-        "You have already booked this service with the same details. Please wait until the previous booking is completed."
-      );
+    const selectedServices = getSelectedServices();
+    if (selectedServices.length === 0) {
+      alert("Please select at least one service");
+      setLoading(false);
       return;
     }
 
-    /* add new booking */
-    await addDoc(bookingsRef, {
-      ...form,
-      services:           selectedServices.map((s) => s.name),
-      servicesWithPrices: selectedServices,
-      barber:             selectedBarber,
-      location:           selectedLocation,
-      createdAt:          new Date().toISOString(),
-      status:             "pending",
-    });
+    try {
+      /* check duplicate */
+      const bookingsRef = collection(db, "bookings");
+      const q = query(
+        bookingsRef,
+        where("firstName", "==", form.firstName),
+        where("lastName", "==", form.lastName),
+        where("email", "==", form.email),
+        where("barber", "==", selectedBarber),
+        where("location", "==", selectedLocation),
+        where("date", "==", form.date),
+        where("phone", "==", form.phone),
+        where("service", "==", form.service),
+        where("status", "==", "pending")
+      );
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        alert(
+          "You have already booked this service with the same details. Please wait until the previous booking is completed."
+        );
+        return;
+      }
 
-    alert("Your appointment has been confirmed,our team will contact you soon✅");
-    /* reset */
-    setForm({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      date: "",
-      service: "",
-      time: "",
-      notes: "",
-    });
-    setSelectedOptions({});
-    setSelectedBarber("");
-    setSelectedLocation("ETOBICOKE");
-  } catch (err) {
-    console.error("Error adding document:", err);
-    alert("Something went wrong. Please try again.");
-  } finally {
-    setLoading(false);          // hide spinner
-  }
-};
+      /* add new booking */
+      await addDoc(bookingsRef, {
+        ...form,
+        services: selectedServices.map((s) => s.name),
+        servicesWithPrices: selectedServices,
+        barber: selectedBarber,
+        location: selectedLocation,
+        createdAt: new Date().toISOString(),
+        status: "pending",
+      });
+
+      alert(
+        "Your appointment has been confirmed,our team will contact you soon✅"
+      );
+      /* reset */
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        date: "",
+        service: "",
+        time: "",
+        notes: "",
+      });
+      setSelectedOptions({});
+      setSelectedBarber("");
+      setSelectedLocation("ETOBICOKE");
+    } catch (err) {
+      console.error("Error adding document:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false); // hide spinner
+    }
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
@@ -540,8 +541,7 @@ const handleSubmit = async (e) => {
                   </div>
                 </div> */}
 
-
-                  <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
+                <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT DATE &amp; TIME
                   </h3>
@@ -698,23 +698,24 @@ const handleSubmit = async (e) => {
                         </select>
 
                         {/* local number */}
-                       <input
-  type="tel"
-  id="phone"
-  name="phone"
-  value={form.phone}
-  onChange={handleChange}
-  /* ―― blocks any non-digit key press ―― */
-  onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-  pattern="\d{6,10}"     /* 6-10 digits allowed */
-  maxLength={10}
-  required
-  className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={form.phone}
+                          onChange={handleChange}
+                          /* ―― blocks any non-digit key press ―― */
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
+                          pattern="\d{6,10}" /* 6-10 digits allowed */
+                          maxLength={10}
+                          required
+                          className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
              text-white focus:border-amber-500 focus:ring-1
              focus:ring-amber-500 transition-all duration-300"
-  placeholder="Your phone number"
-/>
-
+                          placeholder="Your phone number"
+                        />
                       </div>
                     </div>
                   </div>
@@ -807,10 +808,10 @@ const handleSubmit = async (e) => {
                     CONFIRM BOOKING
                   </button> */}
 
-  <button
-  type="submit"
-  disabled={loading}
-  className={`w-full py-3 flex items-center justify-center
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`w-full py-3 flex items-center justify-center
     bg-gradient-to-r from-amber-500 to-yellow-400
     hover:from-amber-400 hover:to-yellow-300
     text-black font-bold rounded-md transition-all duration-300
@@ -819,34 +820,33 @@ const handleSubmit = async (e) => {
     hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
     ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}
   `}
->
-  {loading ? (
-    /* simple SVG spinner */
-    <svg
-      className="animate-spin h-5 w-5 text-black"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-      />
-    </svg>
-  ) : (
-    "CONFIRM BOOKING"
-  )}
-</button>
-
+                  >
+                    {loading ? (
+                      /* simple SVG spinner */
+                      <svg
+                        className="animate-spin h-5 w-5 text-black"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                    ) : (
+                      "CONFIRM BOOKING"
+                    )}
+                  </button>
 
                   <p className="text-gray-400 text-sm mt-4 text-center">
                     By confirming, you agree to our booking terms and
@@ -900,9 +900,8 @@ const handleSubmit = async (e) => {
           <div>
             <h4 className="text-white font-bold mb-4">HOURS</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Monday - Friday: 10AM - 9PM</li>
-              <li>Saturday: 9AM - 7PM</li>
-              <li>Sunday: 10AM - 6PM</li>
+             <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
+                    <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
             </ul>
           </div>
           <div>
