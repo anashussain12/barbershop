@@ -167,7 +167,7 @@ export default function DubaiPage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-              MR.BARBER UNISEX
+              MR.BARBER UNISEX SALON
             </h3>
             <p className="text-gray-400 mb-4">
               Where gentlemen receive the royal treatment.
@@ -223,7 +223,7 @@ export default function DubaiPage() {
         </div>
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <p className="text-gray-500">
-            © 2024 MR.BARBER UNISEX. All rights reserved.
+            © 2024 MR.BARBER UNISEX SALON. All rights reserved.
           </p>
         </div>
       </footer>

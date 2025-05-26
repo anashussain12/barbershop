@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Mr.Barber Unisex",
+  title: "Mr.Barber Unisex Salon",
   description: "Best Unisex hairsalon for both men and women",
   icon: "/favicon.png"
 };

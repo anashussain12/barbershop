@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import Logo from "../public/misterbarber.jpg"
+import Logo from "../public/misterbarber.jpg";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,9 +20,7 @@ export default function Header() {
           className=" font-bold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text"
         >
           {/* MISTR BARBER */}
-          <Image
-          src={Logo}
-          />
+          <Image src={Logo} />
         </Link>
 
         {/* Desktop Navigation */}
@@ -56,13 +54,13 @@ export default function Header() {
                   href="/notryork"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  Notryork
+                  NORTH YORK
                 </Link>
                 <Link
-                  href="/dundaslocation"
+                  href="/dundaswest"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  DundasLocation
+                  DUNDAS WEST
                 </Link>
               </div>
             )}
@@ -153,38 +151,38 @@ export default function Header() {
               Locations
             </Link> */}
 
-<div
-            className="relative"
-            onMouseEnter={() => setIsDubaiDropdownOpen(true)}
-            onMouseLeave={() => setIsDubaiDropdownOpen(false)}
-          >
-            <button className="text-white hover:text-amber-400 transition-colors duration-300">
-              Locations
-            </button>
-            {isDubaiDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
-                <Link
-                  href="/etobicoke"
-                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
-                >
-                  Etobicokde
-                </Link>
+            <div
+              className="relative"
+              onMouseEnter={() => setIsDubaiDropdownOpen(true)}
+              onMouseLeave={() => setIsDubaiDropdownOpen(false)}
+            >
+              <button className="text-white hover:text-amber-400 transition-colors duration-300">
+                Locations
+              </button>
+              {isDubaiDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
+                  <Link
+                    href="/etobicoke"
+                    className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                  >
+                    Etobicokde
+                  </Link>
 
-                <Link
-                  href="/notryork"
-                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
-                >
-                  Notryork
-                </Link>
-                <Link
-                  href="/dundaslocation"
-                  className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
-                >
-                  DundasLocation
-                </Link>
-              </div>
-            )}
-          </div>
+                  <Link
+                    href="/notryork"
+                    className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                  >
+                    NORTH YORK
+                  </Link>
+                  <Link
+                    href="/dundaswest"
+                    className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
+                  >
+                    DUNDAS WEST
+                  </Link>
+                </div>
+              )}
+            </div>
           </nav>
         </div>
       )}

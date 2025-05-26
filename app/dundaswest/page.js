@@ -5,94 +5,43 @@ import Header from "../../components/Header";
 export default function DubaiPage() {
   const notryorkservices = [
     {
-      notname: "Hair Cut & Styling ",
+      notname: "Beard Trim/Shave",
       notdescription: [
-        "Men Haircut",
-        "Women Haircut & wash",
-        "Women Haircut & style",
-        "Women Hair Shampoo & Blow dry",
-        "Women oil head massage",
-        "Kids Hair cut",
-        "Girls Hair cut under age",
-        "Women layers cut",
-        "Hair straightening",
-        "Ladies shampoo",
-        "Mens beard cut",
+        "Precision beard trims and clean shaves tailored to your style, leaving you sharp and confident.",
+        
       ],
-      notimage: "/package.jpg",
+      notimage: "/beardshave.jpg",
     },
     {
-      notname: "Threading",
+      notname: "Junior Haircut",
       notdescription: [
-        "Eyebrow",
-        "Upper lips",
-        "Chin",
-        "Forehead",
-        "Full face",
-        "Full face & Neck",
-        "Mens threading",
+        "Stylish and age-appropriate haircuts for kids, delivered with care and a friendly touch",
       ],
-      notimage: "/threadingmen.png",
+      notimage: "/juniorpic.jpg",
     },
     {
-      notname: "Skin care",
+      notname: "Haircut & Wash/Style",
       notdescription: [
-        "Men facial staring",
-        "Full face bleach",
-        "Herbal facial",
-        "Gold facial",
-        "Diamond facial",
-        "Acne facial",
+        "A fresh cut paired with a relaxing wash and professional styling — the complete grooming experience.",
+       
       ],
-      notimage: "/skincare.jpg",
+      notimage: "/washstyle.jpeg",
     },
     {
-      notname: "Hair colour & Highlights",
+      notname: "Haircut & Beard Trim",
       notdescription: [
-        "Individual highlights",
-        "Cap highlights",
-        "Hair colour for men with mesh",
-        "Hair smoothing",
-        "Hair keratin",
-        "Women root touchup",
+        "Sharp haircut and precision beard trim combined for a clean, well-groomed look tailored to you.",
+        
       ],
-      notimage: "/highlighthair.png",
+      notimage: "/hairbeard.jpg",
     },
     {
-      notname: "Makeup Artistry",
+      notname: "Seniors haircut",
       notdescription: [
-        "Party makeup",
-        "Party hairstyles",
-        "Full bridal makeup in salon",
-        "Bridal mehndi",
-        "Mehndi per hand",
+        "Classic, comfortable haircuts for seniors, delivered with care, precision, and attention to detail.",
+        
       ],
-      notimage: "/artistry.jpg",
-    },
-    {
-      notname: "Piercing",
-      notdescription: ["Ear", "Nose"],
-      notimage: "/piercing.jpg",
-    },
-    {
-      notname: "Waxing",
-      notdescription: [
-        "Eyebrow",
-        "Upper lips",
-        "Chin",
-        "Forehead",
-        "Full face",
-        "Under arm",
-        "Full arm",
-        "Full legs",
-        "Half legs",
-        "Stomach",
-        "Full back",
-        "Full body",
-        "Brazilian",
-        "Bikini/Line",
-      ],
-      notimage: "/waxing.jpg",
+      notimage: "/seniors.jpg",
     },
   ];
 
@@ -100,12 +49,12 @@ export default function DubaiPage() {
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333] text-white">
       <Header />
 
- <div className="relative h-[50vh] w-full">
+          <div className="relative h-[50vh] w-full">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-[#4a3c31]/50 z-10" />
         {/* <ImageWithFallback
-          src="/sharjah-location-hero.jpg"
-          alt="Sharjah Barber Shop"
+          src="/ajman-location-hero.jpg"
+          alt="Ajman Barber Shop"
           fill
           className="object-cover z-5"
           priority
@@ -113,13 +62,13 @@ export default function DubaiPage() {
         /> */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-            NOTRYORK
+             DUNDAS WEST
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl text-gray-200 mb-8">
-            Classic styles with modern techniques
+            Relaxed atmosphere with expert service
           </p>
           <Link
-            href="/notryork/checkout"
+            href="/dundaswest/checkout"
             className="inline-block px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]"
           >
             BOOK APPOINTMENT
@@ -127,8 +76,9 @@ export default function DubaiPage() {
         </div>
       </div>
 
+
       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 ">
         <div className="max-w-7xl mx-auto space-y-14">
           <h2 className="w-fit mx-auto text-5xl font-extrabold bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
            OUR SERVICES
@@ -140,7 +90,7 @@ export default function DubaiPage() {
             {notryorkservices.map((svc) => (
               <Link
                 key={svc.notname}
-                href="/notryork/checkout"
+                href="/dundaswest/checkout"
                 className="group relative rounded-2xl overflow-hidden "
               >
                 {/* container */}
@@ -165,11 +115,11 @@ export default function DubaiPage() {
                     </header>
 
                     {/* description list */}
-                    <ul className="flex-1 space-y-1 list-disc list-inside text-gray-300/90">
+                    <p className="flex-1 text-xs space-y-1 list-disc list-inside text-gray-300/90">
                       {svc.notdescription.map((line) => (
-                        <li key={line}>{line}</li>
+                        <p key={line}>{line}</p>
                       ))}
-                    </ul>
+                    </p>
 
                     {/* CTA */}
                     <div className="pt-6 text-right">
@@ -224,13 +174,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
-                    <p className="text-gray-300">Location: Notryork</p>
-                    <p className="text-gray-300">
-                      Address: 2528 Finch Avenue w 
-                    </p>
-                    <p className="text-gray-300">
-                      Phone number: +1 416-749-4757 
-                    </p>
+                    <p className="text-gray-300">2912 Dundas St W, Toronto.</p>
                     
                   </div>
                 </div>
@@ -254,7 +198,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Hours</h3>
-                   <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
+                    <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
                     <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
                   </div>
                 </div>
@@ -278,7 +222,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
-                    <p className="text-gray-300">Phone: +1 416-749-4757</p>
+                    <p className="text-gray-300">Phone: +1 416-604-4066</p>
                     <p className="text-gray-300">
                       Email: Mr.BarberUnisexBeautySalon@gmail.com
                     </p>
@@ -334,8 +278,9 @@ export default function DubaiPage() {
           <div>
             <h4 className="text-white font-bold mb-4">HOURS</h4>
             <ul className="text-gray-400 space-y-2">
-             <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
-                    <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
+              <li>Monday - Friday: 10AM - 9PM</li>
+              <li>Saturday: 9AM - 7PM</li>
+              <li>Sunday: 10AM - 6PM</li>
             </ul>
           </div>
           <div>
@@ -345,14 +290,14 @@ export default function DubaiPage() {
                 Mr Barber unisex{" "}
               </h1>
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
-              <li>Phone: +1 416-749-4757</li>
-              <li>Address: 2528 Finch Avenue w</li>
+              <li>Phone: +1 416-604-4066</li>
+              <li>Address: 2912 Dundas St W, Toronto</li>
             </ul>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <p className="text-gray-500">
-            © 2024 MR.BARBER UNISEX. All rights reserved.
+            © 2024 MISTR BARBER. All rights reserved.
           </p>
         </div>
       </footer>

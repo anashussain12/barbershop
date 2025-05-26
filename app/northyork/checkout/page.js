@@ -1,6 +1,6 @@
 "use client";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
@@ -8,18 +8,18 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("DUNDASLOCATION");
-   const [minDate, setMinDate] = useState("");
-      useEffect(() => {
-        setMinDate(new Date().toISOString().split("T")[0]);
-      }, []);
+  const [selectedLocation, setSelectedLocation] = useState("NORTH YORK");
+  const [minDate, setMinDate] = useState("");
+  useEffect(() => {
+    setMinDate(new Date().toISOString().split("T")[0]);
+  }, []);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    service : "",
-    
+    service: "",
+
     date: "",
     time: "",
     notes: "",
@@ -30,45 +30,107 @@ export default function CheckoutPage() {
 
   const data = [
     {
-      title: "Beard Trim/Shave",
+      title: "Hair Cut & Styling",
       options: [
-        { name: "Beard Trim/Shave", price: "$25 " },
-        
+        { name: "Men Hair Cut", price: "$20" },
+        { name: "Women Hair Cut & Wash", price: "$30" },
+        { name: "Women Hair Cut Wa & Style", price: "$45" },
+        { name: "Women Hair Shampoo & Blow Dry", price: "$25" },
+        { name: "Women Oil Head Massage", price: "$25" },
+        { name: "Kids Hair Cut", price: "$20" },
+        { name: "Girls Hair Cut Under age", price: "$20" },
+        { name: "Women Layers Cut", price: "$40" },
+        { name: "Hair Straightening", price: "$35 & up" },
+        { name: "Ladies Shampoo", price: "$10" },
+        { name: "Mens Beard Cut", price: "$20" },
       ],
     },
     {
-      title: "Junior Haircut",
+      title: "Threading",
       options: [
-        { name: "Junior Haircut", price: "$25 " },
+        { name: "Eyebrow", price: "$5" },
+        { name: "Upper Lips", price: "$5" },
+        { name: "Chin", price: "$5" },
+        { name: "Forehead", price: "$5" },
+        { name: "Full Face", price: "$25" },
+        { name: "Full Face & Neck", price: "$30" },
+        { name: "Mens Threading", price: "$10" },
       ],
     },
 
     {
-      title: "Haircut & Wash/Style",
+      title: "Waxing",
       options: [
-        { name: "Haircut & Wash/Style", price: "$40" },
-        
+        { name: "Eyebrow", price: "$5" },
+        { name: "Upper Lips", price: "$5" },
+        { name: "Chin", price: "$5" },
+        { name: "Forehead", price: "$5" },
+        { name: "Full Face", price: "$25" },
+        { name: "Under Arm", price: "$10" },
+        { name: "Full Arm", price: "$20" },
+        { name: "Full Legs", price: "$35" },
+        { name: "Half Legs", price: "$20" },
+        { name: "Stomach", price: "$25" },
+        { name: "Full Back", price: "$25" },
+        { name: "Full Body", price: "$100" },
+        { name: "Brazilian", price: "$35" },
+        { name: "Bikini/Line", price: "$15" },
       ],
     },
     {
-      title: "Haircut & Beard Trim",
+      title: "Piercing",
       options: [
-        { name: "Haircut & Beard Trim", price: "$60" },
+        { name: "Ear", price: "$25" },
+        { name: "Nose", price: "$25" },
       ],
     },
     {
-      title: "Seniors haircut",
+      title: "Skin Care",
       options: [
-        { name: "Seniors haircut", price: "$30" },
-        
+        { name: "Men Facial Staring", price: "$60" },
+        { name: "Full Face Bleach", price: "$15" },
+        { name: "Herbal Facial", price: "$60" },
+        { name: "Gold Facial", price: "$70" },
+        { name: "Diamond Facial", price: "$80" },
+        { name: "Acne Facial", price: "$80" },
+      ],
+    },
+
+    {
+      title: "Hair Colour & Highlights",
+      options: [
+        { name: "Individual Highlights", price: "$10" },
+        { name: "Cap Highlights", price: "$60" },
+        { name: "Hair Colour for Men with Wash", price: "$20" },
+        { name: "Hair Smoothing", price: "$200 Up" },
+        { name: "Hair Keratin", price: "$200 Up" },
+        { name: "Women Root Touchup", price: "$35" },
+      ],
+    },
+
+    {
+      title: "Makeup Artistry",
+      options: [
+        { name: "Party Makeup", price: "$80" },
+        { name: "Party Hairstyles", price: "$40" },
+        { name: "Full Bridal Makeup in Salon", price: "$150" },
+        { name: "Bridal Mehndi", price: "$90" },
+        { name: "Mehndi per Hand", price: "$15" },
+      ],
+    },
+
+    {
+      title: "Perm",
+      options: [
+        { name: "Men & Women Perm", price: "$100 & Up" },
+        { name: "Beard Perm", price: "$80" },
       ],
     },
   ];
-  const [loading, setLoading] = useState(false);     // NEW
-
+  const [loading, setLoading] = useState(false); // NEW
 
   const barbers = ["Ahmed", "Malik", "Rashed", "Any Available Barber"];
-  const locations = ["ETOBICOKE", "NOTRYORK", "DUNDASLOCATION"];
+  const locations = ["ETOBICOKE", "NORTH YORK", " DUNDAS WEST"];
 
   const toggleSection = (title) => {
     setOpenSections((prev) =>
@@ -179,75 +241,76 @@ export default function CheckoutPage() {
   //   }
   // };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (loading) return;          // ignore double-clicks
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading) return; // ignore double-clicks
+    setLoading(true);
 
-  const selectedServices = getSelectedServices();
-  if (selectedServices.length === 0) {
-    alert("Please select at least one service");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    /* check duplicate */
-    const bookingsRef = collection(db, "bookings");
-    const q = query(
-      bookingsRef,
-      where("firstName", "==", form.firstName),
-      where("lastName",  "==", form.lastName),
-      where("email",     "==", form.email),
-      where("barber",    "==", selectedBarber),
-      where("location",  "==", selectedLocation),
-      where("date",      "==", form.date),
-      where("phone",     "==", form.phone),
-      where("service",   "==", form.service),
-      where("status",    "==", "pending")
-    );
-    const snap = await getDocs(q);
-    if (!snap.empty) {
-      alert(
-        "You have already booked this service with the same details. Please wait until the previous booking is completed."
-        
-      );
+    const selectedServices = getSelectedServices();
+    if (selectedServices.length === 0) {
+      alert("Please select at least one service");
+      setLoading(false);
       return;
     }
 
-    /* add new booking */
-    await addDoc(bookingsRef, {
-      ...form,
-      services:           selectedServices.map((s) => s.name),
-      servicesWithPrices: selectedServices,
-      barber:             selectedBarber,
-      location:           selectedLocation,
-      createdAt:          new Date().toISOString(),
-      status:             "pending",
-    });
+    try {
+      /* check duplicate */
+      const bookingsRef = collection(db, "bookings");
+      const q = query(
+        bookingsRef,
+        where("firstName", "==", form.firstName),
+        where("lastName", "==", form.lastName),
+        where("email", "==", form.email),
+        where("barber", "==", selectedBarber),
+        where("location", "==", selectedLocation),
+        where("date", "==", form.date),
+        where("phone", "==", form.phone),
+        where("service", "==", form.service),
+        where("status", "==", "pending")
+      );
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        alert(
+          "You have already booked this service with the same details. Please wait until the previous booking is completed."
+        );
+        return;
+      }
 
-    alert("Your appointment has been confirmed,our team will contact you soon✅");
-    /* reset */
-    setForm({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      date: "",
-      service: "",
-      time: "",
-      notes: "",
-    });
-    setSelectedOptions({});
-    setSelectedBarber("");
-    setSelectedLocation("ETOBICOKE");
-  } catch (err) {
-    console.error("Error adding document:", err);
-    alert("Something went wrong. Please try again.");
-  } finally {
-    setLoading(false);          // hide spinner
-  }
-};
+      /* add new booking */
+      await addDoc(bookingsRef, {
+        ...form,
+        services: selectedServices.map((s) => s.name),
+        servicesWithPrices: selectedServices,
+        barber: selectedBarber,
+        location: selectedLocation,
+        createdAt: new Date().toISOString(),
+        status: "pending",
+      });
+
+      alert(
+        "Your appointment has been confirmed,our team will contact you soon✅"
+      );
+      /* reset */
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        date: "",
+        service: "",
+        time: "",
+        notes: "",
+      });
+      setSelectedOptions({});
+      setSelectedBarber("");
+      setSelectedLocation("ETOBICOKE");
+    } catch (err) {
+      console.error("Error adding document:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false); // hide spinner
+    }
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
@@ -478,8 +541,7 @@ const handleSubmit = async (e) => {
                   </div>
                 </div> */}
 
-
-                  <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
+                <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT DATE &amp; TIME
                   </h3>
@@ -537,7 +599,8 @@ const handleSubmit = async (e) => {
                     </div>
                   </div>
                 </div>
- <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
+
+                <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     YOUR DETAILS
                   </h3>
@@ -635,23 +698,24 @@ const handleSubmit = async (e) => {
                         </select>
 
                         {/* local number */}
-                       <input
-  type="tel"
-  id="phone"
-  name="phone"
-  value={form.phone}
-  onChange={handleChange}
-  /* ―― blocks any non-digit key press ―― */
-  onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-  pattern="\d{6,10}"     /* 6-10 digits allowed */
-  maxLength={10}
-  required
-  className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={form.phone}
+                          onChange={handleChange}
+                          /* ―― blocks any non-digit key press ―― */
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
+                          pattern="\d{6,10}" /* 6-10 digits allowed */
+                          maxLength={10}
+                          required
+                          className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
              text-white focus:border-amber-500 focus:ring-1
              focus:ring-amber-500 transition-all duration-300"
-  placeholder="Your phone number"
-/>
-
+                          placeholder="Your phone number"
+                        />
                       </div>
                     </div>
                   </div>
@@ -744,10 +808,10 @@ const handleSubmit = async (e) => {
                     CONFIRM BOOKING
                   </button> */}
 
-  <button
-  type="submit"
-  disabled={loading}
-  className={`w-full py-3 flex items-center justify-center
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`w-full py-3 flex items-center justify-center
     bg-gradient-to-r from-amber-500 to-yellow-400
     hover:from-amber-400 hover:to-yellow-300
     text-black font-bold rounded-md transition-all duration-300
@@ -756,34 +820,33 @@ const handleSubmit = async (e) => {
     hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
     ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}
   `}
->
-  {loading ? (
-    /* simple SVG spinner */
-    <svg
-      className="animate-spin h-5 w-5 text-black"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-      />
-    </svg>
-  ) : (
-    "CONFIRM BOOKING"
-  )}
-</button>
-
+                  >
+                    {loading ? (
+                      /* simple SVG spinner */
+                      <svg
+                        className="animate-spin h-5 w-5 text-black"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                    ) : (
+                      "CONFIRM BOOKING"
+                    )}
+                  </button>
 
                   <p className="text-gray-400 text-sm mt-4 text-center">
                     By confirming, you agree to our booking terms and
@@ -800,7 +863,7 @@ const handleSubmit = async (e) => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-              MR.BARBER UNISEX
+              Mr.BARBER UNISEX SALON
             </h3>
             <p className="text-gray-400 mb-4">
               Where gentlemen receive the royal treatment.
@@ -837,23 +900,22 @@ const handleSubmit = async (e) => {
           <div>
             <h4 className="text-white font-bold mb-4">HOURS</h4>
             <ul className="text-gray-400 space-y-2">
-              <li>Monday - Friday: 10AM - 9PM</li>
-              <li>Saturday: 9AM - 7PM</li>
-              <li>Sunday: 10AM - 6PM</li>
+             <p className="text-gray-300">Tuesday - Saturday: 10AM - 8PM</p>
+                    <p className="text-gray-300">Sunday - Monday: 10AM - 7PM</p>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
-              <li>Phone: +1 416-604-4066</li>
-              <li>Address: 2912 Dundas St W, Toronto</li>
+              <li>Phone: +1 416-749-4757</li>
+              <li>Address: 2528 Finch Avenue w</li>
             </ul>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <p className="text-gray-500">
-            © 2024 MR.BARBER UNISEX. All rights reserved.
+            © 2024 MR.BARBER UNISEX SALON. All rights reserved.
           </p>
         </div>
       </footer>

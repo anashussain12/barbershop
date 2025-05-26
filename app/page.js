@@ -7,19 +7,19 @@ export default function Home() {
   const locations = [
     { 
       name: "ETOBICOKE", 
-      image: "/dubai-barber.jpg", 
+      image: "/ajman-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       // description: "Premium cuts in the heart of Downtown"
     },
     { 
-      name: "NOTRYORK", 
-      image: "/sharjah-barber.jpg", 
+      name: "NORTHYORK", 
+      image: "/northyork.png", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       // description: "Classic styles with modern techniques"
     },
     { 
-      name: "DundasLocation", 
-      image: "/ajman-barber.jpg", 
+      name: "DUNDASWEST", 
+      image: "/dubai-barber.jpg", 
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       // description: "Relaxed atmosphere with expert service"
     }
@@ -206,14 +206,14 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div>
+          {/* <div>
             <h4 className="text-white font-bold mb-4">HOURS</h4>
             <ul className="text-gray-400 space-y-2">
               <li>Monday - Friday: 10AM - 9PM</li>
               <li>Saturday: 9AM - 7PM</li>
               <li>Sunday: 10AM - 6PM</li>
             </ul>
-          </div>
+          </div> */}
           <div>
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
