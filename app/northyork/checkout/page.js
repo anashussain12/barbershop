@@ -129,7 +129,8 @@ export default function CheckoutPage() {
   ];
   const [loading, setLoading] = useState(false); // NEW
 
-  const barbers = ["Ahmed", "Malik", "Rashed", "Any Available Barber"];
+  const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
+
   const locations = ["ETOBICOKE", "NORTH YORK", " DUNDAS WEST"];
 
   const toggleSection = (title) => {

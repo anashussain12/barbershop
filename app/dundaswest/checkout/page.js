@@ -67,7 +67,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);     // NEW
 
 
-  const barbers = ["Ahmed", "Malik", "Rashed", "Any Available Barber"];
+  const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
   const locations = ["ETOBICOKE", "NORTH YORK", " DUNDAS WEST"];
 
   const toggleSection = (title) => {
@@ -800,7 +800,7 @@ const handleSubmit = async (e) => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-              MR.BARBER UNISEX
+              MR.BARBER UNISEX SALON
             </h3>
             <p className="text-gray-400 mb-4">
               Where gentlemen receive the royal treatment.
@@ -847,13 +847,16 @@ const handleSubmit = async (e) => {
             <ul className="text-gray-400 space-y-2">
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
               <li>Phone: +1 416-604-4066</li>
-              <li>Address: 2912 Dundas St W, Toronto</li>
+               <li>Address: 2912 Dundas St W.</li>
+              <li>Toronto, ON M6P 1Y8</li>
+              <li>1625 Albion ed. Etobicoke</li>
+              <li>2528 finch ave west</li>
             </ul>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-white/10 text-center">
           <p className="text-gray-500">
-            © 2024 MR.BARBER UNISEX. All rights reserved.
+            © 2024 MR.BARBER UNISEX SALON. All rights reserved.
           </p>
         </div>
       </footer>

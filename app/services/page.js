@@ -213,11 +213,11 @@ export default function DubaiPage() {
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
               <h1 className="text-amber-500 font-bold mb-2">
-                Mr Barber unisex{" "}
+                Mr Barber Unisex Salon
               </h1>
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
               <li>Phone: +1 416-604-4066</li>
-              <li>Address: 1625 albion Road 416 749 7900 </li>
+              <li>Address: 1625 albion Road  </li>
             </ul>
           </div>
         </div>

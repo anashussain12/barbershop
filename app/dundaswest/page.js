@@ -241,7 +241,7 @@ export default function DubaiPage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
-              MR.BARBER UNISEX
+              MR.BARBER UNISEX SALON
             </h3>
             <p className="text-gray-400 mb-4">
               Where gentlemen receive the royal treatment.
@@ -287,11 +287,14 @@ export default function DubaiPage() {
             <h4 className="text-white font-bold mb-4">CONTACT</h4>
             <ul className="text-gray-400 space-y-2">
               <h1 className="text-amber-500 font-bold mb-2">
-                Mr Barber unisex{" "}
+                Mr Barber Unisex Salon
               </h1>
               <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
               <li>Phone: +1 416-604-4066</li>
-              <li>Address: 2912 Dundas St W, Toronto</li>
+              <li>Address: 2912 Dundas St W.</li>
+              <li>Toronto, ON M6P 1Y8</li>
+              <li>1625 Albion ed. Etobicoke</li>
+              <li>2528 finch ave west</li>
             </ul>
           </div>
         </div>
