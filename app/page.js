@@ -1,9 +1,60 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import ImageWithFallback from "./components/ImageWithFallback";
 import Header from "../components/Header";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Home() {
+    // SLIDER CODE
+
+
+   const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length)
+    }, 2000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const prevSlide = () => {
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
+  }
+
+  const nextSlide = () => {
+    setCurrent((prev) => (prev + 1) % slides.length)
+  }
+
+
+  const slides = [
+  {
+    image: '/unisexsalon.jpg',
+    title: 'MR.BARBER UNISEX SALON',
+    subtitle: 'Where gentlemen and womens receive the royal treatment',
+    label: 'Exclusive Grooming',
+  },
+  {
+    image: '/beard-trim.jpg',
+    title: 'MR.BARBER UNISEX SALON',
+    subtitle: 'Where gentlemen and womens receive the royal treatment',
+    label: 'Exclusive Grooming',
+  },
+  {
+    image: '/kids.jpg',
+    title: 'MR.BARBER UNISEX SALON',
+    subtitle: 'Where gentlemen and womens receive the royal treatment',
+    label: 'Exclusive Grooming',
+  },
+  {
+    image: '/father-son.jpg',
+    title: 'MR.BARBER UNISEX SALON',
+    subtitle: 'Where gentlemen and womens receive the royal treatment',
+    label: 'Exclusive Grooming',
+  },
+]
+
   const locations = [
     { 
       name: "ETOBICOKE", 
@@ -23,6 +74,10 @@ export default function Home() {
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       // description: "Relaxed atmosphere with expert service"
     }
+
+
+    
+
   ];
 
   return (
@@ -30,7 +85,7 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <div className="relative h-[60vh] w-full">
+      {/* <div className="relative h-[60vh] w-full">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-[#4a3c31]/50 z-10" />
         <ImageWithFallback
@@ -49,7 +104,57 @@ export default function Home() {
           <p className="text-xl md:text-2xl max-w-2xl text-gray-200 mb-8">Where gentlemen receive the royal treatment</p>
           
         </div>
-      </div>
+      </div> */}
+
+
+<div className="relative h-[60vh] w-full overflow-hidden">
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === current ? 'opacity-100 z-20' : 'opacity-0 z-10'
+          }`}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] z-0" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-[#4a3c31]/50 z-10" />
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            fill
+            className="object-cover z-5"
+            priority
+          />
+          <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 text-center">
+            <div className="mb-6 transform -rotate-2">
+              <span className="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text text-lg md:text-xl font-semibold tracking-wider uppercase">
+                {slide.label}
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
+              {slide.title}
+            </h1>
+            <p className="text-xl md:text-2xl max-w-2xl text-gray-200 mb-8">
+              {slide.subtitle}
+            </p>
+          </div>
+        </div>
+      ))}
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-30 p-2 bg-black/40 hover:bg-black/60 rounded-full"
+      >
+        <ChevronLeft className="text-white" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 p-2 bg-black/40 hover:bg-black/60 rounded-full"
+      >
+        <ChevronRight className="text-white" />
+      </button>
+    </div>
+
 
       {/* Divider */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>

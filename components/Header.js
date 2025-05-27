@@ -47,20 +47,20 @@ export default function Header() {
                   href="/etobicoke"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  Etobicokde
+                  Etobicoke
                 </Link>
 
                 <Link
                   href="/notryork"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  NORTH YORK
+                  North York
                 </Link>
                 <Link
                   href="/dundaswest"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  DUNDAS WEST
+                  Dundas West
                 </Link>
               </div>
             )}
@@ -165,20 +165,20 @@ export default function Header() {
                     href="/etobicoke"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                   >
-                    Etobicokde
+                    Etobicoke
                   </Link>
 
                   <Link
                     href="/notryork"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                   >
-                    NORTH YORK
+                    North York
                   </Link>
                   <Link
                     href="/dundaswest"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                   >
-                    DUNDAS WEST
+                    Dundas West
                   </Link>
                 </div>
               )}
