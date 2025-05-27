@@ -131,7 +131,7 @@ export default function CheckoutPage() {
 
   const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
 
-  const locations = ["ETOBICOKE", "NORTH YORK", " DUNDAS WEST"];
+  const locations = ["ETOBICOKE", "NORTHYORK WEST", " DUNDAS WEST"];
 
   const toggleSection = (title) => {
     setOpenSections((prev) =>

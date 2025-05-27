@@ -42,7 +42,7 @@ export default function Header() {
               Locations
             </button>
             {isDubaiDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
+              <div className="absolute text-[15px] left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
                 <Link
                   href="/etobicoke"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
@@ -112,44 +112,13 @@ export default function Header() {
             >
               Home
             </Link>
-
-            {/* Dubai Dropdown (Mobile) */}
-            {/* <details className="group">
-              <summary className="text-white cursor-pointer hover:text-amber-400 transition">
-                Dubai
-              </summary>
-              <div className="pl-4 mt-2 space-y-2">
-                <Link
-                  href="/dubai"
-                  className="block text-white hover:text-amber-400"
-                  onClick={closeMenu}
-                >
-                  Overview
-                </Link>
-                <Link
-                  href="/dubai/services"
-                  className="block text-white hover:text-amber-400"
-                  onClick={closeMenu}
-                >
-                  Services
-                </Link>
-                <Link
-                  href="/dubai/gallery"
-                  className="block text-white hover:text-amber-400"
-                  onClick={closeMenu}
-                >
-                  Gallery
-                </Link>
-              </div>
-            </details> */}
-
-            {/* <Link
-              href="/about"
+            <Link
+              href="/services"
               className="text-white hover:text-amber-400 transition"
               onClick={closeMenu}
             >
-              Locations
-            </Link> */}
+              Services
+            </Link>
 
             <div
               className="relative"
@@ -160,7 +129,7 @@ export default function Header() {
                 Locations
               </button>
               {isDubaiDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
+                <div className="absolute text-[15px] left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
                   <Link
                     href="/etobicoke"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
@@ -180,8 +149,13 @@ export default function Header() {
                   >
                     Dundas West
                   </Link>
+                  
                 </div>
+                
+                
+                
               )}
+              
             </div>
           </nav>
         </div>
