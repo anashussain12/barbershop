@@ -42,7 +42,7 @@ export default function Home() {
     label: 'Exclusive Grooming',
   },
   {
-    image: 'highlighthair.png',
+    image: '/highlighthair.png',
     title: 'MR.BARBER UNISEX SALON',
     subtitle: 'Where gentlemen and womens receive the royal treatment',
     label: 'Exclusive Grooming',
