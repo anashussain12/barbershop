@@ -54,7 +54,7 @@ export default function Header() {
                   href="/notryork"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  North York
+                  North York West
                 </Link>
                 <Link
                   href="/dundaswest"
@@ -172,7 +172,7 @@ export default function Header() {
                     href="/notryork"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                   >
-                    North York
+                    North York West
                   </Link>
                   <Link
                     href="/dundaswest"

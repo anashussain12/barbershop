@@ -113,7 +113,7 @@ export default function DubaiPage() {
         /> */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-            NORTH YORK
+            NORTHYORK WEST
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl text-gray-200 mb-8">
             Classic styles with modern techniques
@@ -140,7 +140,7 @@ export default function DubaiPage() {
             {notryorkservices.map((svc) => (
               <Link
                 key={svc.notname}
-                href="/northyork/checkout"
+                href="/northyorkwest/checkout"
                 className="group relative rounded-2xl overflow-hidden "
               >
                 {/* container */}
