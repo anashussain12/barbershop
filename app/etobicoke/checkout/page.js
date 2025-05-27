@@ -251,6 +251,8 @@ export default function CheckoutPage() {
     }
   };
 
+
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
       <Header />

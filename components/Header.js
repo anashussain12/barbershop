@@ -51,7 +51,7 @@ export default function Header() {
                 </Link>
 
                 <Link
-                  href="/notryork"
+                  href="/northyorkwest"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
                   NorthYork West
@@ -138,7 +138,7 @@ export default function Header() {
                   </Link>
 
                   <Link
-                    href="/notryork"
+                    href="/northyorkwest"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                   >
                     NorthYork West
