@@ -387,7 +387,7 @@ const Dashboard = () => {
 
                     <div className="flex items-center text-gray-600">
                       <FiScissors className="mr-2 text-gray-400" />
-                      <br/>
+                      <br />
                       <div>
                         {booking.servicesWithPrices ? (
                           booking.servicesWithPrices.map((service, i) => (

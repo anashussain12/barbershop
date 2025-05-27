@@ -62,22 +62,22 @@ export default function Home() {
   const locations = [
     {
       title: "ETOBICOKE",
-          slug: "etobicoke",
+      slug: "etobicoke",
       image: "/ajman-barber.jpg",
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       // description: "Premium cuts in the heart of Downtown"
     },
     {
       title: "NORTHYORK WEST",
-          slug: "northyorkwest",
+      slug: "northyorkwest",
 
-      image: "/northyork.png",
+      image: "/sharjah-barber.jpg",
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
       // description: "Classic styles with modern techniques"
     },
     {
       title: "DUNDAS WEST",
-          slug: "dundaswest",
+      slug: "dundaswest",
 
       image: "/dubai-barber.jpg",
       fallbackColor: "bg-gradient-to-br from-gray-800 to-amber-900",
