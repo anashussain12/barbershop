@@ -1,6 +1,6 @@
 "use client";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
@@ -9,17 +9,17 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(" DUNDAS WEST");
-   const [minDate, setMinDate] = useState("");
-      useEffect(() => {
-        setMinDate(new Date().toISOString().split("T")[0]);
-      }, []);
+  const [minDate, setMinDate] = useState("");
+  useEffect(() => {
+    setMinDate(new Date().toISOString().split("T")[0]);
+  }, []);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    service : "",
-    
+    service: "",
+
     date: "",
     time: "",
     notes: "",
@@ -31,41 +31,27 @@ export default function CheckoutPage() {
   const data = [
     {
       title: "Beard Trim/Shave",
-      options: [
-        { name: "Beard Trim/Shave", price: "$25 " },
-        
-      ],
+      options: [{ name: "Beard Trim/Shave", price: "$25 ", tax: " +Tax" }],
     },
     {
       title: "Junior Haircut",
-      options: [
-        { name: "Junior Haircut", price: "$25 " },
-      ],
+      options: [{ name: "Junior Haircut", price: "$25 ", tax: " +Tax" }],
     },
 
     {
       title: "Haircut & Wash/Style",
-      options: [
-        { name: "Haircut & Wash/Style", price: "$40" },
-        
-      ],
+      options: [{ name: "Haircut & Wash/Style", price: "$40", tax: " +Tax" }],
     },
     {
       title: "Haircut & Beard Trim",
-      options: [
-        { name: "Haircut & Beard Trim", price: "$60" },
-      ],
+      options: [{ name: "Haircut & Beard Trim", price: "$60", tax: " +Tax" }],
     },
     {
       title: "Seniors haircut",
-      options: [
-        { name: "Seniors haircut", price: "$30" },
-        
-      ],
+      options: [{ name: "Seniors haircut", price: "$30", tax: " +Tax" }],
     },
   ];
-  const [loading, setLoading] = useState(false);     // NEW
-
+  const [loading, setLoading] = useState(false); // NEW
 
   const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
   const locations = ["ETOBICOKE", "NORTHYORK WEST", " DUNDAS WEST"];
@@ -117,137 +103,76 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading) return; // ignore double-clicks
+    setLoading(true);
 
-  //   const selectedServices = getSelectedServices();
-  //   if (selectedServices.length === 0) {
-  //     alert("Please select at least one service");
-  //     return;
-  //   }
-
-  //   const bookingsRef = collection(db, "bookings");
-  //   const q = query(
-  //     bookingsRef,
-  //     where("firstName", "==", form.firstName),
-  //     where("lastName", "==", form.lastName),
-  //     where("email", "==", form.email),
-  //     where("barber", "==", selectedBarber),
-  //     where("location", "==", selectedLocation),
-  //     where("date", "==", form.date),
-  //     where("phone", "==", form.phone),
-  //     where("service", "==", form.service),
-  //     where("status", "==", "pending")
-  //   );
-
-  //   const querySnapshot = await getDocs(q);
-  //   if (!querySnapshot.empty) {
-  //     alert(
-  //       "You have already booked this service with the same details. Please wait until the previous booking is completed."
-  //     );
-  //     return;
-  //   }
-
-  //   try {
-  //     const docRef = await addDoc(collection(db, "bookings"), {
-  //       ...form,
-  //       services: selectedServices.map((s) => s.name),
-  //       servicesWithPrices: selectedServices,
-  //       barber: selectedBarber,
-  //       location: selectedLocation,
-  //       createdAt: new Date().toISOString(),
-  //       status: "pending",
-  //     });
-
-  //     alert("Your appointment has been confirmed, our team will contact you soon✅");
-  //     setForm({
-  //       firstName: "",
-  //       lastName: "",
-  //       email: "",
-  //       phone: "",
-  //       date: "",
-  //       service: "",
-  //       time: "",
-  //       notes: "",
-  //     });
-  //     setSelectedOptions({});
-  //     setSelectedBarber("");
-  //     setSelectedLocation("ETOBICOKE");
-  //   } catch (error) {
-  //     console.error("Error adding document: ", error);
-  //     alert("Something went wrong. Please try again.");
-  //   }
-  // };
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (loading) return;          // ignore double-clicks
-  setLoading(true);
-
-  const selectedServices = getSelectedServices();
-  if (selectedServices.length === 0) {
-    alert("Please select at least one service");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    /* check duplicate */
-    const bookingsRef = collection(db, "bookings");
-    const q = query(
-      bookingsRef,
-      where("firstName", "==", form.firstName),
-      where("lastName",  "==", form.lastName),
-      where("email",     "==", form.email),
-      where("barber",    "==", selectedBarber),
-      where("location",  "==", selectedLocation),
-      where("date",      "==", form.date),
-      where("phone",     "==", form.phone),
-      where("service",   "==", form.service),
-      where("status",    "==", "pending")
-    );
-    const snap = await getDocs(q);
-    if (!snap.empty) {
-      alert(
-        "You have already booked this service with the same details. Please wait until the previous booking is completed."
-        
-      );
+    const selectedServices = getSelectedServices();
+    if (selectedServices.length === 0) {
+      alert("Please select at least one service");
+      setLoading(false);
       return;
     }
 
-    /* add new booking */
-    await addDoc(bookingsRef, {
-      ...form,
-      services:           selectedServices.map((s) => s.name),
-      servicesWithPrices: selectedServices,
-      barber:             selectedBarber,
-      location:           selectedLocation,
-      createdAt:          new Date().toISOString(),
-      status:             "pending",
-    });
+    try {
+      /* check duplicate */
+      const bookingsRef = collection(db, "bookings");
+      const q = query(
+        bookingsRef,
+        where("firstName", "==", form.firstName),
+        where("lastName", "==", form.lastName),
+        where("email", "==", form.email),
+        where("barber", "==", selectedBarber),
+        where("location", "==", selectedLocation),
+        where("date", "==", form.date),
+        where("phone", "==", form.phone),
+        where("service", "==", form.service),
+        where("status", "==", "pending")
+      );
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        alert(
+          "You have already booked this service with the same details. Please wait until the previous booking is completed."
+        );
+        return;
+      }
 
-    alert("Your appointment has been confirmed,our team will contact you soon✅");
-    /* reset */
-    setForm({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      date: "",
-      service: "",
-      time: "",
-      notes: "",
-    });
-    setSelectedOptions({});
-    setSelectedBarber("");
-    setSelectedLocation("ETOBICOKE");
-  } catch (err) {
-    console.error("Error adding document:", err);
-    alert("Something went wrong. Please try again.");
-  } finally {
-    setLoading(false);          // hide spinner
-  }
-};
+      /* add new booking */
+      await addDoc(bookingsRef, {
+        ...form,
+        services: selectedServices.map((s) => s.name),
+        servicesWithPrices: selectedServices,
+        barber: selectedBarber,
+        location: selectedLocation,
+        createdAt: new Date().toISOString(),
+        status: "pending",
+      });
+
+      alert(
+        "Your appointment has been confirmed,our team will contact you soon✅"
+      );
+      /* reset */
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        date: "",
+        service: "",
+        time: "",
+        notes: "",
+      });
+      setSelectedOptions({});
+      setSelectedBarber("");
+      setSelectedLocation("ETOBICOKE");
+    } catch (err) {
+      console.error("Error adding document:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false); // hide spinner
+    }
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
@@ -372,9 +297,12 @@ const handleSubmit = async (e) => {
                                   />
                                   <span>{option.name}</span>
                                 </div>
-                                <span className="text-gray-400">
+                                <p className="text-gray-400">
                                   {option.price}
-                                </span>
+                                  <span className="text-[10px]">
+                                    {option.tax}
+                                  </span>
+                                </p>
                               </label>
                             ))}
                           </div>
@@ -478,8 +406,7 @@ const handleSubmit = async (e) => {
                   </div>
                 </div> */}
 
-
-                  <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
+                <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT DATE &amp; TIME
                   </h3>
@@ -537,7 +464,7 @@ const handleSubmit = async (e) => {
                     </div>
                   </div>
                 </div>
- <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
+                <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     YOUR DETAILS
                   </h3>
@@ -635,23 +562,24 @@ const handleSubmit = async (e) => {
                         </select>
 
                         {/* local number */}
-                       <input
-  type="tel"
-  id="phone"
-  name="phone"
-  value={form.phone}
-  onChange={handleChange}
-  /* ―― blocks any non-digit key press ―― */
-  onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-  pattern="\d{6,10}"     /* 6-10 digits allowed */
-  maxLength={10}
-  required
-  className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={form.phone}
+                          onChange={handleChange}
+                          /* ―― blocks any non-digit key press ―― */
+                          onKeyPress={(e) =>
+                            !/[0-9]/.test(e.key) && e.preventDefault()
+                          }
+                          pattern="\d{6,10}" /* 6-10 digits allowed */
+                          maxLength={10}
+                          required
+                          className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
              text-white focus:border-amber-500 focus:ring-1
              focus:ring-amber-500 transition-all duration-300"
-  placeholder="Your phone number"
-/>
-
+                          placeholder="Your phone number"
+                        />
                       </div>
                     </div>
                   </div>
@@ -722,9 +650,9 @@ const handleSubmit = async (e) => {
                         {form.time ? `${form.time}` : "Select a time"}
                       </span>
                     </div>
-                    <div className="border-t border-white/10 pt-4 mt-4">
-                      <div className="flex justify-between text-lg">
-                        <span className="text-white font-medium">Total:</span>
+                    <div className="flex justify-between text-lg">
+                      <span className="text-white font-medium">Total:</span>
+                      <div className="text-right">
                         <span className="text-amber-500 font-bold">
                           $
                           {getSelectedServices().reduce((total, service) => {
@@ -734,20 +662,17 @@ const handleSubmit = async (e) => {
                             return total + price;
                           }, 0)}
                         </span>
+                        <span className="text-[11px] text-gray-400 ml-1">
+                          +Tax
+                        </span>
                       </div>
                     </div>
                   </div>
-                  {/* <button
-                    type="submit"
-                    className="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-[1.02] shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]"
-                  >
-                    CONFIRM BOOKING
-                  </button> */}
 
-  <button
-  type="submit"
-  disabled={loading}
-  className={`w-full py-3 flex items-center justify-center
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`w-full py-3 flex items-center justify-center
     bg-gradient-to-r from-amber-500 to-yellow-400
     hover:from-amber-400 hover:to-yellow-300
     text-black font-bold rounded-md transition-all duration-300
@@ -756,34 +681,33 @@ const handleSubmit = async (e) => {
     hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
     ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}
   `}
->
-  {loading ? (
-    /* simple SVG spinner */
-    <svg
-      className="animate-spin h-5 w-5 text-black"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-      />
-    </svg>
-  ) : (
-    "CONFIRM BOOKING"
-  )}
-</button>
-
+                  >
+                    {loading ? (
+                      /* simple SVG spinner */
+                      <svg
+                        className="animate-spin h-5 w-5 text-black"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                    ) : (
+                      "CONFIRM BOOKING"
+                    )}
+                  </button>
 
                   <p className="text-gray-400 text-sm mt-4 text-center">
                     By confirming, you agree to our booking terms and
@@ -796,11 +720,15 @@ const handleSubmit = async (e) => {
         </div>
       </div>
 
-  <footer className="py-12 px-6 bg-[#111111]">
+      <footer className="py-12 px-6 bg-[#111111]">
         <div className="max-w-7xl mx-auto flex justify-center items-center ">
           <div>
-            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">MR.BARBER UNISEX SALON</h3>
-            <p className="text-gray-400 mb-4">Where gentlemen receive the royal treatment.</p>
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
+              MR.BARBER UNISEX SALON
+            </h3>
+            <p className="text-gray-400 mb-4">
+              Where gentlemen receive the royal treatment.
+            </p>
             {/* <div className="flex space-x-4">
               <a href="#" className="text-amber-500 hover:text-yellow-400">
                 <span className="sr-only">Instagram</span>
@@ -835,10 +763,11 @@ const handleSubmit = async (e) => {
           </div> */}
         </div>
         <div className="mt-12  pt-8 border-t border-white/10 text-center">
-          <p className="text-gray-500">© 2024 MR.BARBER UNISEX SALON. All rights reserved.</p>
+          <p className="text-gray-500">
+            © 2024 MR.BARBER UNISEX SALON. All rights reserved.
+          </p>
         </div>
       </footer>
-      
     </main>
   );
 }

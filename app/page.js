@@ -216,11 +216,11 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text relative z-10">
-                Master Barbers & Hairstylists 
+                Master Barbers & Hairstylists
               </h3>
               <p className="text-gray-300 leading-relaxed relative z-10">
-                Our elite team of barbers and hairstylists are trained in both classic and
-                contemporary techniques to deliver the perfect cut.
+                Our elite team of barbers and hairstylists are trained in both
+                classic and contemporary techniques to deliver the perfect cut.
               </p>
 
               {/* Subtle border highlight effect */}

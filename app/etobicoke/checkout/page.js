@@ -32,98 +32,98 @@ export default function CheckoutPage() {
     {
       title: "Hair Cut & Styling",
       options: [
-        { name: "Men Hair Cut", price: "$20" },
-        { name: "Women Hair Cut & Wash", price: "$30" },
-        { name: "Women Hair Cut Wa & Style", price: "$45" },
-        { name: "Women Hair Shampoo & Blow Dry", price: "$25" },
-        { name: "Women Oil Head Massage", price: "$25" },
-        { name: "Kids Hair Cut", price: "$20" },
-        { name: "Girls Hair Cut Under age", price: "$20" },
-        { name: "Women Layers Cut", price: "$40" },
-        { name: "Hair Straightening", price: "$35 & up" },
-        { name: "Ladies Shampoo", price: "$10" },
-        { name: "Mens Beard Cut", price: "$20" },
+        { name: "Men Hair Cut", price: "$20", tax: " +Tax" },
+        { name: "Women Hair Cut & Wash", price: "$30", tax: " +Tax" },
+        { name: "Women Hair Cut Wa & Style", price: "$45", tax: " +Tax" },
+        { name: "Women Hair Shampoo & Blow Dry", price: "$25", tax: " +Tax" },
+        { name: "Women Oil Head Massage", price: "$25", tax: " +Tax" },
+        { name: "Kids Hair Cut", price: "$20", tax: " +Tax" },
+        { name: "Girls Hair Cut Under age", price: "$20", tax: " +Tax" },
+        { name: "Women Layers Cut", price: "$40", tax: " +Tax" },
+        { name: "Hair Straightening", price: "$35 & up", tax: " +Tax" },
+        { name: "Ladies Shampoo", price: "$10", tax: " +Tax" },
+        { name: "Mens Beard Cut", price: "$20", tax: " +Tax" },
       ],
     },
     {
       title: "Threading",
       options: [
-        { name: "Eyebrow", price: "$5" },
-        { name: "Upper Lips", price: "$5" },
-        { name: "Chin", price: "$5" },
-        { name: "Forehead", price: "$5" },
-        { name: "Full Face", price: "$25" },
-        { name: "Full Face & Neck", price: "$30" },
-        { name: "Mens Threading", price: "$10" },
+        { name: "Eyebrow", price: "$5", tax: " +Tax" },
+        { name: "Upper Lips", price: "$5", tax: " +Tax" },
+        { name: "Chin", price: "$5", tax: " +Tax" },
+        { name: "Forehead", price: "$5", tax: " +Tax" },
+        { name: "Full Face", price: "$25", tax: " +Tax" },
+        { name: "Full Face & Neck", price: "$30", tax: " +Tax" },
+        { name: "Mens Threading", price: "$10", tax: " +Tax" },
       ],
     },
 
     {
       title: "Waxing",
       options: [
-        { name: "Eyebrow", price: "$5" },
-        { name: "Upper Lips", price: "$5" },
-        { name: "Chin", price: "$5" },
-        { name: "Forehead", price: "$5" },
-        { name: "Full Face", price: "$25" },
-        { name: "Under Arm", price: "$10" },
-        { name: "Full Arm", price: "$20" },
-        { name: "Full Legs", price: "$35" },
-        { name: "Half Legs", price: "$20" },
-        { name: "Stomach", price: "$25" },
-        { name: "Full Back", price: "$25" },
-        { name: "Full Body", price: "$100" },
-        { name: "Brazilian", price: "$35" },
-        { name: "Bikini/Line", price: "$15" },
+        { name: "Eyebrow", price: "$5", tax: " +Tax" },
+        { name: "Upper Lips", price: "$5", tax: " +Tax" },
+        { name: "Chin", price: "$5", tax: " +Tax" },
+        { name: "Forehead", price: "$5", tax: " +Tax" },
+        { name: "Full Face", price: "$25", tax: " +Tax" },
+        { name: "Under Arm", price: "$10", tax: " +Tax" },
+        { name: "Full Arm", price: "$20", tax: " +Tax" },
+        { name: "Full Legs", price: "$35", tax: " +Tax" },
+        { name: "Half Legs", price: "$20", tax: " +Tax" },
+        { name: "Stomach", price: "$25", tax: " +Tax" },
+        { name: "Full Back", price: "$25", tax: " +Tax" },
+        { name: "Full Body", price: "$100", tax: " +Tax" },
+        { name: "Brazilian", price: "$35", tax: " +Tax" },
+        { name: "Bikini/Line", price: "$15", tax: " +Tax" },
       ],
     },
     {
       title: "Piercing",
       options: [
-        { name: "Ear", price: "$25" },
-        { name: "Nose", price: "$25" },
+        { name: "Ear", price: "$25", tax: " +Tax" },
+        { name: "Nose", price: "$25", tax: " +Tax" },
       ],
     },
     {
       title: "Skin Care",
       options: [
-        { name: "Men Facial Staring", price: "$60" },
-        { name: "Full Face Bleach", price: "$15" },
-        { name: "Herbal Facial", price: "$60" },
-        { name: "Gold Facial", price: "$70" },
-        { name: "Diamond Facial", price: "$80" },
-        { name: "Acne Facial", price: "$80" },
+        { name: "Men Facial Staring", price: "$60", tax: " +Tax" },
+        { name: "Full Face Bleach", price: "$15", tax: " +Tax" },
+        { name: "Herbal Facial", price: "$60", tax: " +Tax" },
+        { name: "Gold Facial", price: "$70", tax: " +Tax" },
+        { name: "Diamond Facial", price: "$80", tax: " +Tax" },
+        { name: "Acne Facial", price: "$80", tax: " +Tax" },
       ],
     },
 
     {
       title: "Hair Colour & Highlights",
       options: [
-        { name: "Individual Highlights", price: "$10" },
-        { name: "Cap Highlights", price: "$60" },
-        { name: "Hair Colour for Men with Wash", price: "$20" },
-        { name: "Hair Smoothing", price: "$200 Up" },
-        { name: "Hair Keratin", price: "$200 Up" },
-        { name: "Women Root Touchup", price: "$35" },
+        { name: "Individual Highlights", price: "$10", tax: " +Tax" },
+        { name: "Cap Highlights", price: "$60", tax: " +Tax" },
+        { name: "Hair Colour for Men with Wash", price: "$20", tax: " +Tax" },
+        { name: "Hair Smoothing", price: "$200 Up", tax: " +Tax" },
+        { name: "Hair Keratin", price: "$200 Up", tax: " +Tax" },
+        { name: "Women Root Touchup", price: "$35", tax: " +Tax" },
       ],
     },
 
     {
       title: "Makeup Artistry",
       options: [
-        { name: "Party Makeup", price: "$80" },
-        { name: "Party Hairstyles", price: "$40" },
-        { name: "Full Bridal Makeup in Salon", price: "$150" },
-        { name: "Bridal Mehndi", price: "$90" },
-        { name: "Mehndi per Hand", price: "$15" },
+        { name: "Party Makeup", price: "$80", tax: " +Tax" },
+        { name: "Party Hairstyles", price: "$40", tax: " +Tax" },
+        { name: "Full Bridal Makeup in Salon", price: "$150", tax: " +Tax" },
+        { name: "Bridal Mehndi", price: "$90", tax: " +Tax" },
+        { name: "Mehndi per Hand", price: "$15", tax: " +Tax" },
       ],
     },
 
     {
       title: "Perm",
       options: [
-        { name: "Men & Women Perm", price: "$100 & Up" },
-        { name: "Beard Perm", price: "$80" },
+        { name: "Men & Women Perm", price: "$100 & Up", tax: " +Tax" },
+        { name: "Beard Perm", price: "$80", tax: " +Tax" },
       ],
     },
   ];
@@ -374,9 +374,12 @@ export default function CheckoutPage() {
                                   />
                                   <span>{option.name}</span>
                                 </div>
-                                <span className="text-gray-400">
+                                <p className="text-gray-400">
                                   {option.price}
-                                </span>
+                                  <span className="text-[10px]">
+                                    {option.tax}
+                                  </span>
+                                </p>
                               </label>
                             ))}
                           </div>
@@ -424,61 +427,6 @@ export default function CheckoutPage() {
                     ))}
                   </div>
                 </div>
-
-                {/* <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
-                  <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-                    SELECT DATE & TIME
-                  </h3>
-
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div>
-                      <label
-                        htmlFor="date"
-                        className="block text-gray-300 mb-2"
-                      >
-                        Date
-                      </label>
-                      <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        value={form.date}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="time"
-                        className="block text-gray-300 mb-2"
-                      >
-                        Time
-                      </label>
-                      <select
-                        id="time"
-                        name="time"
-                        value={form.time}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                      >
-                        <option value="">Select a time</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="12:00">12:00 PM</option>
-                        <option value="13:00">1:00 PM</option>
-                        <option value="14:00">2:00 PM</option>
-                        <option value="15:00">3:00 PM</option>
-                        <option value="16:00">4:00 PM</option>
-                        <option value="17:00">5:00 PM</option>
-                        <option value="18:00">6:00 PM</option>
-                        <option value="19:00">7:00 PM</option>
-                        <option value="20:00">8:00 PM</option>
-                      </select>
-                    </div>
-                  </div>
-                </div> */}
 
                 <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
@@ -538,102 +486,6 @@ export default function CheckoutPage() {
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
-                  <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-                    YOUR DETAILS
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label
-                        htmlFor="firstName"
-                        className="block text-gray-300 mb-2"
-                      >
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        value={form.firstName}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                        placeholder="Your first name"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="lastName"
-                        className="block text-gray-300 mb-2"
-                      >
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        value={form.lastName}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                        placeholder="Your last name"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-gray-300 mb-2"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                        placeholder="Your email address"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="phone"
-                        className="block text-gray-300 mb-2"
-                      >
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={form.phone}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                        placeholder="Your phone number"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="notes" className="block text-gray-300 mb-2">
-                      Special Requests (Optional)
-                    </label>
-                    <textarea
-                      id="notes"
-                      name="notes"
-                      value={form.notes}
-                      onChange={handleChange}
-                      rows="3"
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                      placeholder="Any special requests or notes for your barber"
-                    ></textarea>
-                  </div>
-                </div> */}
 
                 <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
@@ -821,9 +673,9 @@ export default function CheckoutPage() {
                         {form.time ? `${form.time}` : "Select a time"}
                       </span>
                     </div>
-                    <div className="border-t border-white/10 pt-4 mt-4">
-                      <div className="flex justify-between text-lg">
-                        <span className="text-white font-medium">Total:</span>
+                    <div className="flex justify-between text-lg">
+                      <span className="text-white font-medium">Total:</span>
+                      <div className="text-right">
                         <span className="text-amber-500 font-bold">
                           $
                           {getSelectedServices().reduce((total, service) => {
@@ -833,15 +685,12 @@ export default function CheckoutPage() {
                             return total + price;
                           }, 0)}
                         </span>
+                        <span className="text-[11px] text-gray-400 ml-1">
+                          +Tax
+                        </span>
                       </div>
                     </div>
                   </div>
-                  {/* <button
-                    type="submit"
-                    className="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-[1.02] shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]"
-                  >
-                    CONFIRM BOOKING
-                  </button> */}
 
                   <button
                     type="button" /* keep type button so form doesn't auto-submit */
@@ -893,11 +742,15 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-                    <footer className="py-12 px-6 bg-[#111111]">
+      <footer className="py-12 px-6 bg-[#111111]">
         <div className="max-w-7xl mx-auto flex justify-center items-center ">
           <div>
-            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">MR.BARBER UNISEX SALON</h3>
-            <p className="text-gray-400 mb-4">Where gentlemen receive the royal treatment.</p>
+            <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text">
+              MR.BARBER UNISEX SALON
+            </h3>
+            <p className="text-gray-400 mb-4">
+              Where gentlemen receive the royal treatment.
+            </p>
             {/* <div className="flex space-x-4">
               <a href="#" className="text-amber-500 hover:text-yellow-400">
                 <span className="sr-only">Instagram</span>
@@ -932,10 +785,11 @@ export default function CheckoutPage() {
           </div> */}
         </div>
         <div className="mt-12  pt-8 border-t border-white/10 text-center">
-          <p className="text-gray-500">© 2024 MR.BARBER UNISEX SALON. All rights reserved.</p>
+          <p className="text-gray-500">
+            © 2024 MR.BARBER UNISEX SALON. All rights reserved.
+          </p>
         </div>
       </footer>
-      
     </main>
   );
 }
