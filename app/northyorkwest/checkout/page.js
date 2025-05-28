@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
-import { db } from "../../lib/firebase"; // adjust path as needed
+import { db } from "../../lib/firebase"; 
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export default function CheckoutPage() {
@@ -465,6 +465,7 @@ export default function CheckoutPage() {
                         }`}
                       >
                         <input
+                        required
                           type="radio"
                           name="barber"
                           id={barber.replace(/\s+/g, "-").toLowerCase()}

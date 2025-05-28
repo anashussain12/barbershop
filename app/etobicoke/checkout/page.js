@@ -405,6 +405,7 @@ export default function CheckoutPage() {
                         }`}
                       >
                         <input
+                        required
                           type="radio"
                           name="barber"
                           id={barber.replace(/\s+/g, "-").toLowerCase()}
