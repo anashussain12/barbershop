@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { auth } from "../lib/firebase";
 import {
   collection,
   getDocs,
@@ -8,12 +10,14 @@ import {
   doc,
   deleteDoc,
   addDoc,
+  query,
+  where,
 } from "firebase/firestore";
-import { db } from "../lib/firebase";
-import { analytics } from "../lib/firebase";
+import { db, analytics } from "../lib/firebase";
 import { logEvent } from "firebase/analytics";
-import { query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
+
+
 import {
   FiEdit,
   FiTrash2,
@@ -29,12 +33,14 @@ import {
 } from "react-icons/fi";
 
 const Dashboard = () => {
+  // Remove the auth state check from here (keep all other state)
   const [bookings, setBookings] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
 
   // Fetch bookings data from Firebase Firestore
   useEffect(() => {
@@ -139,7 +145,6 @@ const Dashboard = () => {
       });
     } catch (error) {
       console.error("Error deleting document: ", error);
-      // alert("Something went wrong while deleting the booking.");
     }
   };
 
@@ -200,33 +205,6 @@ const Dashboard = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4 md:mt-0 w-full md:w-auto">
-            {/* <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search bookings..."
-                className="pl-10 pr-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              
-              <div className="absolute left-3 top-2.5 text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-            </div> */}
-
             <div className="relative w-full">
               <input
                 type="text"

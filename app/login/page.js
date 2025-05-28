@@ -1,5 +1,6 @@
-// app/login/page.tsx (or jsx)
+// app/login/page.js
 "use client";
+
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/app/lib/firebase";
@@ -9,15 +10,19 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push("/admin"); // redirect to admin panel
+      router.push("/admin"); // Redirect to admin dashboard
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,6 +40,7 @@ export default function LoginPage() {
           className="w-full mb-4 p-2 border rounded"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <input
           type="password"
@@ -42,12 +48,16 @@ export default function LoginPage() {
           className="w-full mb-4 p-2 border rounded"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          disabled={loading}
+          className={`w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 ${
+            loading ? "opacity-70 cursor-not-allowed" : ""
+          }`}
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
