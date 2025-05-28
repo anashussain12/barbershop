@@ -44,8 +44,8 @@ export default function LoginPage() {
           />
         </div>
 
-        <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text mb-8">
-          Admin Login
+        <h2 className=" text-3xl font-extrabold text-center bg-gradient-to-r from-amber-500 to-yellow-400 text-transparent bg-clip-text mb-8">
+          Mr.Barber Unisex Salon
         </h2>
 
         {error && (
