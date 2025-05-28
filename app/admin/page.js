@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../lib/firebase";
+import { signOut } from "firebase/auth"; // Add this import
+
 import {
   collection,
   getDocs,
@@ -30,9 +32,12 @@ import {
   FiScissors,
   FiMapPin,
   FiClock,
+  FiLogOut,
 } from "react-icons/fi";
 
 const Dashboard = () => {
+    const router = useRouter();
+
   // Remove the auth state check from here (keep all other state)
   const [bookings, setBookings] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -41,6 +46,18 @@ const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+
+  
+  // Handle sign out
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      router.push("/login"); // Redirect to home page after sign out
+      logEvent(analytics, "admin_signed_out");
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
 
   // Fetch bookings data from Firebase Firestore
   useEffect(() => {
@@ -206,6 +223,15 @@ const Dashboard = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 mt-4 md:mt-0 w-full md:w-auto">
+        {/* Logout Button - Added here */}
+        <button
+          onClick={handleSignOut}
+          className="flex items-center gap-2 px-4 py-2 bg-red-900/80 hover:bg-red-800 text-red-100 rounded-lg transition-colors border border-red-800"
+        >
+          <FiLogOut className="text-lg" />
+          <span className="hidden sm:inline">Logout</span>
+        </button>
+
         <div className="relative w-full">
           <input
             type="text"
