@@ -112,7 +112,7 @@ export default function DubaiPage() {
             {notryorkservices.map((svc) => (
               <Link
                 key={svc.notname}
-                href="/notryork/checkout"
+                href="/northyorkwest/checkout"
                 className="group relative rounded-2xl overflow-hidden "
               >
                 {/* container */}
@@ -172,9 +172,7 @@ export default function DubaiPage() {
             <p className="text-gray-400 mb-4">
               Where gentlemen receive the royal treatment.
             </p>
-            
           </div>
-          
         </div>
         <div className="mt-12  pt-8 border-t border-white/10 text-center">
           <p className="text-gray-500">

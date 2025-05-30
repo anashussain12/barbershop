@@ -119,7 +119,7 @@ export default function DubaiPage() {
             Classic styles with modern techniques
           </p>
           <Link
-            href="/notryork/checkout"
+            href="/northyorkwest/checkout"
             className="inline-block px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]"
           >
             BOOK APPOINTMENT
@@ -224,7 +224,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
-                    <p className="text-gray-300">Location: Notryork</p>
+                    <p className="text-gray-300">Location: North York West</p>
                     <p className="text-gray-300">
                       Address: 2528 Finch Avenue w 
                     </p>
