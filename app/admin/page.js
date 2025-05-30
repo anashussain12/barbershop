@@ -368,6 +368,13 @@ const Dashboard = () => {
                     >
                       {booking.status === "completed" ? "Completed" : "Pending"}
                     </span>
+                     <button
+      onClick={() => handleDelete(booking.id)}
+      className="p-2 text-red-400 hover:text-red-300 transition-colors"
+      title="Delete booking"
+    >
+      <FiTrash2 />
+    </button>
                   </div>
 
                   <div className="mt-4 space-y-3 text-gray-300">
