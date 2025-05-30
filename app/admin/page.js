@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../lib/firebase";
 import { signOut } from "firebase/auth";
+import emailjs from "@emailjs/browser";
 
 import {
   collection,
@@ -115,34 +116,66 @@ const Dashboard = () => {
   // };
 
   // Handle mark as completed with confirmation
-const handleComplete = async (id) => {
-  const confirmComplete = window.confirm(
-    "Are you sure you want to mark this booking as completed? An email will be sent to the customer."
-  );
-  
-  if (!confirmComplete) return;
 
-  try {
-    const bookingRef = doc(db, "bookings", id);
-    await updateDoc(bookingRef, { 
-      status: "completed",
-      completedAt: new Date().toISOString() // Add completion timestamp
-    });
-    
-    setBookings((prevBookings) =>
-      prevBookings.map((booking) =>
-        booking.id === id ? { ...booking, status: "completed" } : booking
-      )
+  // useEffect(() => {
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_USER_ID); // Add to your .env
+  // }, []);
+
+
+     const handleComplete = async (id) => {
+    const confirmComplete = window.confirm(
+      "Are you sure you want to mark this booking as completed? An email will be sent to the customer."
     );
+    
+    if (!confirmComplete) return;
 
-    logEvent(analytics, "booking_completed", {
-      bookingId: id,
-      status: "completed",
-    });
-  } catch (error) {
-    console.error("Error updating document: ", error);
-  }
-};
+    try {
+      // Find the booking first
+      const bookingToComplete = bookings.find(booking => booking.id === id);
+      
+      // Update in Firestore
+      const bookingRef = doc(db, "bookings", id);
+      await updateDoc(bookingRef, { 
+        status: "completed",
+        completedAt: new Date().toISOString()
+      });
+      
+      // Update local state
+      setBookings((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking.id === id ? { ...booking, status: "completed" } : booking
+        )
+      );
+
+      // Send email notification
+      try {
+        await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+          {
+            to_name: `${bookingToComplete.firstName} ${bookingToComplete.lastName}`,
+            to_email: bookingToComplete.email,
+            service_name: bookingToComplete.service,
+            barber_name: bookingToComplete.barber,
+            booking_date: new Date(bookingToComplete.date).toLocaleDateString(),
+            location: bookingToComplete.location,
+            message: "Your booking has been marked as completed. Thank you for choosing us!",
+          }
+        );
+      } catch (emailError) {
+        console.error("Failed to send email:", emailError);
+        // You might want to notify the admin that email failed but booking was marked complete
+      }
+
+      logEvent(analytics, "booking_completed", {
+        bookingId: id,
+        status: "completed",
+      });
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+  };
+
 
   // Handle edit action
   const handleEdit = (booking) => {
