@@ -8,7 +8,7 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState(" DUNDAS WEST");
+  const [selectedLocation, setSelectedLocation] = useState("DUNDAS WEST");
   const [minDate, setMinDate] = useState("");
   useEffect(() => {
     setMinDate(new Date().toISOString().split("T")[0]);
@@ -54,7 +54,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false); // NEW
 
   const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
-  const locations = ["ETOBICOKE", "NORTHYORK WEST", " DUNDAS WEST"];
+  const locations = ["ETOBICOKE", "NORTHYORKWEST", "DUNDAS WEST"];
 
   const toggleSection = (title) => {
     setOpenSections((prev) =>
@@ -205,7 +205,7 @@ export default function CheckoutPage() {
             </h2>
             <p className="text-gray-300 max-w-2xl mx-auto">
               Select your preferred service, barber, date and time to complete
-              your booking at our Sharjah location.
+              your booking at our location.
             </p>
           </div>
           <form onSubmit={handleSubmit}>
