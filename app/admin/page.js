@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../lib/firebase";
-import { signOut } from "firebase/auth"; // Add this import
+import { signOut } from "firebase/auth";
 
 import {
   collection,
@@ -36,8 +36,6 @@ import {
 
 const Dashboard = () => {
   const router = useRouter();
-
-  // Remove the auth state check from here (keep all other state)
   const [bookings, setBookings] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -49,7 +47,7 @@ const Dashboard = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      router.push("/login"); // Redirect to home page after sign out
+      router.push("/login");
       logEvent(analytics, "admin_signed_out");
     } catch (error) {
       console.error("Error signing out: ", error);
@@ -90,8 +88,14 @@ const Dashboard = () => {
     return matchesFilter && matchesSearch;
   });
 
-  // Handle mark as completed
+  // Handle mark as completed with confirmation
   const handleComplete = async (id) => {
+    const confirmComplete = window.confirm(
+      "Are you sure you want to mark this booking as completed?"
+    );
+    
+    if (!confirmComplete) return;
+
     try {
       const bookingRef = doc(db, "bookings", id);
       await updateDoc(bookingRef, { status: "completed" });
@@ -194,7 +198,6 @@ const Dashboard = () => {
       alert("Booking successful!");
     } catch (error) {
       console.error("Error booking appointment: ", error);
-      // alert("Something went wrong. Please try again.");
     }
   };
 
@@ -219,7 +222,6 @@ const Dashboard = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4 md:mt-0 w-full md:w-auto">
-            {/* Logout Button - Added here */}
             <button
               onClick={handleSignOut}
               className="flex items-center gap-2 px-4 py-2 bg-red-900/80 hover:bg-red-800 text-red-100 rounded-lg transition-colors border border-red-800"
@@ -368,13 +370,6 @@ const Dashboard = () => {
                     >
                       {booking.status === "completed" ? "Completed" : "Pending"}
                     </span>
-                     <button
-      onClick={() => handleDelete(booking.id)}
-      className="p-2 text-red-400 hover:text-red-300 transition-colors"
-      title="Delete booking"
-    >
-      <FiTrash2 />
-    </button>
                   </div>
 
                   <div className="mt-4 space-y-3 text-gray-300">
@@ -433,6 +428,35 @@ const Dashboard = () => {
                       <strong>Notes:</strong> {booking.notes}
                     </div>
                   )}
+
+                  {/* Action Buttons */}
+                  <div className="mt-6 flex justify-between items-center">
+                    {booking.status !== "completed" && (
+                      <button
+                        onClick={() => handleComplete(booking.id)}
+                        className="flex items-center gap-2 px-4 py-2 bg-green-900/80 hover:bg-green-800 text-green-100 rounded-lg transition-colors"
+                      >
+                        <FiCheck className="text-lg" />
+                        Mark as Completed
+                      </button>
+                    )}
+                    
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleEdit(booking)}
+                        className="p-2 text-amber-400 hover:text-amber-300 transition-colors"
+                        title="Edit booking"
+                      >
+                      </button>
+                      <button
+                        onClick={() => handleDelete(booking.id)}
+                        className="p-2 text-red-400 hover:text-red-300 transition-colors"
+                        title="Delete booking"
+                      >
+                        <FiTrash2 />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
