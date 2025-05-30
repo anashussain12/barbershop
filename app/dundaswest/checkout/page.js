@@ -8,7 +8,7 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("DUNDAS WEST");
+  const [selectedLocation, setSelectedLocation] = useState("DUNDASWEST");
   const [minDate, setMinDate] = useState("");
   useEffect(() => {
     setMinDate(new Date().toISOString().split("T")[0]);
@@ -54,7 +54,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false); // NEW
 
   const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
-  const locations = ["ETOBICOKE", "NORTHYORKWEST", "DUNDAS WEST"];
+  const locations = ["ETOBICOKE", "NORTHYORKWEST", "DUNDASWEST"];
 
   const toggleSection = (title) => {
     setOpenSections((prev) =>
