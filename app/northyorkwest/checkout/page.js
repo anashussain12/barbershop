@@ -8,7 +8,7 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("NORTHYORK WEST");
+  const [selectedLocation, setSelectedLocation] = useState("NORTHYORKWEST");
   const [minDate, setMinDate] = useState("");
   useEffect(() => {
     setMinDate(new Date().toISOString().split("T")[0]);
