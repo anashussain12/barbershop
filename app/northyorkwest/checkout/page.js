@@ -180,68 +180,6 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const selectedServices = getSelectedServices();
-  //   if (selectedServices.length === 0) {
-  //     alert("Please select at least one service");
-  //     return;
-  //   }
-
-  //   const bookingsRef = collection(db, "bookings");
-  //   const q = query(
-  //     bookingsRef,
-  //     where("firstName", "==", form.firstName),
-  //     where("lastName", "==", form.lastName),
-  //     where("email", "==", form.email),
-  //     where("barber", "==", selectedBarber),
-  //     where("location", "==", selectedLocation),
-  //     where("date", "==", form.date),
-  //     where("phone", "==", form.phone),
-  //     where("service", "==", form.service),
-  //     where("status", "==", "pending")
-  //   );
-
-  //   const querySnapshot = await getDocs(q);
-  //   if (!querySnapshot.empty) {
-  //     alert(
-  //       "You have already booked this service with the same details. Please wait until the previous booking is completed."
-  //     );
-  //     return;
-  //   }
-
-  //   try {
-  //     const docRef = await addDoc(collection(db, "bookings"), {
-  //       ...form,
-  //       services: selectedServices.map((s) => s.name),
-  //       servicesWithPrices: selectedServices,
-  //       barber: selectedBarber,
-  //       location: selectedLocation,
-  //       createdAt: new Date().toISOString(),
-  //       status: "pending",
-  //     });
-
-  //     alert("Your appointment has been confirmed, our team will contact you soon✅");
-  //     setForm({
-  //       firstName: "",
-  //       lastName: "",
-  //       email: "",
-  //       phone: "",
-  //       date: "",
-  //       service: "",
-  //       time: "",
-  //       notes: "",
-  //     });
-  //     setSelectedOptions({});
-  //     setSelectedBarber("");
-  //     setSelectedLocation("ETOBICOKE");
-  //   } catch (error) {
-  //     console.error("Error adding document: ", error);
-  //     alert("Something went wrong. Please try again.");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return; // ignore double-clicks

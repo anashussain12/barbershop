@@ -89,30 +89,60 @@ const Dashboard = () => {
   });
 
   // Handle mark as completed with confirmation
-  const handleComplete = async (id) => {
-    const confirmComplete = window.confirm(
-      "Are you sure you want to mark this booking as completed?"
-    );
+  // const handleComplete = async (id) => {
+  //   const confirmComplete = window.confirm(
+  //     "Are you sure you want to mark this booking as completed?"
+  //   );
     
-    if (!confirmComplete) return;
+  //   if (!confirmComplete) return;
 
-    try {
-      const bookingRef = doc(db, "bookings", id);
-      await updateDoc(bookingRef, { status: "completed" });
-      setBookings((prevBookings) =>
-        prevBookings.map((booking) =>
-          booking.id === id ? { ...booking, status: "completed" } : booking
-        )
-      );
+  //   try {
+  //     const bookingRef = doc(db, "bookings", id);
+  //     await updateDoc(bookingRef, { status: "completed" });
+  //     setBookings((prevBookings) =>
+  //       prevBookings.map((booking) =>
+  //         booking.id === id ? { ...booking, status: "completed" } : booking
+  //       )
+  //     );
 
-      logEvent(analytics, "booking_completed", {
-        bookingId: id,
-        status: "completed",
-      });
-    } catch (error) {
-      console.error("Error updating document: ", error);
-    }
-  };
+  //     logEvent(analytics, "booking_completed", {
+  //       bookingId: id,
+  //       status: "completed",
+  //     });
+  //   } catch (error) {
+  //     console.error("Error updating document: ", error);
+  //   }
+  // };
+
+  // Handle mark as completed with confirmation
+const handleComplete = async (id) => {
+  const confirmComplete = window.confirm(
+    "Are you sure you want to mark this booking as completed? An email will be sent to the customer."
+  );
+  
+  if (!confirmComplete) return;
+
+  try {
+    const bookingRef = doc(db, "bookings", id);
+    await updateDoc(bookingRef, { 
+      status: "completed",
+      completedAt: new Date().toISOString() // Add completion timestamp
+    });
+    
+    setBookings((prevBookings) =>
+      prevBookings.map((booking) =>
+        booking.id === id ? { ...booking, status: "completed" } : booking
+      )
+    );
+
+    logEvent(analytics, "booking_completed", {
+      bookingId: id,
+      status: "completed",
+    });
+  } catch (error) {
+    console.error("Error updating document: ", error);
+  }
+};
 
   // Handle edit action
   const handleEdit = (booking) => {
