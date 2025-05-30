@@ -88,120 +88,34 @@ const Dashboard = () => {
     return matchesFilter && matchesSearch;
   });
 
-  // const handleComplete = async (id) => {
-  //   const confirmComplete = window.confirm(
-  //     "Are you sure you want to mark this booking as completed?"
-  //   );
-
-  //   if (!confirmComplete) return;
-
-  //   try {
-  //     const bookingRef = doc(db, "bookings", id);
-  //     await updateDoc(bookingRef, { status: "completed" });
-  //     setBookings((prevBookings) =>
-  //       prevBookings.map((booking) =>
-  //         booking.id === id ? { ...booking, status: "completed" } : booking
-  //       )
-  //     );
-
-  //     logEvent(analytics, "booking_completed", {
-  //       bookingId: id,
-  //       status: "completed",
-  //     });
-  //   } catch (error) {
-  //     console.error("Error updating document: ", error);
-  //   }
-  // };
-
-  // Handle edit action
-
-
-  const handleComplete = async (id, booking) => {
-  const confirmComplete = window.confirm(
-    "Are you sure you want to mark this booking as completed?"
-  );
-
-  if (!confirmComplete) return;
-
-  try {
-    // 1. Update the Firestore document
-    const bookingRef = doc(db, "bookings", id);
-    await updateDoc(bookingRef, { status: "completed" });
-
-    // 2. Update local state
-    setBookings((prevBookings) =>
-      prevBookings.map((b) =>
-        b.id === id ? { ...b, status: "completed" } : b
-      )
+  const handleComplete = async (id) => {
+    const confirmComplete = window.confirm(
+      "Are you sure you want to mark this booking as completed?"
     );
 
-    // 3. Log event
-    logEvent(analytics, "booking_completed", {
-      bookingId: id,
-      status: "completed",
-    });
+    if (!confirmComplete) return;
 
-    // 4. Send confirmation email
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: booking.email,
-        firstName: booking.firstName,
-        barber: booking.barber,
-        service: booking.service,
-        date: booking.date,
-        location: booking.location,
-      }),
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.error || "Failed to send confirmation email");
-    }
-
-    alert("Booking marked as completed and confirmation email sent.");
-  } catch (error) {
-    console.error("Error completing booking: ", error);
-    alert("There was an error completing the booking.");
-  }
-};
-
-  
-  
-  const handleEdit = (booking) => {
-    setSelectedBooking(booking);
-    setIsEditing(true);
-  };
-
-  // Handle update action
-  const handleUpdate = async () => {
     try {
-      const bookingRef = doc(db, "bookings", selectedBooking.id);
-      await updateDoc(bookingRef, selectedBooking);
+      const bookingRef = doc(db, "bookings", id);
+      await updateDoc(bookingRef, { status: "completed" });
       setBookings((prevBookings) =>
         prevBookings.map((booking) =>
-          booking.id === selectedBooking.id ? selectedBooking : booking
+          booking.id === id ? { ...booking, status: "completed" } : booking
         )
       );
-      setIsEditing(false);
 
-      logEvent(analytics, "booking_updated", {
-        bookingId: selectedBooking.id,
-        updatedFields: selectedBooking,
+      logEvent(analytics, "booking_completed", {
+        bookingId: id,
+        status: "completed",
       });
     } catch (error) {
       console.error("Error updating document: ", error);
     }
   };
 
-  // Handle cancel editing
-  const handleCancel = () => {
-    setSelectedBooking(null);
-    setIsEditing(false);
+  const handleEdit = (booking) => {
+    setSelectedBooking(booking);
+    setIsEditing(true);
   };
 
   // Handle delete booking
