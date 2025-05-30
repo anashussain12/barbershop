@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { auth } from "../lib/firebase";
 import { signOut } from "firebase/auth";
 import emailjs from "@emailjs/browser";
-import { sendBookingCompletedEmail } from '../EmalLib/service'; // Import the email service
+import { sendBookingCompletedEmail } from "../EmalLib/service"; // Import the email service
 
 import {
   collection,
@@ -90,84 +90,32 @@ const Dashboard = () => {
     return matchesFilter && matchesSearch;
   });
 
-  // const handleComplete = async (id) => {
-  //   const confirmComplete = window.confirm(
-  //     "Are you sure you want to mark this booking as completed?"
-  //   );
-
-  //   if (!confirmComplete) return;
-
-  //   try {
-  //     const bookingRef = doc(db, "bookings", id);
-  //     await updateDoc(bookingRef, { status: "completed" });
-  //     setBookings((prevBookings) =>
-  //       prevBookings.map((booking) =>
-  //         booking.id === id ? { ...booking, status: "completed" } : booking
-  //       )
-  //     );
-
-  //     logEvent(analytics, "booking_completed", {
-  //       bookingId: id,
-  //       status: "completed",
-  //     });
-  //   } catch (error) {
-  //     console.error("Error updating document: ", error);
-  //   }
-  // };
-
-
-
-  // Handle edit action
-  
-
   const handleComplete = async (id) => {
-  const confirmComplete = window.confirm(
-    "Are you sure you want to mark this booking as completed? An email will be sent to the customer."
-  );
-
-  if (!confirmComplete) return;
-
-  try {
-    // 1. Find the booking first
-    const bookingToComplete = bookings.find(booking => booking.id === id);
-    
-    // 2. Update Firestore
-    const bookingRef = doc(db, "bookings", id);
-    await updateDoc(bookingRef, { 
-      status: "completed",
-      completedAt: new Date().toISOString() // Add completion timestamp
-    });
-    
-    // 3. Update local state
-    setBookings(prevBookings =>
-      prevBookings.map(booking =>
-        booking.id === id ? { ...booking, status: "completed" } : booking
-      )
+    const confirmComplete = window.confirm(
+      "Are you sure you want to mark this booking as completed?"
     );
 
-    // 4. Send email notification
+    if (!confirmComplete) return;
+
     try {
-      await sendBookingCompletedEmail(bookingToComplete);
-    } catch (emailError) {
-      console.error("Email failed to send:", emailError);
-      // Optionally show a toast notification:
-      // toast.error("Booking marked complete but email failed to send");
+      const bookingRef = doc(db, "bookings", id);
+      await updateDoc(bookingRef, { status: "completed" });
+      setBookings((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking.id === id ? { ...booking, status: "completed" } : booking
+        )
+      );
+
+      logEvent(analytics, "booking_completed", {
+        bookingId: id,
+        status: "completed",
+      });
+    } catch (error) {
+      console.error("Error updating document: ", error);
     }
+  };
 
-    // 5. Log analytics
-    logEvent(analytics, "booking_completed", {
-      bookingId: id,
-      status: "completed",
-      emailSent: true // Track whether email was attempted
-    });
-
-  } catch (error) {
-    console.error("Error completing booking:", error);
-    // Optionally show error to user
-    // toast.error("Failed to complete booking");
-  }
-};
-  
+  // Handle edit action
   const handleEdit = (booking) => {
     setSelectedBooking(booking);
     setIsEditing(true);
