@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../lib/firebase";
 import { signOut } from "firebase/auth";
-import emailjs from "@emailjs/browser";
-import { sendBookingCompletedEmail } from "../EmalLib/service"; // Import the email service
 
 import {
   collection,
