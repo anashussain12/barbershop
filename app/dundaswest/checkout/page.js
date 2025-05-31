@@ -108,76 +108,80 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (loading) return; // ignore double-clicks
-    setLoading(true);
 
-    const selectedServices = getSelectedServices();
-    if (selectedServices.length === 0) {
-      alert("Please select at least one service");
-      setLoading(false);
-      return;
-    }
 
-    try {
-      /* check duplicate */
-      const bookingsRef = collection(db, "bookings");
-      const q = query(
-        bookingsRef,
-        where("firstName", "==", form.firstName),
-        where("lastName", "==", form.lastName),
-        where("email", "==", form.email),
-        where("barber", "==", selectedBarber),
-        where("location", "==", selectedLocation),
-        where("date", "==", form.date),
-        where("phone", "==", form.phone),
-        where("service", "==", form.service),
-        where("status", "==", "pending")
-      );
-      const snap = await getDocs(q);
-      if (!snap.empty) {
-        alert(
-          "You have already booked this service with the same details. Please wait until the previous booking is completed."
-        );
-        return;
-      }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (loading) return; // ignore double-clicks
+  //   setLoading(true);
 
-      /* add new booking */
-      await addDoc(bookingsRef, {
-        ...form,
-        services: selectedServices.map((s) => s.name),
-        servicesWithPrices: selectedServices,
-        barber: selectedBarber,
-        location: selectedLocation,
-        createdAt: new Date().toISOString(),
-        status: "pending",
-      });
+  //   const selectedServices = getSelectedServices();
+  //   if (selectedServices.length === 0) {
+  //     alert("Please select at least one service");
+  //     setLoading(false);
+  //     return;
+  //   }
 
-      alert(
-        "Your appointment has been confirmed,our team will contact you soon✅"
-      );
-      /* reset */
-      setForm({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        date: "",
-        service: "",
-        time: "",
-        notes: "",
-      });
-      setSelectedOptions({});
-      setSelectedBarber("");
-      setSelectedLocation("ETOBICOKE");
-    } catch (err) {
-      console.error("Error adding document:", err);
-      alert("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false); // hide spinner
-    }
-  };
+  //   try {
+  //     /* check duplicate */
+  //     const bookingsRef = collection(db, "bookings");
+  //     const q = query(
+  //       bookingsRef,
+  //       where("firstName", "==", form.firstName),
+  //       where("lastName", "==", form.lastName),
+  //       where("email", "==", form.email),
+  //       where("barber", "==", selectedBarber),
+  //       where("location", "==", selectedLocation),
+  //       where("date", "==", form.date),
+  //       where("phone", "==", form.phone),
+  //       where("service", "==", form.service),
+  //       where("status", "==", "pending")
+  //     );
+  //     const snap = await getDocs(q);
+  //     if (!snap.empty) {
+  //       alert(
+  //         "You have already booked this service with the same details. Please wait until the previous booking is completed."
+  //       );
+  //       return;
+  //     }
+
+  //     /* add new booking */
+  //     await addDoc(bookingsRef, {
+  //       ...form,
+  //       services: selectedServices.map((s) => s.name),
+  //       servicesWithPrices: selectedServices,
+  //       barber: selectedBarber,
+  //       location: selectedLocation,
+  //       createdAt: new Date().toISOString(),
+  //       status: "pending",
+  //     });
+
+  //     alert(
+  //       "Your appointment has been confirmed,our team will contact you soon✅"
+  //     );
+  //     /* reset */
+  //     setForm({
+  //       firstName: "",
+  //       lastName: "",
+  //       email: "",
+  //       phone: "",
+  //       date: "",
+  //       service: "",
+  //       time: "",
+  //       notes: "",
+  //     });
+  //     setSelectedOptions({});
+  //     setSelectedBarber("");
+  //     setSelectedLocation("ETOBICOKE");
+  //   } catch (err) {
+  //     console.error("Error adding document:", err);
+  //     alert("Something went wrong. Please try again.");
+  //   } finally {
+  //     setLoading(false); // hide spinner
+  //   }
+  // };
+
+
 
   // Email js code
 
@@ -279,6 +283,95 @@ export default function CheckoutPage() {
   //     setLoading(false);
   //   }
   // };
+
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (loading) return;
+  setLoading(true);
+
+  const selectedServices = getSelectedServices();
+  if (selectedServices.length === 0) {
+    alert("Please select at least one service");
+    setLoading(false);
+    return;
+  }
+
+  try {
+    /* check duplicate */
+    const bookingsRef = collection(db, "bookings");
+    const q = query(
+      bookingsRef,
+      where("firstName", "==", form.firstName),
+      where("lastName", "==", form.lastName),
+      where("email", "==", form.email),
+      where("barber", "==", selectedBarber),
+      where("location", "==", selectedLocation),
+      where("date", "==", form.date),
+      where("phone", "==", form.phone),
+      where("service", "==", form.service),
+      where("status", "==", "pending")
+    );
+    const snap = await getDocs(q);
+    if (!snap.empty) {
+      alert(
+        "You have already booked this service with the same details. Please wait until the previous booking is completed."
+      );
+      return;
+    }
+
+    /* add new booking */
+    const bookingData = {
+      ...form,
+      services: selectedServices.map((s) => s.name),
+      servicesWithPrices: selectedServices,
+      barber: selectedBarber,
+      location: selectedLocation,
+      createdAt: new Date().toISOString(),
+      status: "pending",
+    };
+
+    await addDoc(bookingsRef, bookingData);
+
+    // Send email notification
+    const emailResponse = await fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    if (!emailResponse.ok) {
+      throw new Error('Failed to send email');
+    }
+
+    alert(
+      "Your appointment has been confirmed, our team will contact you soon✅"
+    );
+    
+    /* reset */
+    setForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      date: "",
+      service: "",
+      time: "",
+      notes: "",
+    });
+    setSelectedOptions({});
+    setSelectedBarber("");
+    setSelectedLocation("ETOBICOKE");
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
