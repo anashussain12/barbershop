@@ -5,6 +5,8 @@ import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import emailjs from '@emailjs/browser';
+
 
 export default function CheckoutPage() {
   const [selectedBarber, setSelectedBarber] = useState("");
@@ -56,6 +58,10 @@ export default function CheckoutPage() {
   const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
   const locations = ["ETOBICOKE", "NORTHYORKWEST", "DUNDASWEST"];
 
+   useEffect(() => {
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_USER_ID);
+  }, []);
+
   const toggleSection = (title) => {
     setOpenSections((prev) =>
       prev.includes(title)
@@ -103,76 +109,179 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (loading) return; // ignore double-clicks
-    setLoading(true);
+// Email js code
 
-    const selectedServices = getSelectedServices();
-    if (selectedServices.length === 0) {
-      alert("Please select at least one service");
-      setLoading(false);
-      return;
-    }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (loading) return; // ignore double-clicks
+  //   setLoading(true);
 
-    try {
-      /* check duplicate */
-      const bookingsRef = collection(db, "bookings");
-      const q = query(
-        bookingsRef,
-        where("firstName", "==", form.firstName),
-        where("lastName", "==", form.lastName),
-        where("email", "==", form.email),
-        where("barber", "==", selectedBarber),
-        where("location", "==", selectedLocation),
-        where("date", "==", form.date),
-        where("phone", "==", form.phone),
-        where("service", "==", form.service),
-        where("status", "==", "pending")
-      );
-      const snap = await getDocs(q);
-      if (!snap.empty) {
-        alert(
-          "You have already booked this service with the same details. Please wait until the previous booking is completed."
-        );
-        return;
-      }
+  //   const selectedServices = getSelectedServices();
+  //   if (selectedServices.length === 0) {
+  //     alert("Please select at least one service");
+  //     setLoading(false);
+  //     return;
+  //   }
 
-      /* add new booking */
-      await addDoc(bookingsRef, {
-        ...form,
-        services: selectedServices.map((s) => s.name),
-        servicesWithPrices: selectedServices,
-        barber: selectedBarber,
-        location: selectedLocation,
-        createdAt: new Date().toISOString(),
-        status: "pending",
-      });
+  //   try {
+  //     /* check duplicate */
+  //     const bookingsRef = collection(db, "bookings");
+  //     const q = query(
+  //       bookingsRef,
+  //       where("firstName", "==", form.firstName),
+  //       where("lastName", "==", form.lastName),
+  //       where("email", "==", form.email),
+  //       where("barber", "==", selectedBarber),
+  //       where("location", "==", selectedLocation),
+  //       where("date", "==", form.date),
+  //       where("phone", "==", form.phone),
+  //       where("service", "==", form.service),
+  //       where("status", "==", "pending")
+  //     );
+  //     const snap = await getDocs(q);
+  //     if (!snap.empty) {
+  //       alert(
+  //         "You have already booked this service with the same details. Please wait until the previous booking is completed."
+  //       );
+  //       return;
+  //     }
 
-      alert(
-        "Your appointment has been confirmed,our team will contact you soon✅"
-      );
-      /* reset */
-      setForm({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        date: "",
-        service: "",
-        time: "",
-        notes: "",
-      });
-      setSelectedOptions({});
-      setSelectedBarber("");
-      setSelectedLocation("ETOBICOKE");
-    } catch (err) {
-      console.error("Error adding document:", err);
-      alert("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false); // hide spinner
-    }
-  };
+  //     /* add new booking */
+  //     await addDoc(bookingsRef, {
+  //       ...form,
+  //       services: selectedServices.map((s) => s.name),
+  //       servicesWithPrices: selectedServices,
+  //       barber: selectedBarber,
+  //       location: selectedLocation,
+  //       createdAt: new Date().toISOString(),
+  //       status: "pending",
+  //     });
+
+  //     alert(
+  //       "Your appointment has been confirmed,our team will contact you soon✅"
+  //     );
+  //     /* reset */
+  //     setForm({
+  //       firstName: "",
+  //       lastName: "",
+  //       email: "",
+  //       phone: "",
+  //       date: "",
+  //       service: "",
+  //       time: "",
+  //       notes: "",
+  //     });
+  //     setSelectedOptions({});
+  //     setSelectedBarber("");
+  //     setSelectedLocation("ETOBICOKE");
+  //   } catch (err) {
+  //     console.error("Error adding document:", err);
+  //     alert("Something went wrong. Please try again.");
+  //   } finally {
+  //     setLoading(false); // hide spinner
+  //   }
+  // };
+
+
+//   const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   if (loading) return;
+//   setLoading(true);
+
+//   const selectedServices = getSelectedServices();
+//   if (selectedServices.length === 0) {
+//     alert("Please select at least one service");
+//     setLoading(false);
+//     return;
+//   }
+
+//   try {
+//     /* check duplicate */
+//     const bookingsRef = collection(db, "bookings");
+//     const q = query(
+//       bookingsRef,
+//       where("firstName", "==", form.firstName),
+//       where("lastName", "==", form.lastName),
+//       where("email", "==", form.email),
+//       where("barber", "==", selectedBarber),
+//       where("location", "==", selectedLocation),
+//       where("date", "==", form.date),
+//       where("phone", "==", form.phone),
+//       where("service", "==", form.service),
+//       where("status", "==", "pending")
+//     );
+//     const snap = await getDocs(q);
+//     if (!snap.empty) {
+//       alert(
+//         "You have already booked this service with the same details. Please wait until the previous booking is completed."
+//       );
+//       return;
+//     }
+
+//     /* add new booking */
+//     const bookingData = {
+//       ...form,
+//       services: selectedServices.map((s) => s.name),
+//       servicesWithPrices: selectedServices,
+//       barber: selectedBarber,
+//       location: selectedLocation,
+//       createdAt: new Date().toISOString(),
+//       status: "pending",
+//     };
+
+//     await addDoc(bookingsRef, bookingData);
+
+//     // Prepare email data
+//     const emailParams = {
+//       to_name: `${form.firstName} ${form.lastName}`,
+//       to_email: form.email,
+//       first_name: form.firstName,
+//       last_name: form.lastName,
+//       phone: form.phone,
+//       email: form.email,
+//       date: form.date,
+//       time: form.time,
+//       barber: selectedBarber,
+//       location: selectedLocation,
+//       services: selectedServices.map(s => s.name).join(', '),
+//       total_price: selectedServices.reduce((sum, service) => sum + service.price, 0),
+//       notes: form.notes || 'No additional notes',
+//     };
+
+//     // Send email using EmailJS
+//     await emailjs.send(
+//       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,      
+//       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,      
+//       emailParams,
+//       process.env.NEXT_PUBLIC_EMAILJS_USER_ID
+//     );
+
+//     alert(
+//       "Your appointment has been confirmed, our team will contact you soon✅"
+//     );
+    
+//     /* reset */
+//     setForm({
+//       firstName: "",
+//       lastName: "",
+//       email: "",
+//       phone: "",
+//       date: "",
+//       service: "",
+//       time: "",
+//       notes: "",
+//     });
+//     setSelectedOptions({});
+//     setSelectedBarber("");
+//     setSelectedLocation("ETOBICOKE");
+//   } catch (err) {
+//     console.error("Error:", err);
+//     alert("Something went wrong. Please try again.");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
@@ -326,7 +435,7 @@ export default function CheckoutPage() {
                         }`}
                       >
                         <input
-                        required
+                          required
                           type="radio"
                           name="barber"
                           id={barber.replace(/\s+/g, "-").toLowerCase()}
