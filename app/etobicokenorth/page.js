@@ -113,13 +113,13 @@ export default function DubaiPage() {
         /> */}
         <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-            ETOBICOKE
+            ETOBICOKE NORTH
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl text-gray-200 mb-8">
             Premium cuts in the heart of Downtown
           </p>
           <Link
-            href="/etobicoke/checkout"
+            href="/etobicokenorth/checkout"
             className="inline-block px-8 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-bold rounded-md transition-all duration-300 transform hover:scale-105 shadow-[0_5px_15px_rgba(0,0,0,0.2)] hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]"
           >
             BOOK APPOINTMENT
@@ -139,7 +139,7 @@ export default function DubaiPage() {
             {notryorkservices.map((svc) => (
               <Link
                 key={svc.notname}
-                href="/etobicoke/checkout"
+                href="/etobicokenorth/checkout"
                 className="group relative rounded-2xl overflow-hidden "
               >
                 {/* container */}
@@ -223,7 +223,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Address</h3>
-                    <p className="text-gray-300">Location: Etobicoke</p>
+                    <p className="text-gray-300">Location: Etobicoke North</p>
                     <p className="text-gray-300">
                       1625 albion Road 416 749 7900
                     </p>
@@ -276,7 +276,7 @@ export default function DubaiPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Contact</h3>
-                    <p className="text-gray-300">Phone: +1 416-604-4066</p>
+                    <p className="text-gray-300">Phone: +1 416-749-7900</p>
                     <p className="text-gray-300">
                       Email: Mr.BarberUnisexBeautySalon@gmail.com
                     </p>

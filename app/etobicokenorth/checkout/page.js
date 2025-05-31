@@ -5,14 +5,17 @@ import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
+  const router = useRouter();
+
   const [selectedBarber, setSelectedBarber] = useState("");
   const [minDate, setMinDate] = useState("");
   useEffect(() => {
     setMinDate(new Date().toISOString().split("T")[0]);
   }, []);
-  const [selectedLocation, setSelectedLocation] = useState("ETOBICOKE");
+  const [selectedLocation, setSelectedLocation] = useState("ETOBICOKE NORTH");
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -131,7 +134,9 @@ export default function CheckoutPage() {
 
   const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
 
-  const locations = ["ETOBICOKE", "NORTHYORKWEST", "DUNDASWEST"];
+  const locations = ["ETOBICOKE NORTH", "NORTHYORK WEST", "DUNDAS WEST"];
+
+  const createSlug = (text) => text.toLowerCase().replace(/\s+/g, "");
 
   const toggleSection = (title) => {
     setOpenSections((prev) =>
@@ -171,18 +176,19 @@ export default function CheckoutPage() {
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
     setSelectedLocation(newLocation);
-    if (newLocation !== "ETOBICOKE") {
-      window.location.href = `/${newLocation.toLowerCase()}/checkout`;
+
+    const slug = createSlug(newLocation);
+    if (newLocation !== "ETOBICOKE NORTH") {
+      router.push(`/${slug}/checkout`);
     }
   };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (loading) return; // ignore double-clicks
+    if (loading) return;
     setLoading(true);
 
     const selectedServices = getSelectedServices();
@@ -193,7 +199,6 @@ export default function CheckoutPage() {
     }
 
     try {
-      /* check duplicate */
       const bookingsRef = collection(db, "bookings");
       const q = query(
         bookingsRef,
@@ -216,7 +221,7 @@ export default function CheckoutPage() {
       }
 
       /* add new booking */
-      await addDoc(bookingsRef, {
+      const bookingData = {
         ...form,
         services: selectedServices.map((s) => s.name),
         servicesWithPrices: selectedServices,
@@ -224,12 +229,51 @@ export default function CheckoutPage() {
         location: selectedLocation,
         createdAt: new Date().toISOString(),
         status: "pending",
-      });
+      };
 
-      alert(
-        "Your appointment has been confirmed,our team will contact you soon✅"
-      );
-      /* reset */
+      // First create the booking
+      await addDoc(bookingsRef, bookingData);
+
+      // Then send confirmation email
+      try {
+        const emailResponse = await fetch("/api/sendEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email,
+            barber: selectedBarber,
+            location: selectedLocation,
+            phone: form.phone,
+            service: form.service,
+            date: form.date,
+            time: form.time,
+            notes: form.notes,
+            services: selectedServices.map((s) => s.name), // Ensure this is an array
+          }),
+        });
+
+        const emailResult = await emailResponse.json();
+
+        if (!emailResponse.ok) {
+          console.error("Email sending failed:", emailResult.message);
+          // Don't fail the entire booking if email fails
+          alert("Booking created! But we couldn't send a confirmation email.");
+        } else {
+          alert(
+            "Your appointment has been confirmed! A confirmation has been sent to your email."
+          );
+        }
+      } catch (emailError) {
+        console.error("Email error:", emailError);
+        // Continue even if email fails
+        alert("Booking created! But we couldn't send a confirmation email.");
+      }
+
+      /* reset form */
       setForm({
         firstName: "",
         lastName: "",
@@ -242,16 +286,14 @@ export default function CheckoutPage() {
       });
       setSelectedOptions({});
       setSelectedBarber("");
-      setSelectedLocation("ETOBICOKE");
+      setSelectedLocation("ETOBICOKE NORTH");
     } catch (err) {
-      console.error("Error adding document:", err);
+      console.error("Error:", err);
       alert("Something went wrong. Please try again.");
     } finally {
-      setLoading(false); // hide spinner
+      setLoading(false);
     }
   };
-
-
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
@@ -284,7 +326,7 @@ export default function CheckoutPage() {
             </h2>
             <p className="text-gray-300 max-w-2xl mx-auto">
               Select your preferred service, barber, date and time to complete
-              your booking at our Sharjah location.
+              your booking at our location.
             </p>
           </div>
           <form onSubmit={handleSubmit}>
@@ -294,42 +336,47 @@ export default function CheckoutPage() {
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT LOCATION
                   </h3>
+
                   <div className="space-y-3 mb-6">
-                    {locations.map((location) => (
-                      <div
-                        key={location}
-                        className={`flex items-center p-4 rounded-md cursor-pointer transition-all duration-300 ${
-                          selectedLocation === location
-                            ? "bg-white/10 border border-white/10"
-                            : "hover:bg-white/5 border border-transparent"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="location"
-                          id={location.toLowerCase()}
-                          value={location}
-                          checked={selectedLocation === location}
-                          onChange={handleLocationChange}
-                          className="h-4 w-4 text-amber-500 focus:ring-amber-400 border-gray-600 bg-gray-700"
-                        />
-                        <label
-                          htmlFor={location.toLowerCase()}
-                          className="ml-3 block text-white cursor-pointer"
+                    {locations.map((location) => {
+                      const slug = createSlug(location);
+                      return (
+                        <div
+                          key={slug}
+                          className={`flex items-center p-4 rounded-md cursor-pointer transition-all duration-300 ${
+                            selectedLocation === location
+                              ? "bg-white/10 border border-white/10"
+                              : "hover:bg-white/5 border border-transparent"
+                          }`}
                         >
-                          <span
-                            className={
-                              selectedLocation === location
-                                ? "text-amber-400"
-                                : ""
-                            }
+                          <input
+                            type="radio"
+                            name="location"
+                            id={slug}
+                            value={location}
+                            checked={selectedLocation === location}
+                            onChange={handleLocationChange}
+                            className="h-4 w-4 text-amber-500 focus:ring-amber-400 border-gray-600 bg-gray-700"
+                          />
+                          <label
+                            htmlFor={slug}
+                            className="ml-3 block text-white cursor-pointer"
                           >
-                            {location}
-                          </span>
-                        </label>
-                      </div>
-                    ))}
+                            <span
+                              className={
+                                selectedLocation === location
+                                  ? "text-amber-400"
+                                  : ""
+                              }
+                            >
+                              {location}
+                            </span>
+                          </label>
+                        </div>
+                      );
+                    })}
                   </div>
+
                   <div className="h-px w-full bg-white/10 my-6"></div>
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT SERVICE
@@ -405,7 +452,7 @@ export default function CheckoutPage() {
                         }`}
                       >
                         <input
-                        required
+                          required
                           type="radio"
                           name="barber"
                           id={barber.replace(/\s+/g, "-").toLowerCase()}
@@ -437,7 +484,6 @@ export default function CheckoutPage() {
                   </h3>
 
                   <div className="grid grid-cols-2 gap-4 mb-6">
-                    {/* ---- DATE ---- */}
                     <div>
                       <label
                         htmlFor="date"
@@ -457,7 +503,6 @@ export default function CheckoutPage() {
                       />
                     </div>
 
-                    {/* ---- TIME ---- */}
                     <div>
                       <label
                         htmlFor="time"
@@ -540,7 +585,6 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  {/* email + phone */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                       <label
@@ -563,7 +607,6 @@ export default function CheckoutPage() {
                       />
                     </div>
 
-                    {/* phone with country code */}
                     <div>
                       <label
                         htmlFor="phone"
@@ -573,7 +616,6 @@ export default function CheckoutPage() {
                       </label>
 
                       <div className="flex">
-                        {/* country code selector */}
                         <select
                           id="countryCode"
                           name="countryCode"
@@ -584,21 +626,18 @@ export default function CheckoutPage() {
                      focus:ring-amber-500 transition-all duration-300"
                         >
                           <option value="+1">+1</option>
-                          {/* add more as needed */}
                         </select>
 
-                        {/* local number */}
                         <input
                           type="tel"
                           id="phone"
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
-                          /* ―― blocks any non-digit key press ―― */
                           onKeyPress={(e) =>
                             !/[0-9]/.test(e.key) && e.preventDefault()
                           }
-                          pattern="\d{6,10}" /* 6-10 digits allowed */
+                          pattern="\d{6,10}"
                           maxLength={10}
                           required
                           className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
@@ -610,7 +649,6 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  {/* notes */}
                   <div>
                     <label htmlFor="notes" className="block text-gray-300 mb-2">
                       Special Requests (Optional)
@@ -628,8 +666,6 @@ export default function CheckoutPage() {
                     ></textarea>
                   </div>
                 </div>
-
-                {/* ... (rest of the form elements remain the same) ... */}
               </div>
               <div className="md:col-span-1">
                 <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)] sticky top-6">
@@ -696,7 +732,7 @@ export default function CheckoutPage() {
                   </div>
 
                   <button
-                    type="button" /* keep type button so form doesn't auto-submit */
+                    type="button"
                     disabled={loading}
                     onClick={handleSubmit}
                     className={`w-full py-3 flex items-center justify-center

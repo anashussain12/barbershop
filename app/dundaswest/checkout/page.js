@@ -5,11 +5,13 @@ import Link from "next/link";
 import Header from "../../../components/Header";
 import { db } from "../../lib/firebase"; // adjust path as needed
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
-import emailjs from "@emailjs/browser";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
+  const router = useRouter();
+
   const [selectedBarber, setSelectedBarber] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("DUNDASWEST");
+  const [selectedLocation, setSelectedLocation] = useState("DUNDAS WEST");
   const [minDate, setMinDate] = useState("");
   useEffect(() => {
     setMinDate(new Date().toISOString().split("T")[0]);
@@ -55,12 +57,8 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false); // NEW
 
   const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
-  const locations = ["ETOBICOKE", "NORTHYORKWEST", "DUNDASWEST"];
-
-  useEffect(() => {
-    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_USER_ID);
-  }, []);
-
+  const locations = ["ETOBICOKE NORTH", "NORTHYORK WEST", "DUNDAS WEST"];
+  const createSlug = (text) => text.toLowerCase().replace(/\s+/g, "");
   const toggleSection = (title) => {
     setOpenSections((prev) =>
       prev.includes(title)
@@ -95,12 +93,13 @@ export default function CheckoutPage() {
   const handleBarberChange = (e) => {
     setSelectedBarber(e.target.value);
   };
-
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
     setSelectedLocation(newLocation);
-    if (newLocation !== "ETOBICOKE") {
-      window.location.href = `/${newLocation.toLowerCase()}/checkout`;
+
+    const slug = createSlug(newLocation);
+    if (newLocation !== "DUNDAS WEST") {
+      router.push(`/${slug}/checkout`);
     }
   };
 
@@ -108,270 +107,115 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (loading) return; // ignore double-clicks
-  //   setLoading(true);
-
-  //   const selectedServices = getSelectedServices();
-  //   if (selectedServices.length === 0) {
-  //     alert("Please select at least one service");
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   try {
-  //     /* check duplicate */
-  //     const bookingsRef = collection(db, "bookings");
-  //     const q = query(
-  //       bookingsRef,
-  //       where("firstName", "==", form.firstName),
-  //       where("lastName", "==", form.lastName),
-  //       where("email", "==", form.email),
-  //       where("barber", "==", selectedBarber),
-  //       where("location", "==", selectedLocation),
-  //       where("date", "==", form.date),
-  //       where("phone", "==", form.phone),
-  //       where("service", "==", form.service),
-  //       where("status", "==", "pending")
-  //     );
-  //     const snap = await getDocs(q);
-  //     if (!snap.empty) {
-  //       alert(
-  //         "You have already booked this service with the same details. Please wait until the previous booking is completed."
-  //       );
-  //       return;
-  //     }
-
-  //     /* add new booking */
-  //     await addDoc(bookingsRef, {
-  //       ...form,
-  //       services: selectedServices.map((s) => s.name),
-  //       servicesWithPrices: selectedServices,
-  //       barber: selectedBarber,
-  //       location: selectedLocation,
-  //       createdAt: new Date().toISOString(),
-  //       status: "pending",
-  //     });
-
-  //     alert(
-  //       "Your appointment has been confirmed,our team will contact you soon✅"
-  //     );
-  //     /* reset */
-  //     setForm({
-  //       firstName: "",
-  //       lastName: "",
-  //       email: "",
-  //       phone: "",
-  //       date: "",
-  //       service: "",
-  //       time: "",
-  //       notes: "",
-  //     });
-  //     setSelectedOptions({});
-  //     setSelectedBarber("");
-  //     setSelectedLocation("ETOBICOKE");
-  //   } catch (err) {
-  //     console.error("Error adding document:", err);
-  //     alert("Something went wrong. Please try again.");
-  //   } finally {
-  //     setLoading(false); // hide spinner
-  //   }
-  // };
-
-
-
-  // Email js code
-
-  //   const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (loading) return;
-  //   setLoading(true);
-
-  //   const selectedServices = getSelectedServices();
-  //   if (selectedServices.length === 0) {
-  //     alert("Please select at least one service");
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   try {
-  //     /* check duplicate */
-  //     const bookingsRef = collection(db, "bookings");
-  //     const q = query(
-  //       bookingsRef,
-  //       where("firstName", "==", form.firstName),
-  //       where("lastName", "==", form.lastName),
-  //       where("email", "==", form.email),
-  //       where("barber", "==", selectedBarber),
-  //       where("location", "==", selectedLocation),
-  //       where("date", "==", form.date),
-  //       where("phone", "==", form.phone),
-  //       where("service", "==", form.service),
-  //       where("status", "==", "pending")
-  //     );
-  //     const snap = await getDocs(q);
-  //     if (!snap.empty) {
-  //       alert(
-  //         "You have already booked this service with the same details. Please wait until the previous booking is completed."
-  //       );
-  //       return;
-  //     }
-
-  //     /* add new booking */
-  //     const bookingData = {
-  //       ...form,
-  //       services: selectedServices.map((s) => s.name),
-  //       servicesWithPrices: selectedServices,
-  //       barber: selectedBarber,
-  //       location: selectedLocation,
-  //       createdAt: new Date().toISOString(),
-  //       status: "pending",
-  //     };
-
-  //     await addDoc(bookingsRef, bookingData);
-
-  //     // Prepare email data
-  //     const emailParams = {
-  //       to_name: `${form.firstName} ${form.lastName}`,
-  //       to_email: form.email,
-  //       first_name: form.firstName,
-  //       last_name: form.lastName,
-  //       phone: form.phone,
-  //       email: form.email,
-  //       date: form.date,
-  //       time: form.time,
-  //       barber: selectedBarber,
-  //       location: selectedLocation,
-  //       services: selectedServices.map(s => s.name).join(', '),
-  //       total_price: selectedServices.reduce((sum, service) => sum + service.price, 0),
-  //       notes: form.notes || 'No additional notes',
-  //     };
-
-  //     // Send email using EmailJS
-  //     await emailjs.send(
-  //       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-  //       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-  //       emailParams,
-  //       process.env.NEXT_PUBLIC_EMAILJS_USER_ID
-  //     );
-
-  //     alert(
-  //       "Your appointment has been confirmed, our team will contact you soon✅"
-  //     );
-
-  //     /* reset */
-  //     setForm({
-  //       firstName: "",
-  //       lastName: "",
-  //       email: "",
-  //       phone: "",
-  //       date: "",
-  //       service: "",
-  //       time: "",
-  //       notes: "",
-  //     });
-  //     setSelectedOptions({});
-  //     setSelectedBarber("");
-  //     setSelectedLocation("ETOBICOKE");
-  //   } catch (err) {
-  //     console.error("Error:", err);
-  //     alert("Something went wrong. Please try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (loading) return;
-  setLoading(true);
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
 
-  const selectedServices = getSelectedServices();
-  if (selectedServices.length === 0) {
-    alert("Please select at least one service");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    /* check duplicate */
-    const bookingsRef = collection(db, "bookings");
-    const q = query(
-      bookingsRef,
-      where("firstName", "==", form.firstName),
-      where("lastName", "==", form.lastName),
-      where("email", "==", form.email),
-      where("barber", "==", selectedBarber),
-      where("location", "==", selectedLocation),
-      where("date", "==", form.date),
-      where("phone", "==", form.phone),
-      where("service", "==", form.service),
-      where("status", "==", "pending")
-    );
-    const snap = await getDocs(q);
-    if (!snap.empty) {
-      alert(
-        "You have already booked this service with the same details. Please wait until the previous booking is completed."
-      );
+    const selectedServices = getSelectedServices();
+    if (selectedServices.length === 0) {
+      alert("Please select at least one service");
+      setLoading(false);
       return;
     }
 
-    /* add new booking */
-    const bookingData = {
-      ...form,
-      services: selectedServices.map((s) => s.name),
-      servicesWithPrices: selectedServices,
-      barber: selectedBarber,
-      location: selectedLocation,
-      createdAt: new Date().toISOString(),
-      status: "pending",
-    };
+    try {
+      /* check duplicate */
+      const bookingsRef = collection(db, "bookings");
+      const q = query(
+        bookingsRef,
+        where("firstName", "==", form.firstName),
+        where("lastName", "==", form.lastName),
+        where("email", "==", form.email),
+        where("barber", "==", selectedBarber),
+        where("location", "==", selectedLocation),
+        where("date", "==", form.date),
+        where("phone", "==", form.phone),
+        where("service", "==", form.service),
+        where("status", "==", "pending")
+      );
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        alert(
+          "You have already booked this service with the same details. Please wait until the previous booking is completed."
+        );
+        return;
+      }
 
-    await addDoc(bookingsRef, bookingData);
+      /* add new booking */
+      const bookingData = {
+        ...form,
+        services: selectedServices.map((s) => s.name),
+        servicesWithPrices: selectedServices,
+        barber: selectedBarber,
+        location: selectedLocation,
+        createdAt: new Date().toISOString(),
+        status: "pending",
+      };
 
-    // Send email notification
-    const emailResponse = await fetch('/api/sendEmail', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bookingData),
-    });
+      // First create the booking
+      await addDoc(bookingsRef, bookingData);
 
-    if (!emailResponse.ok) {
-      throw new Error('Failed to send email');
+      // Then send confirmation email
+      try {
+        const emailResponse = await fetch("/api/sendEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email,
+            barber: selectedBarber,
+            location: selectedLocation,
+            phone: form.phone,
+            service: form.service,
+            date: form.date,
+            time: form.time,
+            notes: form.notes,
+            services: selectedServices.map((s) => s.name), // Ensure this is an array
+          }),
+        });
+
+        const emailResult = await emailResponse.json();
+
+        if (!emailResponse.ok) {
+          console.error("Email sending failed:", emailResult.message);
+          // Don't fail the entire booking if email fails
+          alert("Booking created! But we couldn't send a confirmation email.");
+        } else {
+          alert(
+            "Your appointment has been confirmed! A confirmation has been sent to your email."
+          );
+        }
+      } catch (emailError) {
+        console.error("Email error:", emailError);
+        // Continue even if email fails
+        alert("Booking created! But we couldn't send a confirmation email.");
+      }
+
+      /* reset form */
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        date: "",
+        service: "",
+        time: "",
+        notes: "",
+      });
+      setSelectedOptions({});
+      setSelectedBarber("");
+      setSelectedLocation("ETOBICOKE");
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    alert(
-      "Your appointment has been confirmed, our team will contact you soon✅"
-    );
-    
-    /* reset */
-    setForm({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      date: "",
-      service: "",
-      time: "",
-      notes: "",
-    });
-    setSelectedOptions({});
-    setSelectedBarber("");
-    setSelectedLocation("ETOBICOKE");
-  } catch (err) {
-    console.error("Error:", err);
-    alert("Something went wrong. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
@@ -414,42 +258,47 @@ export default function CheckoutPage() {
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT LOCATION
                   </h3>
+
                   <div className="space-y-3 mb-6">
-                    {locations.map((location) => (
-                      <div
-                        key={location}
-                        className={`flex items-center p-4 rounded-md cursor-pointer transition-all duration-300 ${
-                          selectedLocation === location
-                            ? "bg-white/10 border border-white/10"
-                            : "hover:bg-white/5 border border-transparent"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="location"
-                          id={location.toLowerCase()}
-                          value={location}
-                          checked={selectedLocation === location}
-                          onChange={handleLocationChange}
-                          className="h-4 w-4 text-amber-500 focus:ring-amber-400 border-gray-600 bg-gray-700"
-                        />
-                        <label
-                          htmlFor={location.toLowerCase()}
-                          className="ml-3 block text-white cursor-pointer"
+                    {locations.map((location) => {
+                      const slug = createSlug(location);
+                      return (
+                        <div
+                          key={slug}
+                          className={`flex items-center p-4 rounded-md cursor-pointer transition-all duration-300 ${
+                            selectedLocation === location
+                              ? "bg-white/10 border border-white/10"
+                              : "hover:bg-white/5 border border-transparent"
+                          }`}
                         >
-                          <span
-                            className={
-                              selectedLocation === location
-                                ? "text-amber-400"
-                                : ""
-                            }
+                          <input
+                            type="radio"
+                            name="location"
+                            id={slug}
+                            value={location}
+                            checked={selectedLocation === location}
+                            onChange={handleLocationChange}
+                            className="h-4 w-4 text-amber-500 focus:ring-amber-400 border-gray-600 bg-gray-700"
+                          />
+                          <label
+                            htmlFor={slug}
+                            className="ml-3 block text-white cursor-pointer"
                           >
-                            {location}
-                          </span>
-                        </label>
-                      </div>
-                    ))}
+                            <span
+                              className={
+                                selectedLocation === location
+                                  ? "text-amber-400"
+                                  : ""
+                              }
+                            >
+                              {location}
+                            </span>
+                          </label>
+                        </div>
+                      );
+                    })}
                   </div>
+
                   <div className="h-px w-full bg-white/10 my-6"></div>
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT SERVICE
@@ -551,68 +400,12 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                {/* <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
-                  <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-                    SELECT DATE & TIME
-                  </h3>
-
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div>
-                      <label
-                        htmlFor="date"
-                        className="block text-gray-300 mb-2"
-                      >
-                        Date
-                      </label>
-                      <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        value={form.date}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="time"
-                        className="block text-gray-300 mb-2"
-                      >
-                        Time
-                      </label>
-                      <select
-                        id="time"
-                        name="time"
-                        value={form.time}
-                        onChange={handleChange}
-                        required
-                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all duration-300"
-                      >
-                        <option value="">Select a time</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="12:00">12:00 PM</option>
-                        <option value="13:00">1:00 PM</option>
-                        <option value="14:00">2:00 PM</option>
-                        <option value="15:00">3:00 PM</option>
-                        <option value="16:00">4:00 PM</option>
-                        <option value="17:00">5:00 PM</option>
-                        <option value="18:00">6:00 PM</option>
-                        <option value="19:00">7:00 PM</option>
-                        <option value="20:00">8:00 PM</option>
-                      </select>
-                    </div>
-                  </div>
-                </div> */}
-
                 <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)]">
                   <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
                     SELECT DATE &amp; TIME
                   </h3>
 
                   <div className="grid grid-cols-2 gap-4 mb-6">
-                    {/* ---- DATE ---- */}
                     <div>
                       <label
                         htmlFor="date"
@@ -626,13 +419,12 @@ export default function CheckoutPage() {
                         name="date"
                         value={form.date}
                         onChange={handleChange}
-                        min={minDate} // ⬅️ new
+                        min={minDate}
                         required
                         className="w-full h-10 p-2 bg-[#1a1a1a] …"
                       />
                     </div>
 
-                    {/* ---- TIME ---- */}
                     <div>
                       <label
                         htmlFor="time"
@@ -737,7 +529,6 @@ export default function CheckoutPage() {
                       />
                     </div>
 
-                    {/* phone with country code */}
                     <div>
                       <label
                         htmlFor="phone"
@@ -747,7 +538,6 @@ export default function CheckoutPage() {
                       </label>
 
                       <div className="flex">
-                        {/* country code selector */}
                         <select
                           id="countryCode"
                           name="countryCode"
@@ -758,21 +548,18 @@ export default function CheckoutPage() {
                      focus:ring-amber-500 transition-all duration-300"
                         >
                           <option value="+1">+1</option>
-                          {/* add more as needed */}
                         </select>
 
-                        {/* local number */}
                         <input
                           type="tel"
                           id="phone"
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
-                          /* ―― blocks any non-digit key press ―― */
                           onKeyPress={(e) =>
                             !/[0-9]/.test(e.key) && e.preventDefault()
                           }
-                          pattern="\d{6,10}" /* 6-10 digits allowed */
+                          pattern="\d{6,10}"
                           maxLength={10}
                           required
                           className="w-full bg-[#1a1a1a] border border-white/10 rounded-md p-2
@@ -784,7 +571,6 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  {/* notes */}
                   <div>
                     <label htmlFor="notes" className="block text-gray-300 mb-2">
                       Special Requests (Optional)
@@ -802,8 +588,6 @@ export default function CheckoutPage() {
                     ></textarea>
                   </div>
                 </div>
-
-                {/* ... (rest of the form elements remain the same) ... */}
               </div>
               <div className="md:col-span-1">
                 <div className="bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 rounded-lg p-6 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)] sticky top-6">
@@ -883,7 +667,6 @@ export default function CheckoutPage() {
   `}
                   >
                     {loading ? (
-                      /* simple SVG spinner */
                       <svg
                         className="animate-spin h-5 w-5 text-black"
                         xmlns="http://www.w3.org/2000/svg"
@@ -929,38 +712,7 @@ export default function CheckoutPage() {
             <p className="text-gray-400 mb-4">
               Where gentlemen receive the royal treatment.
             </p>
-            {/* <div className="flex space-x-4">
-              <a href="#" className="text-amber-500 hover:text-yellow-400">
-                <span className="sr-only">Instagram</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a href="#" className="text-amber-500 hover:text-yellow-400">
-                <span className="sr-only">Twitter</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                </svg>
-              </a>
-            </div> */}
           </div>
-          {/* <div>
-            <h4 className="text-white font-bold mb-4">HOURS</h4>
-            <ul className="text-gray-400 space-y-2">
-              <li>Monday - Friday: 10AM - 9PM</li>
-              <li>Saturday: 9AM - 7PM</li>
-              <li>Sunday: 10AM - 6PM</li>
-            </ul>
-          </div> */}
-          {/* <div>
-            <h4 className="text-white font-bold mb-4">CONTACT</h4>
-            <ul className="text-gray-400 space-y-2">
-              <li>Email: Mr.BarberUnisexBeautySalon@gmail.com</li>
-              <li>Phone: +1 416-604-4066</li>
-              <li>Address: 2912 Dundas St W, Toronto</li>
-              
-            </ul>
-          </div> */}
         </div>
         <div className="mt-12  pt-8 border-t border-white/10 text-center">
           <p className="text-gray-500">

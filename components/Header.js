@@ -44,17 +44,17 @@ export default function Header() {
             {isDubaiDropdownOpen && (
               <div className="absolute text-[15px] left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
                 <Link
-                  href="/etobicoke"
+                  href="/etobicokenorth"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  Etobicoke
+                  Etobicoke North
                 </Link>
 
                 <Link
                   href="/northyorkwest"
                   className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                 >
-                  NorthYork West
+                  North York West
                 </Link>
                 <Link
                   href="/dundaswest"
@@ -131,17 +131,17 @@ export default function Header() {
               {isDubaiDropdownOpen && (
                 <div className="absolute text-[15px] left-0 mt-2 w-40 bg-[#1a1a1a] border border-white/10 shadow-lg rounded-md z-50">
                   <Link
-                    href="/etobicoke"
+                    href="/etobicokenorth"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                   >
-                    Etobicoke
+                    Etobicoke North
                   </Link>
 
                   <Link
                     href="/northyorkwest"
                     className="block px-4 py-2 text-white hover:bg-amber-400 hover:text-black transition"
                   >
-                    NorthYork West
+                    North York West
                   </Link>
                   <Link
                     href="/dundaswest"
