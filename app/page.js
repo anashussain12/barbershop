@@ -195,6 +195,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-8 rounded-lg bg-gradient-to-b from-[#2d2d2d]/90 to-[#1a1a1a]/90 backdrop-blur-sm border border-white/5 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.3)] relative overflow-hidden group">
               {/* Subtle glow effect on hover */}
+              {/* Subtle glow effect on hover */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-b from-amber-500/5 to-transparent pointer-events-none"></div>
 
               <div className="mb-6 text-amber-500 relative z-10">
