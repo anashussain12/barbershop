@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "../../../components/Header";
-import { db } from "../../lib/firebase"; // adjust path as needed
+import { db } from "../../lib/firebase";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
@@ -11,11 +11,11 @@ export default function CheckoutPage() {
   const router = useRouter();
 
   const [selectedBarber, setSelectedBarber] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("ETOBICOKE NORTH");
   const [minDate, setMinDate] = useState("");
   useEffect(() => {
     setMinDate(new Date().toISOString().split("T")[0]);
   }, []);
-  const [selectedLocation, setSelectedLocation] = useState("ETOBICOKE NORTH");
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -136,7 +136,7 @@ export default function CheckoutPage() {
 
   const locations = ["ETOBICOKE NORTH", "NORTHYORK WEST", "DUNDAS WEST"];
 
-  const createSlug = (text) => text.toLowerCase().replace(/\s+/g, "");
+  const createSlug = (text) => text.toLowerCase().replace(/\s+/g, ""); // Removes all spaces
 
   const toggleSection = (title) => {
     setOpenSections((prev) =>
@@ -186,6 +186,7 @@ export default function CheckoutPage() {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
@@ -199,6 +200,7 @@ export default function CheckoutPage() {
     }
 
     try {
+      /* check duplicate */
       const bookingsRef = collection(db, "bookings");
       const q = query(
         bookingsRef,
@@ -286,7 +288,7 @@ export default function CheckoutPage() {
       });
       setSelectedOptions({});
       setSelectedBarber("");
-      setSelectedLocation("ETOBICOKE NORTH");
+      setSelectedLocation("ETOBICOKE");
     } catch (err) {
       console.error("Error:", err);
       alert("Something went wrong. Please try again.");
@@ -484,6 +486,7 @@ export default function CheckoutPage() {
                   </h3>
 
                   <div className="grid grid-cols-2 gap-4 mb-6">
+                    {/* ---- DATE ---- */}
                     <div>
                       <label
                         htmlFor="date"
@@ -540,7 +543,6 @@ export default function CheckoutPage() {
                     YOUR DETAILS
                   </h3>
 
-                  {/* names */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                       <label
@@ -732,21 +734,21 @@ export default function CheckoutPage() {
                   </div>
 
                   <button
-                    type="button"
+                    type="submit"
                     disabled={loading}
-                    onClick={handleSubmit}
                     className={`w-full py-3 flex items-center justify-center
-        bg-gradient-to-r from-amber-500 to-yellow-400
-        hover:from-amber-400 hover:to-yellow-300
-        text-black font-bold rounded-md transition-all duration-300
-        transform hover:scale-[1.02]
-        shadow-[0_5px_15px_rgba(0,0,0,0.2)]
-        hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
-        ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}`}
+    bg-gradient-to-r from-amber-500 to-yellow-400
+    hover:from-amber-400 hover:to-yellow-300
+    text-black font-bold rounded-md transition-all duration-300
+    transform hover:scale-[1.02]
+    shadow-[0_5px_15px_rgba(0,0,0,0.2)]
+    hover:shadow-[0_5px_20px_rgba(245,158,11,0.3)]
+    ${loading ? "opacity-60 cursor-not-allowed hover:scale-100" : ""}
+  `}
                   >
                     {loading ? (
                       <svg
-                        className="h-5 w-5 animate-spin text-black"
+                        className="animate-spin h-5 w-5 text-black"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
