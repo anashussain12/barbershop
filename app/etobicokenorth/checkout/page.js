@@ -132,7 +132,7 @@ export default function CheckoutPage() {
   ];
   const [loading, setLoading] = useState(false); // NEW
 
-  const barbers = ["Gill", "Sanjeev", "Hussain", "Barber 1"];
+  const barbers = ["Waseem", "Hussain", "Honey", "ilyas" , "Mahfooz", "Manju", "Harpeet"];
 
   const locations = ["ETOBICOKE NORTH", "NORTHYORK WEST", "DUNDAS WEST"];
 
