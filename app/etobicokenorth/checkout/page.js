@@ -35,7 +35,7 @@ export default function CheckoutPage() {
     {
       title: "Hair Cut & Styling",
       options: [
-        { name: "Men Hair Cut", price: "$20", tax: " +Tax" },
+        { name: "Men Hair Cut", price: "$25", tax: " +Tax" },
         { name: "Women Hair Cut & Wash", price: "$30", tax: " +Tax" },
         { name: "Women Hair Cut Wa & Style", price: "$45", tax: " +Tax" },
         { name: "Women Hair Shampoo & Blow Dry", price: "$25", tax: " +Tax" },
