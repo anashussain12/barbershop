@@ -803,6 +803,3 @@ export default function CheckoutPage() {
     </main>
   );
 }
-// }
-// }
-// }
