@@ -806,5 +806,3 @@ export default function CheckoutPage() {
 // }
 // }
 // }
-// }
-// }
