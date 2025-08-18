@@ -22,7 +22,6 @@ export default function CheckoutPage() {
     email: "",
     phone: "",
     service: "",
-
     date: "",
     time: "",
     notes: "",
@@ -132,7 +131,15 @@ export default function CheckoutPage() {
   ];
   const [loading, setLoading] = useState(false); // NEW
 
-  const barbers = ["Waseem", "Hussain", "Honey", "ilyas" , "Mahfooz", "Manju", "Harpeet"];
+  const barbers = [
+    "Waseem",
+    "Hussain",
+    "Honey",
+    "ilyas",
+    "Mahfooz",
+    "Manju",
+    "Harpeet",
+  ];
 
   const locations = ["ETOBICOKE NORTH", "NORTHYORK WEST", "DUNDAS WEST"];
 

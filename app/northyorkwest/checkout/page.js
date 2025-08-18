@@ -22,7 +22,6 @@ export default function CheckoutPage() {
     email: "",
     phone: "",
     service: "",
-
     date: "",
     time: "",
     notes: "",
