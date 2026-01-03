@@ -52,6 +52,3 @@ export default function Restricted() {
     </main>
   );
 }
-// new
-// new
-// new
