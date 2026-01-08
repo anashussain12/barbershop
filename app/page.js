@@ -89,6 +89,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a1a1a] via-[#262626] to-[#333333] text-white">
       <Header />
+      {/* <Header /> */}
 
       <div className="relative h-[60vh] w-full overflow-hidden">
         {slides.map((slide, index) => (
