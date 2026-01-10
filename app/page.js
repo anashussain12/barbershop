@@ -5,6 +5,7 @@ import ImageWithFallback from "./components/ImageWithFallback";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+// import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Home() {
   const [current, setCurrent] = useState(0);
