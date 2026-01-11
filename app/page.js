@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 // new 
 // new 
+// new 
 
 export default function Home() {
   const [current, setCurrent] = useState(0);
