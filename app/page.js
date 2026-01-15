@@ -251,7 +251,6 @@ export default function Home() {
                 scalp massage with every visit.
               </p>
 
-              {/* Subtle border highlight effect */}
               <div className="absolute inset-0 border border-transparent group-hover:border-white/10 rounded-lg transition-all duration-500"></div>
             </div>
 
