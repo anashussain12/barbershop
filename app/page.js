@@ -63,7 +63,6 @@ export default function Home() {
     },
   ];
   // anas
-  // anas
 
   const locations = [
     {
