@@ -62,7 +62,6 @@ export default function Home() {
       label: "Exclusive Grooming",
     },
   ];
-  // anas
 
   const locations = [
     {
