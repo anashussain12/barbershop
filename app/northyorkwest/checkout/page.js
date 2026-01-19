@@ -236,7 +236,6 @@ export default function CheckoutPage() {
       // First create the booking
       await addDoc(bookingsRef, bookingData);
 
-      // Then send confirmation email
       try {
         const emailResponse = await fetch("/api/sendEmail", {
           method: "POST",
