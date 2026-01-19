@@ -233,7 +233,6 @@ export default function CheckoutPage() {
         status: "pending",
       };
 
-      // First create the booking
       await addDoc(bookingsRef, bookingData);
 
       try {
