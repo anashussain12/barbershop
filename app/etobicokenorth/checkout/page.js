@@ -258,7 +258,7 @@ export default function CheckoutPage() {
             date: form.date,
             time: form.time,
             notes: form.notes,
-            services: selectedServices.map((s) => s.name), // Ensure this is an array
+            services: selectedServices.map((s) => s.name), 
           }),
         });
 
