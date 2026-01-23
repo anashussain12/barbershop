@@ -143,7 +143,7 @@ export default function CheckoutPage() {
 
   const locations = ["ETOBICOKE NORTH", "NORTHYORK WEST", "DUNDAS WEST"];
 
-  const createSlug = (text) => text.toLowerCase().replace(/\s+/g, ""); // Removes all spaces
+  const createSlug = (text) => text.toLowerCase().replace(/\s+/g, ""); 
 
   const toggleSection = (title) => {
     setOpenSections((prev) =>
