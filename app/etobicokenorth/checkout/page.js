@@ -207,7 +207,6 @@ export default function CheckoutPage() {
     }
 
     try {
-      /* check duplicate */
       const bookingsRef = collection(db, "bookings");
       const q = query(
         bookingsRef,
