@@ -228,7 +228,6 @@ export default function CheckoutPage() {
         return;
       }
 
-      /* add new booking */
       const bookingData = {
         ...form,
         services: selectedServices.map((s) => s.name),
