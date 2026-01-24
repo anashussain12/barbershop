@@ -266,7 +266,6 @@ export default function CheckoutPage() {
 
         if (!emailResponse.ok) {
           console.error("Email sending failed:", emailResult.message);
-          // Don't fail the entire booking if email fails
           alert("Booking created! But we couldn't send a confirmation email.");
         } else {
           alert(
